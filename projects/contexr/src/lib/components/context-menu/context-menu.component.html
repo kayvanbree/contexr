@@ -1,0 +1,20 @@
+<div
+  (contextmenu)="onContextMenu($event)"
+  (click)="onClick($event)"
+  *ngIf="open"
+  class="context-menu"
+  [ngStyle]="{'top.px': contextState.top, 'left.px': contextState.left}"
+>
+  <ul class="context-list">
+    <li class="context-list-item"
+      *ngFor="let item of contextState.context"
+      (click)="act(item)"
+    >
+      <div class="flex-container">
+        <span class="context">{{item.text}}</span>
+        <span style="flex: 1 1 auto;"></span>
+        <span class="shortcut">{{item.hotkey}}</span>
+      </div>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,31 @@
+.context-menu {
+  background: white;
+  border: 1px black solid;
+  position: absolute;
+
+  .context-list {
+    margin: 0px;
+    padding: 0px;
+
+    .context-list-item {
+      list-style: none;
+      padding: 5px 7px;
+      min-width: 200px;
+
+      .flex-container {
+        display: flex;
+      }
+
+      .shortcut {
+        font-size: 0.8em;
+        opacity: 0.5;
+        margin-left: 10px;
+        margin-top: 2px;
+      }
+    }
+
+    .context-list-item:hover {
+      background: grey;
+    }
+  }
+}

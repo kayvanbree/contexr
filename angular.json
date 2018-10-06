@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "contexr": {
+    "contexr-demo": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/contexr",
+            "outputPath": "dist/contexr-demo",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -50,18 +50,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "contexr:build"
+            "browserTarget": "contexr-demo:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "contexr:build:production"
+              "browserTarget": "contexr-demo:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "contexr:build"
+            "browserTarget": "contexr-demo:build"
           }
         },
         "test": {
@@ -103,7 +103,7 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "contexr:serve"
+            "devServerTarget": "contexr-demo:serve"
           }
         },
         "lint": {
@@ -116,7 +116,47 @@
           }
         }
       }
+    },
+    "contexr": {
+      "root": "projects/contexr",
+      "sourceRoot": "projects/contexr/src",
+      "projectType": "library",
+      "prefix": "ctx",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/contexr/tsconfig.lib.json",
+            "project": "projects/contexr/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "projects/contexr/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/contexr/src/test.ts",
+            "tsConfig": "projects/contexr/tsconfig.spec.json",
+            "karmaConfig": "projects/contexr/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/contexr/tsconfig.lib.json",
+              "projects/contexr/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
-  "defaultProject": "contexr"
+  "defaultProject": "contexr-demo"
 }

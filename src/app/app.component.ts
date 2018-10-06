@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {ContexrService} from '../../projects/contexr/src/lib/providers/contexr.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+
+  constructor(private contexr: ContexrService) {}
+
+  public openContext(event: MouseEvent, context: string): void {
+    this.contexr.open(event, context);
+  }
 }
