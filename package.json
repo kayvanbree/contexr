@@ -5,10 +5,12 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build contexr-demo --prod",
-    "build-lib": "ng build contexr --prod",
+    "build:lib": "ng build contexr --prod",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "prepublish": "npm run build:lib",
+    "publish": "cd ./dist/contexr && npm publish"
   },
   "private": true,
   "dependencies": {

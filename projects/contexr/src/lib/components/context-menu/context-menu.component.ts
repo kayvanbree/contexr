@@ -21,7 +21,7 @@ export class ContextMenuComponent implements OnInit, OnDestroy {
   /**
    * Close the context menu when we click somewhere else
    */
-  @HostListener('document:click', ['$event'])
+  @HostListener('document:click')
   onDocumentClick(): void {
     this.contexr.close();
   }
@@ -58,7 +58,7 @@ export class ContextMenuComponent implements OnInit, OnDestroy {
 
   /**
    * Call an action and close the context menu
-   * @param {Context} context
+   * @param context
    */
   public act(context: ContextMenuItem): void {
     context.action();

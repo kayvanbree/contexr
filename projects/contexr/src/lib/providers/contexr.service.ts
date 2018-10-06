@@ -26,7 +26,7 @@ export class ContexrService {
 
   /**
    * Returns the state of the context menu
-   * @returns {Observable<ContextState>}
+   * @returns
    */
   public getContextState(): Observable<ContextState> {
     return this.contextStateObservable;

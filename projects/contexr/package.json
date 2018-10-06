@@ -1,6 +1,18 @@
 {
   "name": "contexr",
-  "version": "0.0.1",
+  "version": "0.0.2",
+  "description": "Contexr is a context menu that integrates with angular2-hotkeys to synchronize your context menu items with your hotkeys. Never change a hotkey in different places again.",
+  "keywords": ["shortcut", "context", "menu", "contextmenu", "right-click", "rightclick", "right click"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kayvanbree/contexr"
+  },
+  "author": "Kay van Bree",
+  "bugs": {
+    "url": "https://github.com/kayvanbree/contexr/issues"
+  },
+  "homepage": "https://github.com/kayvanbree/contexr",
+  "license": "MIT",
   "peerDependencies": {
     "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
     "@angular/core": "^6.0.0-rc.0 || ^6.0.0"
