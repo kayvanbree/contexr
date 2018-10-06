@@ -3,9 +3,9 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import {ContexrModule} from '../../projects/contexr/src';
-import {Context} from '../../projects/contexr/src/lib/types/context';
+import {ContextMenuItem} from '../../projects/contexr/src/lib/types/context-menu-item';
 
-const context: Context[] = [
+const context: ContextMenuItem[] = [
   { text: 'Yellow square', context: ['yellow-square'], action: () => { console.log('Yellow square'); }, hotkey: 'y' },
   { text: 'Appears on all', context: ['all'], action: () => { console.log('Appears on all'); }, hotkey: 'a' },
   { text: 'Blue square', context: ['blue-square'], action: () => { console.log('Blue square'); }, hotkey: 'b' },

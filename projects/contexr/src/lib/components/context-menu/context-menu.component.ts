@@ -2,7 +2,7 @@ import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
 import {ContextState} from '../../types/context-state';
 import {ContexrService} from '../../providers/contexr.service';
 import {Subscription} from 'rxjs';
-import {Context} from '../../types/context';
+import {ContextMenuItem} from '../../types/context-menu-item';
 
 @Component({
   selector: 'ctx-context-menu',
@@ -60,7 +60,7 @@ export class ContextMenuComponent implements OnInit, OnDestroy {
    * Call an action and close the context menu
    * @param {Context} context
    */
-  public act(context: Context): void {
+  public act(context: ContextMenuItem): void {
     context.action();
     this.contexr.close();
   }

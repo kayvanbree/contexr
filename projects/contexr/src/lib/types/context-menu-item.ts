@@ -1,4 +1,4 @@
-export interface Context {
+export interface ContextMenuItem {
   text: string;
   context: string[];
   action: () => void;

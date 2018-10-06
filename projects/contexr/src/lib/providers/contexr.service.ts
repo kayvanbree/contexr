@@ -1,7 +1,7 @@
 import {HostListener, Inject, Injectable} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
 import {ContextState} from '../types/context-state';
-import {Context} from '../types/context';
+import {ContextMenuItem} from '../types/context-menu-item';
 import {Hotkey, HotkeysService} from 'angular2-hotkeys';
 
 @Injectable({
@@ -13,7 +13,7 @@ export class ContexrService {
   private contextStateObservable: Observable<ContextState> = this.contextStateSubject.asObservable();
 
   constructor(
-    @Inject('context') private context: Context[],
+    @Inject('context') private context: ContextMenuItem[],
     private hotkeysService: HotkeysService
   ) {
     for (let i = 0; i < context.length; i++) {
