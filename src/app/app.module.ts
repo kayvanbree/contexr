@@ -21,18 +21,22 @@ export function long(): void {
   console.log('One item with a very long name');
 }
 
-export function inner(): void {
-  console.log('Inner context');
-}
-
 
 const context: ContextMenuItem[] = [
-  { text: 'Yellow square', context: ['yellow-square'], action: () => { console.log('Yellow'); }, hotkey: 'y' },
-  { text: 'Appears on all', context: ['all'], action: all, hotkey: 'a' },
-  { text: 'Blue square', context: ['blue-square'], action: blueSquare, hotkey: 'b' },
-  { text: 'Also blue square', context: ['blue-square'], action: alsoBlue, hotkey: 'ctrl+b' },
-  { text: 'One item with a very long name, like really really long', context: ['blue-square'], action: long, hotkey: 'ctrl+l' },
-  { text: 'Inner context menu item', context: ['green-square', 'orange-square'], action: () => { console.log('This is an inner action!'); }, hotkey: 'ctrl+l' }
+  {
+    text: 'Yellow square', context: ['yellow-square'], action: () => {
+      console.log('Yellow');
+    }, hotkey: 'y'
+  },
+  {text: 'Appears on all', context: ['all'], action: all, hotkey: 'a'},
+  {text: 'Blue square', context: ['blue-square'], action: blueSquare, hotkey: 'b'},
+  {text: 'Also blue square', context: ['blue-square'], action: alsoBlue, hotkey: 'ctrl+b'},
+  {text: 'One item with a very long name, like really really long', context: ['blue-square'], action: long, hotkey: 'ctrl+l'},
+  {
+    text: 'Inner context menu item', context: ['green-square', 'orange-square'], action: () => {
+      console.log('This is an inner action!');
+    }, hotkey: 'ctrl+l'
+  }
 ];
 
 @NgModule({

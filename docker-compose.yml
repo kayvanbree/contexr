@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  automated-nginx-demo:
+    image: ${DOCKER_IMAGE_SCOPE}/${DOCKER_IMAGE_NAME}:${BRANCH_NAME}
+    environment:
+      VIRTUAL_HOST: ${DOMAIN},dev.136.144.216.182
+      LETSENCRYPT_HOST: ${DOMAIN}
+      LETSENCRYPT_EMAIL: xxx@xxx
+    restart: unless-stopped
+    container_name: ${DOCKER_IMAGE_NAME}_${BRANCH_NAME}
+
+networks:
+  default:
+    external:
+      name: nginx-proxy
