@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
 import {ContextState} from '../types/context-state';
-import {ContextMenuItem} from '../types/context-menu-item';
+import {ContextMenuEntry, ContextMenuItem, Submenu} from '../types/context-menu-item';
 import {Hotkey, HotkeysService} from 'angular2-hotkeys';
 
 @Injectable({
@@ -9,7 +9,7 @@ import {Hotkey, HotkeysService} from 'angular2-hotkeys';
 })
 export class ContexrService {
 
-  private context: ContextMenuItem[] = [];
+  private context: ContextMenuEntry[] = [];
 
   private contextStateSubject: Subject<ContextState> = new Subject<ContextState>();
   private contextStateObservable: Observable<ContextState> = this.contextStateSubject.asObservable();
@@ -20,11 +20,11 @@ export class ContexrService {
    * Register a context menu item to show up at some context
    * @param context
    */
-  public registerContextMenuItem(context: ContextMenuItem): void {
+  public registerContextMenuItem(context: ContextMenuEntry): void {
     this.context.push(context);
-    if (context.hotkey) {
-      this.hotkeysService.add(new Hotkey(context.hotkey, (event: KeyboardEvent): boolean => {
-        context.action();
+    if ((context as any).hotkey &&  (context as any).hotkey) {
+      this.hotkeysService.add(new Hotkey((context as any).hotkey, (event: KeyboardEvent): boolean => {
+        (context as any).action();
         return false;
       }));
     }
@@ -34,7 +34,7 @@ export class ContexrService {
    * Register an array of context menu items
    * @param {ContextMenuItem[]} context
    */
-  public registerContextMenuItems(context: ContextMenuItem[]): void {
+  public registerContextMenuItems(context: ContextMenuEntry[]): void {
     for (let i = 0; i < context.length; i++) {
       this.registerContextMenuItem(context[i]);
     }
@@ -52,14 +52,40 @@ export class ContexrService {
    * Open the context menu
    */
   public open(event: MouseEvent, context: string): void {
+    const items = this.getItemsInContext(this.context, context);
+    console.log(items);
     this.contextStateSubject.next({
       open: true,
-      context: this.context.filter((x) => {
-        return x.context.indexOf(context) !== -1 || x.context.indexOf('all') !== -1;
-      }),
+      context: items,
       top: event.clientY,
       left: event.clientX
     });
+  }
+
+  /**
+   * Filter all context items with our context string
+   * @param {ContextMenuEntry[]} items
+   * @param {string} context
+   * @returns {ContextMenuEntry[]}
+   */
+  private getItemsInContext(items: ContextMenuEntry[], context: string): ContextMenuEntry[] {
+    const itemsInContext: ContextMenuEntry[] = [];
+
+    for (let i = 0; i < items.length; i++) {
+      if ((items[i] as ContextMenuItem).action) {
+        itemsInContext.push(items[i]);
+      } else if ((items[i] as Submenu).children) {
+        const submenu = items[i] as Submenu;
+        submenu.children = this.getItemsInContext(
+          (items[i] as Submenu).children,
+          context
+        );
+        if (submenu.children.length > 0) {
+          itemsInContext.push(submenu);
+        }
+      }
+    }
+    return itemsInContext;
   }
 
   /**

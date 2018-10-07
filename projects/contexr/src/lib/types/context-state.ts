@@ -1,8 +1,8 @@
-import {ContextMenuItem} from './context-menu-item';
+import {ContextMenuEntry} from './context-menu-item';
 
 export interface ContextState {
   open: boolean;
-  context?: ContextMenuItem[];
+  context?: ContextMenuEntry[];
   top?: number;
   left?: number;
 }

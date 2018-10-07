@@ -4,10 +4,9 @@ import {APP_INITIALIZER, NgModule} from '@angular/core';
 import { AppComponent } from './app.component';
 import {ContexrModule} from '../../projects/contexr/src';
 import {SomemoduleModule} from './somemodule/somemodule.module';
-import {ContextMenuItem} from 'contexr/lib/types/context-menu-item';
 import {ContexrService} from 'contexr/lib/providers/contexr.service';
 
-const context: ContextMenuItem[] = [
+const context = [
   {
     text: 'Yellow square',
     context: ['yellow-square'],
@@ -25,20 +24,30 @@ const context: ContextMenuItem[] = [
     hotkey: 'a'
   },
   {
-    text: 'Blue square',
-    context: ['blue-square'],
-    action: () => {
-      console.log('Blue');
-    },
-    hotkey: 'b'
-  },
-  {
-    text: 'Also blue square',
-    context: ['blue-square'],
-    action: () => {
-      console.log('Also blue');
-    },
-    hotkey: 'ctrl+b'
+    text: 'Blue',
+    children: [
+      {
+        text: 'Blue square',
+        context: ['blue-square'],
+        action: () => {
+          console.log('Blue');
+        },
+        hotkey: 'b'
+      },
+      {
+        text: 'Subsub',
+        children: [
+          {
+            text: 'Also blue square',
+            context: ['blue-square'],
+            action: () => {
+              console.log('Also blue');
+            },
+            hotkey: 'ctrl+b'
+          }
+        ]
+      }
+    ]
   },
   {
     text: 'One item with a very long name, like really really long',
