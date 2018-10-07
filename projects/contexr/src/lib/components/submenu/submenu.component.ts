@@ -7,16 +7,13 @@ import {ContextMenuEntry, ContextMenuItem} from 'contexr/lib/types/context-menu-
   templateUrl: './submenu.component.html',
   styleUrls: ['./submenu.component.css']
 })
-export class SubmenuComponent implements OnInit, OnChanges {
+export class SubmenuComponent implements OnChanges {
 
   @Input() item: Submenu;
 
   constructor(private element: ElementRef) { }
 
   public subMenuStyle = {};
-
-  ngOnInit() {
-  }
 
   public ngOnChanges(): void {
     const rect = this.element.nativeElement.getBoundingClientRect();
