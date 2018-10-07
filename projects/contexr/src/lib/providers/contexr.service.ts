@@ -1,4 +1,4 @@
-import {HostListener, Inject, Injectable} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
 import {ContextState} from '../types/context-state';
 import {ContextMenuItem} from '../types/context-menu-item';
@@ -9,18 +9,34 @@ import {Hotkey, HotkeysService} from 'angular2-hotkeys';
 })
 export class ContexrService {
 
+  private context: ContextMenuItem[] = [];
+
   private contextStateSubject: Subject<ContextState> = new Subject<ContextState>();
   private contextStateObservable: Observable<ContextState> = this.contextStateSubject.asObservable();
 
-  constructor(
-    @Inject('context') private context: ContextMenuItem[],
-    private hotkeysService: HotkeysService
-  ) {
-    for (let i = 0; i < context.length; i++) {
-      this.hotkeysService.add(new Hotkey(context[i].hotkey, (event: KeyboardEvent): boolean => {
-        context[i].action();
+  constructor(private hotkeysService: HotkeysService) { }
+
+  /**
+   * Register a context menu item to show up at some context
+   * @param context
+   */
+  public registerContextMenuItem(context: ContextMenuItem): void {
+    this.context.push(context);
+    if (context.hotkey) {
+      this.hotkeysService.add(new Hotkey(context.hotkey, (event: KeyboardEvent): boolean => {
+        context.action();
         return false;
       }));
+    }
+  }
+
+  /**
+   * Register an array of context menu items
+   * @param {ContextMenuItem[]} context
+   */
+  public registerContextMenuItems(context: ContextMenuItem[]): void {
+    for (let i = 0; i < context.length; i++) {
+      this.registerContextMenuItem(context[i]);
     }
   }
 

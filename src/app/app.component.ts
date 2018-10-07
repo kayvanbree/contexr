@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {ContexrService} from '../../projects/contexr/src/lib/providers/contexr.service';
+import {ContextMenuItem} from 'contexr/lib/types/context-menu-item';
 
 @Component({
   selector: 'app-root',
@@ -10,8 +11,4 @@ export class AppComponent {
   title = 'app';
 
   constructor(private contexr: ContexrService) {}
-
-  public openContext(event: MouseEvent, context: string): void {
-    this.contexr.open(event, context);
-  }
 }

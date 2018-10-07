@@ -1,43 +1,71 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
 
 import { AppComponent } from './app.component';
 import {ContexrModule} from '../../projects/contexr/src';
-import {ContextMenuItem} from '../../projects/contexr/src/lib/types/context-menu-item';\
-
-export function all(): void {
-  console.log('Appears on all');
-}
-
-export function blueSquare(): void {
-  console.log('Blue square');
-}
-
-export function alsoBlue(): void {
-  console.log('Also blue square');
-}
-
-export function long(): void {
-  console.log('One item with a very long name');
-}
-
+import {SomemoduleModule} from './somemodule/somemodule.module';
+import {ContextMenuItem} from 'contexr/lib/types/context-menu-item';
+import {ContexrService} from 'contexr/lib/providers/contexr.service';
 
 const context: ContextMenuItem[] = [
   {
-    text: 'Yellow square', context: ['yellow-square'], action: () => {
+    text: 'Yellow square',
+    context: ['yellow-square'],
+    action: () => {
       console.log('Yellow');
-    }, hotkey: 'y'
+    },
+    hotkey: 'y'
   },
-  {text: 'Appears on all', context: ['all'], action: all, hotkey: 'a'},
-  {text: 'Blue square', context: ['blue-square'], action: blueSquare, hotkey: 'b'},
-  {text: 'Also blue square', context: ['blue-square'], action: alsoBlue, hotkey: 'ctrl+b'},
-  {text: 'One item with a very long name, like really really long', context: ['blue-square'], action: long, hotkey: 'ctrl+l'},
   {
-    text: 'Inner context menu item', context: ['green-square', 'orange-square'], action: () => {
+    text: 'Appears on all',
+    context: ['all'],
+    action: () => {
+      console.log('All');
+    },
+    hotkey: 'a'
+  },
+  {
+    text: 'Blue square',
+    context: ['blue-square'],
+    action: () => {
+      console.log('Blue');
+    },
+    hotkey: 'b'
+  },
+  {
+    text: 'Also blue square',
+    context: ['blue-square'],
+    action: () => {
+      console.log('Also blue');
+    },
+    hotkey: 'ctrl+b'
+  },
+  {
+    text: 'One item with a very long name, like really really long',
+    context: ['blue-square'],
+    action: () => {
+      console.log('long');
+    },
+    hotkey: 'ctrl+l'
+  },
+  {
+    text: 'Inner context menu item',
+    context: ['green-square', 'orange-square'],
+    action: () => {
       console.log('This is an inner action!');
-    }, hotkey: 'ctrl+l'
+    },
+    hotkey: 'ctrl+l'
   }
 ];
+
+export function onInitialize(contexr: ContexrService): () => Promise<any> {
+  return (): Promise<any> => {
+    return new Promise((resolve, reject) => {
+      contexr.registerContextMenuItems(context);
+      resolve();
+    });
+  };
+}
 
 @NgModule({
   declarations: [
@@ -45,9 +73,17 @@ const context: ContextMenuItem[] = [
   ],
   imports: [
     BrowserModule,
-    ContexrModule.forRoot(context)
+    SomemoduleModule,
+    ContexrModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: onInitialize,
+      multi: true,
+      deps: [ContexrService]
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

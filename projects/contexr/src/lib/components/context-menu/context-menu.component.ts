@@ -1,4 +1,4 @@
-import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
+import {Component, HostListener, Input, OnDestroy, OnInit} from '@angular/core';
 import {ContextState} from '../../types/context-state';
 import {ContexrService} from '../../providers/contexr.service';
 import {Subscription} from 'rxjs';
@@ -10,7 +10,6 @@ import {ContextMenuItem} from '../../types/context-menu-item';
   styleUrls: ['./context-menu.component.scss']
 })
 export class ContextMenuComponent implements OnInit, OnDestroy {
-
   public open = false;
   public contextState: ContextState;
 
@@ -57,15 +56,6 @@ export class ContextMenuComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Call an action and close the context menu
-   * @param context
-   */
-  public act(context: ContextMenuItem): void {
-    context.action();
-    this.contexr.close();
-  }
-
-  /**
    * Subscribe to the context menu state
    */
   public ngOnInit() {
@@ -80,5 +70,14 @@ export class ContextMenuComponent implements OnInit, OnDestroy {
    */
   public ngOnDestroy(): void  {
     this.contextStateSub.unsubscribe();
+  }
+
+  /**
+   * Call an action and close the context menu
+   * @param context
+   */
+  public act(context: ContextMenuItem): void {
+    context.action();
+    this.contexr.close();
   }
 }
