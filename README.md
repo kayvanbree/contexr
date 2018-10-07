@@ -55,7 +55,7 @@ const context: ContextMenuItem[] = [
 
 ### Importing the library
 
-Import the Contexr library in your module and use APP_INITIALIZER to add context menu items:
+Import the Contexr library in your module and use `APP_INITIALIZER` to add context menu items:
 
 ```javascript
 
@@ -113,3 +113,41 @@ attribute will check with the `ContexrService` to see what context menu items sh
 The ContexrService will compare the `ctx` attribute with all `ContextMenuItems`' context array to
 determine which items to show. Every `ContextMenuItem` that has at least one context that matches
 the `ctx` attribute will show up in the context menu.
+
+## Styling the context menu
+
+The context menu's HTML looks like this:
+
+```html
+<divclass="context-menu">
+  <ul class="context-list">
+    <li class="context-list-item">
+      <div class="flex-container">
+        <span class="context">{{item.text}}</span>
+        <span style="flex: 1 1 auto;"></span>
+        <span class="shortcut">{{item.hotkey}}</span>
+      </div>
+    </li>
+  </ul>
+</div>
+```
+
+Add an id to the context menu element in `app.component.html`. This will make sure your css has
+priority over the css used in the library:
+```html
+<ctx-context-menu id="ctx"></ctx-context-menu>
+```
+
+Style the context menu using this knowledge. To make it really ugly, use the following scss:
+
+```scss
+::ng-deep #ctx {
+  .context-list-item {
+    background: orange;
+  }
+
+  .context-list-item:hover {
+    background: yellow;
+  }
+}
+```

@@ -1,7 +1,10 @@
 .context-menu {
   background: white;
-  border: 1px black solid;
   position: absolute;
+  border: 1px #a7a7a7 solid;
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+  -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
 
   .context-list {
     margin: 0px;
@@ -25,7 +28,7 @@
     }
 
     .context-list-item:hover {
-      background: grey;
+      background: rgba(0, 0, 0, 0.1);
     }
   }
 }

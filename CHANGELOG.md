@@ -2,6 +2,7 @@
 
 ## v1.0.0
 
+- Add support for submenus
 - Add styling for context menu
 - Add styling guide to readme
 - Breaks backward compatibility by changing the way how you 
