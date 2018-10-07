@@ -15,7 +15,7 @@ export function onInitialize(contexr: ContexrService): () => Promise<any> {
             console.log('Doing something in library');
           },
           hotkey: 'l'
-        });
+        } as any);
         resolve();
     });
   };

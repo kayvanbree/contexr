@@ -1,6 +1,9 @@
 .context-menu {
-  background: white;
   position: absolute;
+}
+
+.menu {
+  background: white;
   border: 1px #a7a7a7 solid;
   -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
   -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
@@ -26,10 +29,21 @@
         margin-left: 10px;
         margin-top: 2px;
       }
+
+      .submenu {
+        display: none;
+        position: absolute;
+        top: 50%;
+        left: 100%;
+      }
     }
 
     .context-list-item:hover {
       background: rgba(0, 0, 0, 0.1);
+
+      &>.submenu {
+        display: block;
+      }
     }
   }
 }

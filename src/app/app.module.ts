@@ -51,7 +51,7 @@ const context = [
   },
   {
     text: 'One item with a very long name, like really really long',
-    context: ['blue-square'],
+    context: ['yellow-square'],
     action: () => {
       console.log('long');
     },

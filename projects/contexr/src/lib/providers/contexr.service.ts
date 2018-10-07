@@ -53,7 +53,6 @@ export class ContexrService {
    */
   public open(event: MouseEvent, context: string): void {
     const items = this.getItemsInContext(this.context, context);
-    console.log(items);
     this.contextStateSubject.next({
       open: true,
       context: items,
@@ -73,18 +72,23 @@ export class ContexrService {
 
     for (let i = 0; i < items.length; i++) {
       if ((items[i] as ContextMenuItem).action) {
-        itemsInContext.push(items[i]);
+        const action = Object.assign({}, items[i]) as ContextMenuItem;
+        if (action.context.indexOf(context) !== -1 || action.context.indexOf('all') !== -1) {
+          itemsInContext.push(action);
+        }
       } else if ((items[i] as Submenu).children) {
-        const submenu = items[i] as Submenu;
+        const submenu = Object.assign({}, items[i]) as Submenu;
         submenu.children = this.getItemsInContext(
           (items[i] as Submenu).children,
           context
         );
         if (submenu.children.length > 0) {
+          console.log(submenu);
           itemsInContext.push(submenu);
         }
       }
     }
+
     return itemsInContext;
   }
 
