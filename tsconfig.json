@@ -18,10 +18,10 @@
     ],
     "paths": {
       "contexr": [
-        "dist/contexr"
+        "projects/contexr/src"
       ],
       "contexr/*": [
-        "dist/contexr/*"
+        "projects/contexr/src/*"
       ]
     }
   }

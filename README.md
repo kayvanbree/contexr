@@ -76,25 +76,7 @@ Don't forget to add `.forRoot(context)`, where context is your ContextMenuItem a
 
 ### Include Contexr in your application
 
-For Contexr to work you need to add `<ctx-context-menu></ctx-context-menu>` to your `index.html`:
-
-```html
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Contexr</title>
-  <base href="/">
-
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-</head>
-<body>
-  <app-root></app-root>
-  <ctx-context-menu></ctx-context-menu>
-</body>
-</html>
-```
+For Contexr to work you need to add `<ctx-context-menu></ctx-context-menu>` to your `app.component.ts`.
 
 ## Adding context to an HTML element
 
