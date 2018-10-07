@@ -21,7 +21,12 @@ const context = [
     text: 'Sub0',
     children: [
       {
-        text: 'SubAction0',
+        text: 'Yellow',
+        context: ['yellow-square'],
+        action: () => { console.log('stuff'); }
+      },
+      {
+        text: 'Green',
         context: ['green-square'],
         action: () => { console.log('stuff'); }
       }

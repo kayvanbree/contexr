@@ -40,26 +40,13 @@ to see your context menu item. See chapter `Adding context to an HTML element`.
 shortcut to do.
 - hotkey: The hotkey you want to assign to your context menu item.
 
-An example of a ContextMenuItem array to pass from your `app.module.ts`:
-
-```javascript
-const context: ContextMenuItem[] = [
-  { text: 'Yellow square', context: ['yellow-square'], action: () => { console.log('Yellow square'); }, hotkey: 'y' },
-  { text: 'Appears on all', context: ['all'], action: () => { console.log('Appears on all'); }, hotkey: 'a' },
-  { text: 'Blue square', context: ['blue-square'], action: () => { console.log('Blue square'); }, hotkey: 'b' },
-  { text: 'Also blue square', context: ['blue-square'], action: () => { console.log('Also blue square'); }, hotkey: 'ctrl+b' },
-  { text: 'One item with a very long name, like really really long', context: ['blue-square'], action: () => { console.log('One item with a very long name'); }, hotkey: 'ctrl+l' },
-  { text: 'Inner context menu item', context: ['green-square', 'orange-square'], action: () => { console.log('Inner context'); }, hotkey: 'ctrl+l' }
-];
-```
-
 ### Importing the library
 
 Import the Contexr library in your module and use `APP_INITIALIZER` to add context menu items:
 
 ```javascript
 
-const context: ContextMenuItem[] = [
+const context = [
   {
     text: 'Yellow square',
     context: ['yellow-square'],
@@ -114,6 +101,37 @@ The ContexrService will compare the `ctx` attribute with all `ContextMenuItems`'
 determine which items to show. Every `ContextMenuItem` that has at least one context that matches
 the `ctx` attribute will show up in the context menu.
 
+## The context item array
+
+The context item array you pass in `app.module.ts` consists of `ContextMenuItem`s and `Submenu`s.
+
+### Example of menu without submenus
+
+```javascript
+const context = [
+  { text: 'Yellow square', context: ['yellow-square'], action: () => { console.log('Yellow square'); }, hotkey: 'y' },
+  { text: 'Appears on all', context: ['all'], action: () => { console.log('Appears on all'); }, hotkey: 'a' },
+  { text: 'Blue square', context: ['blue-square'], action: () => { console.log('Blue square'); }, hotkey: 'b' },
+  { text: 'Also blue square', context: ['blue-square'], action: () => { console.log('Also blue square'); }, hotkey: 'ctrl+b' },
+  { text: 'One item with a very long name, like really really long', context: ['blue-square'], action: () => { console.log('One item with a very long name'); }, hotkey: 'ctrl+l' },
+  { text: 'Inner context menu item', context: ['green-square', 'orange-square'], action: () => { console.log('Inner context'); }, hotkey: 'ctrl+l' }
+];
+```
+
+### Example of a menu with submenus
+
+```javascript
+const context = [
+  { text: 'Normal menu item', context: ['yellow-square'], action: () => { console.log('Yellow square'); }, hotkey: 'y' },
+  { text: 'Submenu', children: [
+    { text: 'SubmenuItem 1', context: ['yellow-square'], action: () => { console.log('Yellow square'); }, hotkey: 'y' },
+    { text: 'SubmenuItem 2', context: ['yellow-square'], action: () => { console.log('Yellow square'); }, hotkey: 'y' },
+  ]
+];
+```
+
+If you use submenus, the submenu will only be shown if one of the subitems has the correct context.
+
 ## Styling the context menu
 
 The context menu's HTML looks like this:
@@ -150,4 +168,16 @@ Style the context menu using this knowledge. To make it really ugly, use the fol
     background: yellow;
   }
 }
+```
+
+## Running the demo app
+
+To run the demo app, clone this repository, the run the following commands in the folder:
+
+```
+npm install
+```
+
+```
+ng serve
 ```

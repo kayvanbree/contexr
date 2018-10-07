@@ -22,23 +22,14 @@ export class SubmenuComponent implements OnInit {
    * @returns {{}}
    */
   public getSubMenuPosition() {
-    if (this.element.nativeElement.offsetParent) {
+    const rect = this.element.nativeElement.getBoundingClientRect();
+    if (this.element.nativeElement) {
       return {
-        'left': this.element.nativeElement.offsetParent.clientWidth + 'px',
-        'top': this.getHeightOffset() + 'px'
+        'left': rect.width + 'px',
+        'top': this.element.nativeElement.offsetTop + 'px'
       };
     }
     return {};
-  }
-
-  /**
-   * Calculate what the offset must be for this sub menu
-   * @returns {number}
-   */
-  private getHeightOffset() {
-    const offset = this.element.nativeElement.offsetParent.clientHeight;
-    const height = 27;
-    return offset - height;
   }
 
   /**
