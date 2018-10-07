@@ -6,7 +6,7 @@
     "start": "ng serve",
     "build": "ng build contexr-demo --prod",
     "build:lib": "ng build contexr --prod",
-    "postbuild:lib": "cpx README.md dist/contexr",
+    "postbuild:lib": "cpx README.md dist/contexr && cpx LICENSE.md dist/contexr",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
