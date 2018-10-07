@@ -1,6 +1,7 @@
-import {AfterViewChecked, Component, ComponentRef, ElementRef, Input, OnChanges, OnInit, ViewChild} from '@angular/core';
-import {Submenu} from 'contexr';
-import {ContextMenuEntry, ContextMenuItem} from 'contexr/lib/types/context-menu-item';
+import {Component, ElementRef, Input, OnChanges} from '@angular/core';
+import {ContextMenuItem} from '../../types/context-menu-item';
+import {Submenu} from '../../types/submenu';
+import {ContextMenuEntry} from '../../types/context-menu-entry';
 
 @Component({
   selector: 'ctx-submenu',
@@ -25,8 +26,8 @@ export class SubmenuComponent implements OnChanges {
 
   /**
    * Check if this is an action
-   * @param {ContextMenuEntry} item
-   * @returns {boolean}
+   * @param item
+   * @returns
    */
   public isAction(item: ContextMenuEntry): boolean {
     return !!(item as ContextMenuItem).action;

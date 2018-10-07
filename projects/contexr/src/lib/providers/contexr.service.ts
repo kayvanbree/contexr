@@ -1,8 +1,10 @@
 import {Injectable} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
 import {ContextState} from '../types/context-state';
-import {ContextMenuEntry, ContextMenuItem, Submenu} from '../types/context-menu-item';
+import {ContextMenuItem} from '../types/context-menu-item';
 import {Hotkey, HotkeysService} from 'angular2-hotkeys';
+import {ContextMenuEntry} from '../types/context-menu-entry';
+import {Submenu} from '../types/submenu';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +34,7 @@ export class ContexrService {
 
   /**
    * Register an array of context menu items
-   * @param {ContextMenuItem[]} context
+   * @param context
    */
   public registerContextMenuItems(context: ContextMenuEntry[]): void {
     for (let i = 0; i < context.length; i++) {
@@ -63,9 +65,9 @@ export class ContexrService {
 
   /**
    * Filter all context items with our context string
-   * @param {ContextMenuEntry[]} items
-   * @param {string} context
-   * @returns {ContextMenuEntry[]}
+   * @param items
+   * @param context
+   * @returns
    */
   private getItemsInContext(items: ContextMenuEntry[], context: string): ContextMenuEntry[] {
     const itemsInContext: ContextMenuEntry[] = [];

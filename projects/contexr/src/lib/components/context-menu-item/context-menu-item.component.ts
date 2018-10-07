@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ContextMenuItem} from 'contexr';
-import {ContexrService} from 'contexr/lib/providers/contexr.service';
+import {ContextMenuItem} from '../../types/context-menu-item';
+import {ContexrService} from '../../providers/contexr.service';
 
 @Component({
   selector: 'ctx-context-menu-item',

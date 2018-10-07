@@ -25,18 +25,5 @@
     "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
     "@angular/core": "^6.0.0-rc.0 || ^6.0.0",
     "angular2-hotkeys": "^2.1.2"
-  },
-  "main": "bundles/contexr.umd.js",
-  "module": "fesm5/contexr.js",
-  "es2015": "fesm2015/contexr.js",
-  "esm5": "esm5/contexr.js",
-  "esm2015": "esm2015/contexr.js",
-  "fesm5": "fesm5/contexr.js",
-  "fesm2015": "fesm2015/contexr.js",
-  "typings": "contexr.d.ts",
-  "metadata": "contexr.metadata.json",
-  "sideEffects": false,
-  "dependencies": {
-    "tslib": "^1.9.0"
   }
 }

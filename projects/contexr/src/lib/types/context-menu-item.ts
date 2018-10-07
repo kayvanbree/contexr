@@ -1,13 +1,7 @@
-export interface ContextMenuEntry {
-  text: string;
-}
+import {ContextMenuEntry} from './context-menu-entry';
 
-export interface ContextMenuItem extends ContextMenuEntry {
+export class ContextMenuItem extends ContextMenuEntry {
   context: string[];
   action: () => void;
   hotkey?: string | string[];
-}
-
-export interface Submenu extends ContextMenuEntry {
-  children: ContextMenuEntry[];
 }
