@@ -55,24 +55,52 @@ const context: ContextMenuItem[] = [
 
 ### Importing the library
 
-Import the Contexr library in your module:
+Import the Contexr library in your module and use APP_INITIALIZER to add context menu items:
 
 ```javascript
+
+const context: ContextMenuItem[] = [
+  {
+    text: 'Yellow square',
+    context: ['yellow-square'],
+    action: () => {
+      console.log('Yellow');
+    },
+    hotkey: 'y'
+  }
+];
+
+export function onInitialize(contexr: ContexrService): () => Promise<any> {
+  return (): Promise<any> => {
+    return new Promise((resolve, reject) => {
+      // You can also register a single context menu item with
+      // contexr.registerContextMenuItem(contextItem);
+      contexr.registerContextMenuItems(context);
+      resolve();
+    });
+  };
+}
+
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
     BrowserModule,
-    ContexrModule.forRoot(context)
+    ContexrModule
   ],
-  providers: [],
+  providers: [
+      {
+        provide: APP_INITIALIZER,
+        useFactory: onInitialize,
+        multi: true,
+        deps: [ContexrService]
+      }
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
 ```
-
-Don't forget to add `.forRoot(context)`, where context is your ContextMenuItem array.
 
 ### Include Contexr in your application
 
