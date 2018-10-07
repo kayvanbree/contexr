@@ -1,4 +1,4 @@
-import {Component, HostListener, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, ElementRef, HostListener, Input, OnDestroy, OnInit} from '@angular/core';
 import {ContextState} from '../../types/context-state';
 import {ContexrService} from '../../providers/contexr.service';
 import {Subscription} from 'rxjs';
@@ -70,15 +70,6 @@ export class ContextMenuComponent implements OnInit, OnDestroy {
    */
   public ngOnDestroy(): void  {
     this.contextStateSub.unsubscribe();
-  }
-
-  /**
-   * Call an action and close the context menu
-   * @param context
-   */
-  public act(context: ContextMenuItem): void {
-    context.action();
-    this.contexr.close();
   }
 
   /**

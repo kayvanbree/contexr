@@ -83,7 +83,6 @@ export class ContexrService {
           context
         );
         if (submenu.children.length > 0) {
-          console.log(submenu);
           itemsInContext.push(submenu);
         }
       }

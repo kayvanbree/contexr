@@ -1,12 +1,52 @@
-import { BrowserModule } from '@angular/platform-browser';
+import {BrowserModule} from '@angular/platform-browser';
 import {APP_INITIALIZER, NgModule} from '@angular/core';
 
-import { AppComponent } from './app.component';
+import {AppComponent} from './app.component';
 import {ContexrModule} from '../../projects/contexr/src';
 import {SomemoduleModule} from './somemodule/somemodule.module';
 import {ContexrService} from 'contexr/lib/providers/contexr.service';
 
 const context = [
+  {
+    text: 'Sub',
+    children: [
+      {
+        text: 'SubAction',
+        context: ['green-square'],
+        action: () => { console.log('stuff'); }
+      }
+    ]
+  },
+  {
+    text: 'Sub0',
+    children: [
+      {
+        text: 'SubAction0',
+        context: ['green-square'],
+        action: () => { console.log('stuff'); }
+      }
+    ]
+  },
+  {
+    text: 'Sub1',
+    children: [
+      {
+        text: 'SubAction1',
+        context: ['green-square'],
+        action: () => { console.log('stuff'); }
+      }
+    ]
+  },
+  {
+    text: 'Sub2',
+    children: [
+      {
+        text: 'SubAction2',
+        context: ['green-square'],
+        action: () => { console.log('stuff'); }
+      }
+    ]
+  },
   {
     text: 'Yellow square',
     context: ['yellow-square'],
@@ -95,4 +135,5 @@ export function onInitialize(contexr: ContexrService): () => Promise<any> {
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

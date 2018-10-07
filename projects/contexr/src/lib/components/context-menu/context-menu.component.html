@@ -7,38 +7,8 @@
 >
   <ul class="context-list">
     <ng-container *ngFor="let item of contextState.context">
-      <ng-container
-        [ngTemplateOutlet]="isAction(item) ? action : subMenu"
-        [ngTemplateOutletContext]="{item:item}"
-      ></ng-container>
+      <ctx-context-menu-item *ngIf="isAction(item)" [item]="item"></ctx-context-menu-item>
+      <ctx-submenu *ngIf="!isAction(item)" [item]="item"></ctx-submenu>
     </ng-container>
   </ul>
 </div>
-
-<ng-template #subMenu let-item="item">
-  <li class="context-list-item">
-    <div class="flex-container">
-      <span class="context">{{item.text}}</span>
-      <span style="flex: 1 1 auto;"></span>
-      <span class="shortcut">>>></span>
-    </div>
-    <ul class="context-list submenu menu">
-      <ng-container *ngFor="let subItem of item.children">
-        <ng-container
-          [ngTemplateOutlet]="isAction(subItem) ? action : subMenu"
-          [ngTemplateOutletContext]="{item:subItem}"
-        ></ng-container>
-      </ng-container>
-    </ul>
-  </li>
-</ng-template>
-
-<ng-template #action let-item="item">
-  <li (click)="act(item)" class="context-list-item">
-    <div class="flex-container">
-      <span class="context">{{item.text}}</span>
-      <span style="flex: 1 1 auto;"></span>
-      <span class="shortcut">{{item.hotkey}}</span>
-    </div>
-  </li>
-</ng-template>
