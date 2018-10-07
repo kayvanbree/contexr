@@ -1,4 +1,4 @@
-import {Component, ComponentRef, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {AfterViewChecked, Component, ComponentRef, ElementRef, Input, OnChanges, OnInit, ViewChild} from '@angular/core';
 import {Submenu} from 'contexr';
 import {ContextMenuEntry, ContextMenuItem} from 'contexr/lib/types/context-menu-item';
 
@@ -7,29 +7,23 @@ import {ContextMenuEntry, ContextMenuItem} from 'contexr/lib/types/context-menu-
   templateUrl: './submenu.component.html',
   styleUrls: ['./submenu.component.css']
 })
-export class SubmenuComponent implements OnInit {
+export class SubmenuComponent implements OnInit, OnChanges {
 
   @Input() item: Submenu;
 
   constructor(private element: ElementRef) { }
 
+  public subMenuStyle = {};
+
   ngOnInit() {
   }
 
-  /**
-   * Make the submenu fit in the screen
-   * @param {ElementRef} element
-   * @returns {{}}
-   */
-  public getSubMenuPosition() {
+  public ngOnChanges(): void {
     const rect = this.element.nativeElement.getBoundingClientRect();
-    if (this.element.nativeElement) {
-      return {
-        'left': rect.width + 'px',
-        'top': this.element.nativeElement.offsetTop + 'px'
-      };
-    }
-    return {};
+    this.subMenuStyle = {
+      'left': 214 + 'px',
+      'top': rect.offsetHeight + 'px'
+    };
   }
 
   /**
