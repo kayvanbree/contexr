@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SubmenuComponent } from './submenu.component';
+import {ContextMenuItemComponent} from 'contexr/lib/components/context-menu-item/context-menu-item.component';
+import {HotkeysService} from 'angular2-hotkeys';
 
 describe('SubmenuComponent', () => {
   let component: SubmenuComponent;
@@ -8,7 +10,13 @@ describe('SubmenuComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SubmenuComponent ]
+      declarations: [
+        SubmenuComponent,
+        ContextMenuItemComponent
+      ],
+      providers: [
+        { provide: HotkeysService, useClass: HotkeysMockService }
+      ]
     })
     .compileComponents();
   }));
@@ -16,6 +24,7 @@ describe('SubmenuComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(SubmenuComponent);
     component = fixture.componentInstance;
+    component.item = testSubmenu;
     fixture.detectChanges();
   });
 
@@ -23,3 +32,12 @@ describe('SubmenuComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+
+const testSubmenu = {
+  text: 'sub1',
+  children: [
+    { text: 'subitem1', context: ['test'], action: () => {}, hotkey: 't'}
+  ]
+};
+
+class HotkeysMockService {}
