@@ -8,6 +8,7 @@
     "build:lib": "ng build contexr --prod",
     "postbuild:lib": "cpx README.md dist/contexr && cpx LICENSE.md dist/contexr",
     "test": "ng test contexr",
+    "test:coverage": "ng test contexr --watch=false --code-coverage",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "prepublish": "npm run build:lib",
