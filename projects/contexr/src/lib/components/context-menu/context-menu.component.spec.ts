@@ -55,6 +55,15 @@ describe('ContextMenuComponent', () => {
       left: 0
     };
   });
+
+  it('should react to a new state', () => {
+    component.ngOnInit();
+    contexr.open(new MouseEvent('contextmenu'), 'test1');
+
+    fixture.whenStable().then(() => {
+      expect(component.open).toBe(true);
+    });
+  });
 });
 
 class HotkeysMockService {}
