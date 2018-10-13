@@ -31,6 +31,18 @@ describe('SubmenuComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should react to changes', () => {
+    component.item = {
+      text: 'sub1',
+      children: [
+        { text: 'subitem1', context: ['test'], action: () => {}, hotkey: 't'},
+        { text: 'anothersub', context: ['text'], action: () => {}, hotkey: 'l'}
+      ]
+    } as any;
+    component.ngOnChanges();
+    expect(component.subMenuStyle).not.toBeNull();
+  });
 });
 
 const testSubmenu = {
