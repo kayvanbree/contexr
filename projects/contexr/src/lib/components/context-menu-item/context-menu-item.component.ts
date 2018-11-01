@@ -20,8 +20,8 @@ export class ContextMenuItemComponent implements OnInit {
    * Call an action and close the context menu
    * @param context
    */
-  public act(context: ContextMenuItem): void {
-    context.action();
+  public act(): void {
+    this.item.action();
     this.contexr.close();
   }
 }
