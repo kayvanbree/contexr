@@ -29,10 +29,10 @@ export class ContexrService {
   /**
    * Add a context
    * @param context
-   * @param args
+   * @param arguments
    */
   public addCurrentContext(context: string, args: any) {
-    this.addItemsInContext(this.context, context);
+    this.addItemsInContext(this.context, context, args);
   }
 
   /**
@@ -71,7 +71,7 @@ export class ContexrService {
    * Open the context menu
    */
   public open(event: MouseEvent): void {
-    this.addItemsInContext(this.context, 'all');
+    this.addItemsInContext(this.context, 'all', null);
     this.contextStateSubject.next({
       open: true,
       context: this.currentContext,
@@ -86,10 +86,13 @@ export class ContexrService {
    * @param context
    * @returns
    */
-  private addItemsInContext(items: ContextMenuEntry[], context: string) {
+  private addItemsInContext(items: ContextMenuEntry[], context: string, args: any) {
     for (let i = 0; i < items.length; i++) {
       if ((items[i] as ContextMenuItem).action) {
         const action = Object.assign({}, items[i]) as ContextMenuItem;
+        if (args !== null) {
+          action.args = args;
+        }
         if (action.context.indexOf(context) !== -1) {
           this.currentContext.push(action);
         }
@@ -97,7 +100,8 @@ export class ContexrService {
         const submenu = Object.assign({}, items[i]) as Submenu;
         this.addItemsInContext(
           (items[i] as Submenu).children,
-          context
+          context,
+          args
         );
         if (submenu.children.length > 0) {
           this.currentContext.push(submenu);

@@ -57,12 +57,6 @@ export class ContextMenuComponent implements OnInit, OnDestroy {
   onDocumentContextMenu(event): void {
     console.log('Open context menu');
     this.contexr.open(event);
-    // event.preventDefault();
-    // let context = event.srcElement.getAttribute('ctx');
-    // if (!context) {
-    //   context = 'all';
-    // }
-    // this.contexr.open(event, context);
   }
 
   /**

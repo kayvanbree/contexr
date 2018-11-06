@@ -1,4 +1,4 @@
-<table class="table" [ctx]="'people-list'" [ctxArgs]="'Something something'">
+<table class="table" [ctx]="'people-list'" [ctxArgs]="'Add a person'">
   <tr class="header">
     <td>ID</td>
     <td>Name</td>
@@ -8,7 +8,7 @@
     *ngFor="let person of people"
     class="item"
     [ctx]="'person'"
-    [ctxArgs]="{name: person.name, message: person.message}"
+    [ctxArgs]="{id: person.id, name: person.name, message: person.message}"
   >
     <td>{{person.id}}</td>
     <td>{{person.name}}</td>

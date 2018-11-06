@@ -14,9 +14,14 @@ const context = [
     action: () => { console.log('Adding a person'); }
   },
   {
+    text: 'Log message',
+    context: ['person'],
+    action: (args: any) => { console.log(args.message); }
+  },
+  {
     text: 'Delete',
     context: ['person'],
-    action: () => { console.log('Deleting a person'); }
+    action: (args: any) => { console.log('Deleting ' + args.name); }
   },
   {
     text: 'Say hello',
@@ -24,7 +29,7 @@ const context = [
     action: () => {
       alert('HELLO');
     },
-    shortcut: 'h'
+    hotkey: 'h'
   },
   {
     text: 'All',
@@ -32,7 +37,7 @@ const context = [
     action: () => {
       console.log('This appears on all context menus');
     },
-    shortcut: 'a'
+    hotkey: 'a'
   }
 ];
 

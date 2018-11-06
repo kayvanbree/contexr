@@ -21,7 +21,8 @@ export class ContextMenuItemComponent implements OnInit {
    * @param context
    */
   public act(): void {
-    this.item.action();
+    console.log(this.item);
+    this.item.action(this.item.args);
     this.contexr.close();
   }
 }
