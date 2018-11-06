@@ -12,6 +12,7 @@ import {Submenu} from '../types/submenu';
 export class ContexrService {
 
   private context: ContextMenuEntry[] = [];
+  private currentContext: ContextMenuEntry[] = [];
 
   private contextStateSubject: Subject<ContextState> = new Subject<ContextState>();
   private contextStateObservable: Observable<ContextState> = this.contextStateSubject.asObservable();
@@ -19,7 +20,23 @@ export class ContexrService {
   constructor(private hotkeysService: HotkeysService) { }
 
   /**
-   * Register a context menu item to show up at some context
+   * Reset the current context
+   */
+  public reset() {
+    this.currentContext = [];
+  }
+
+  /**
+   * Add a context
+   * @param context
+   * @param arguments
+   */
+  public addCurrentContext(context: string, args: any) {
+    this.addItemsInContext(this.context, context, args);
+  }
+
+  /**
+   * Register a context menu person to show up at some context
    * @param context
    */
   public registerContextMenuItem(context: ContextMenuEntry): void {
@@ -53,11 +70,11 @@ export class ContexrService {
   /**
    * Open the context menu
    */
-  public open(event: MouseEvent, context: string): void {
-    const items = this.getItemsInContext(this.context, context);
+  public open(event: MouseEvent): void {
+    this.addItemsInContext(this.context, 'all', null);
     this.contextStateSubject.next({
       open: true,
-      context: items,
+      context: this.currentContext,
       top: event.clientY,
       left: event.clientX
     });
@@ -69,28 +86,28 @@ export class ContexrService {
    * @param context
    * @returns
    */
-  private getItemsInContext(items: ContextMenuEntry[], context: string): ContextMenuEntry[] {
-    const itemsInContext: ContextMenuEntry[] = [];
-
+  private addItemsInContext(items: ContextMenuEntry[], context: string, args: any) {
     for (let i = 0; i < items.length; i++) {
       if ((items[i] as ContextMenuItem).action) {
         const action = Object.assign({}, items[i]) as ContextMenuItem;
-        if (action.context.indexOf(context) !== -1 || action.context.indexOf('all') !== -1) {
-          itemsInContext.push(action);
+        if (args !== null) {
+          action.args = args;
+        }
+        if (action.context.indexOf(context) !== -1) {
+          this.currentContext.push(action);
         }
       } else if ((items[i] as Submenu).children) {
         const submenu = Object.assign({}, items[i]) as Submenu;
-        submenu.children = this.getItemsInContext(
+        this.addItemsInContext(
           (items[i] as Submenu).children,
-          context
+          context,
+          args
         );
         if (submenu.children.length > 0) {
-          itemsInContext.push(submenu);
+          this.currentContext.push(submenu);
         }
       }
     }
-
-    return itemsInContext;
   }
 
   /**

@@ -5,6 +5,7 @@ import {ContexrService} from './providers/contexr.service';
 import {HotkeyModule} from 'angular2-hotkeys';
 import {SubmenuComponent} from './components/submenu/submenu.component';
 import {ContextMenuItemComponent} from './components/context-menu-item/context-menu-item.component';
+import { ContextDirective } from './directives/context.directive';
 
 @NgModule({
   imports: [
@@ -14,10 +15,12 @@ import {ContextMenuItemComponent} from './components/context-menu-item/context-m
   declarations: [
     ContextMenuComponent,
     SubmenuComponent,
-    ContextMenuItemComponent
+    ContextMenuItemComponent,
+    ContextDirective
   ],
   exports: [
-    ContextMenuComponent
+    ContextMenuComponent,
+    ContextDirective
   ],
   providers: [
     ContexrService
