@@ -16,7 +16,14 @@ export class ContextMenuComponent implements OnInit, OnDestroy {
 
   private contextStateSub: Subscription;
 
-  constructor(public contexr: ContexrService) { }
+  constructor(public contexr: ContexrService) {
+    // Event capturing (not possible in real Angular yet)
+    document.addEventListener('contextmenu', (event) => {
+      event.preventDefault();
+      console.log('Reset context menu and prevent default');
+      this.contexr.reset();
+    }, true);
+  }
 
   /**
    * Close the context menu when we click somewhere else
@@ -48,12 +55,14 @@ export class ContextMenuComponent implements OnInit, OnDestroy {
    */
   @HostListener('document:contextmenu', ['$event'])
   onDocumentContextMenu(event): void {
-    event.preventDefault();
-    let context = event.srcElement.getAttribute('ctx');
-    if (!context) {
-      context = 'all';
-    }
-    this.contexr.open(event, context);
+    console.log('Open context menu');
+    this.contexr.open(event);
+    // event.preventDefault();
+    // let context = event.srcElement.getAttribute('ctx');
+    // if (!context) {
+    //   context = 'all';
+    // }
+    // this.contexr.open(event, context);
   }
 
   /**

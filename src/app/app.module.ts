@@ -5,110 +5,34 @@ import {AppComponent} from './app.component';
 import {ContexrModule} from '../../projects/contexr/src';
 import {SomemoduleModule} from './somemodule/somemodule.module';
 import {ContexrService} from 'contexr/lib/providers/contexr.service';
+import { ExampleListComponent } from './example-list/example-list.component';
 
 const context = [
   {
-    text: 'Sub',
-    children: [
-      {
-        text: 'SubAction',
-        context: ['green-square'],
-        action: () => { console.log('stuff'); }
-      }
-    ]
+    text: 'Add a person',
+    context: ['people-list'],
+    action: () => { console.log('Adding a person'); }
   },
   {
-    text: 'Sub0',
-    children: [
-      {
-        text: 'Yellow',
-        context: ['yellow-square'],
-        action: () => { console.log('stuff'); }
-      },
-      {
-        text: 'Green',
-        context: ['green-square'],
-        action: () => { console.log('stuff'); }
-      }
-    ]
+    text: 'Delete',
+    context: ['person'],
+    action: () => { console.log('Deleting a person'); }
   },
   {
-    text: 'Sub1',
-    children: [
-      {
-        text: 'SubAction1',
-        context: ['green-square'],
-        action: () => { console.log('stuff'); }
-      }
-    ]
-  },
-  {
-    text: 'Sub2',
-    children: [
-      {
-        text: 'SubAction2',
-        context: ['green-square'],
-        action: () => { console.log('stuff'); }
-      }
-    ]
-  },
-  {
-    text: 'Yellow square',
-    context: ['yellow-square'],
+    text: 'Say hello',
+    context: ['block'],
     action: () => {
-      console.log('Yellow');
+      alert('HELLO');
     },
-    hotkey: 'y'
+    shortcut: 'h'
   },
   {
-    text: 'Appears on all',
+    text: 'All',
     context: ['all'],
     action: () => {
-      console.log('All');
+      console.log('This appears on all context menus');
     },
-    hotkey: 'a'
-  },
-  {
-    text: 'Blue',
-    children: [
-      {
-        text: 'Blue square',
-        context: ['blue-square'],
-        action: () => {
-          console.log('Blue');
-        },
-        hotkey: 'b'
-      },
-      {
-        text: 'Subsub',
-        children: [
-          {
-            text: 'Also blue square',
-            context: ['blue-square'],
-            action: () => {
-              console.log('Also blue');
-            },
-            hotkey: 'ctrl+b'
-          }
-        ]
-      }
-    ]
-  },
-  {
-    text: 'One item with a very long name, like really really long',
-    context: ['yellow-square'],
-    action: () => {
-      console.log('long');
-    },
-    hotkey: 'ctrl+l'
-  },
-  {
-    text: 'Inner context menu item',
-    context: ['green-square', 'orange-square'],
-    action: () => {
-      console.log('This is an inner action!');
-    },
-    hotkey: 'ctrl+l'
+    shortcut: 'a'
   }
 ];
 
@@ -123,7 +47,8 @@ export function onInitialize(contexr: ContexrService): () => Promise<any> {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ExampleListComponent
   ],
   imports: [
     BrowserModule,

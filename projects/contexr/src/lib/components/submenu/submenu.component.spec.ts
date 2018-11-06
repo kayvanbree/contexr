@@ -24,7 +24,7 @@ describe('SubmenuComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(SubmenuComponent);
     component = fixture.componentInstance;
-    component.item = testSubmenu;
+    component.person = testSubmenu;
     fixture.detectChanges();
   });
 

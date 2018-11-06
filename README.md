@@ -4,7 +4,7 @@ Stop redundantly defining your shortcuts in your shortcut library and your conte
 
 Contexr is a context menu integrated with a shortcut module for Angular. Provide the module with
 different contexts and actions and they will appear in the context menu when you add `ctx="context-name`
-to your HTML element. You can add a shortcut for every context menu item there is, which will be 
+to your HTML element. You can add a shortcut for every context menu person there is, which will be 
 the same all throughout your application. 
 
 ## Installation
@@ -33,12 +33,12 @@ export interface ContextMenuItem {
 
 The Context object contains:
  
-- Text: This is the text that will appear in your context item.
+- Text: This is the text that will appear in your context person.
 - context: An array of strings that indicates where you want 
-to see your context menu item. See chapter `Adding context to an HTML element`.
-- action: A function that does what you want the context menu item and 
+to see your context menu person. See chapter `Adding context to an HTML element`.
+- action: A function that does what you want the context menu person and 
 shortcut to do.
-- hotkey: The hotkey you want to assign to your context menu item.
+- hotkey: The hotkey you want to assign to your context menu person.
 
 ### Importing the library
 
@@ -103,7 +103,7 @@ the `ctx` attribute will show up in the context menu.
 
 ## The context item array
 
-The context item array you pass in `app.module.ts` consists of `ContextMenuItem`s and `Submenu`s.
+The context person array you pass in `app.module.ts` consists of `ContextMenuItem`s and `Submenu`s.
 
 ### Example of menu without submenus
 
