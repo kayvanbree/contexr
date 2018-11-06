@@ -1,21 +1,31 @@
 import {APP_INITIALIZER, NgModule} from '@angular/core';
-import { CommonModule } from '@angular/common';
-import {ContexrModule, ContextMenuItem} from 'contexr';
-import { SomeComponent } from './some/some.component';
+import {CommonModule} from '@angular/common';
+import {ContexrModule} from 'contexr';
 import {ContexrService} from 'contexr/lib/providers/contexr.service';
+import {ExampleListComponent} from './example-list/example-list.component';
+
+const context = [
+  {
+    text: 'Add a person',
+    context: ['people-list'],
+    action: () => { console.log('Adding a person'); }
+  },
+  {
+    text: 'Log message',
+    context: ['person'],
+    action: (args: any) => { console.log(args.message); }
+  },
+  {
+    text: 'Delete',
+    context: ['person'],
+    action: (args: any) => { console.log('Deleting ' + args.name); }
+  }
+];
 
 export function onInitialize(contexr: ContexrService): () => Promise<any> {
   return (): Promise<any> => {
     return new Promise((resolve, reject) => {
-
-        contexr.registerContextMenuItem({
-          text: 'Some context in library',
-          context: ['library-context'],
-          action: () => {
-            console.log('Doing something in library');
-          },
-          hotkey: 'l'
-        } as any);
+        contexr.registerContextMenuItems(context);
         resolve();
     });
   };
@@ -26,9 +36,11 @@ export function onInitialize(contexr: ContexrService): () => Promise<any> {
     CommonModule,
     ContexrModule
   ],
-  declarations: [SomeComponent],
+  declarations: [
+    ExampleListComponent
+  ],
   exports: [
-    SomeComponent
+    ExampleListComponent
   ],
   providers: [
     {

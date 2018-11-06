@@ -1,28 +1,11 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {APP_INITIALIZER, NgModule} from '@angular/core';
-
 import {AppComponent} from './app.component';
 import {ContexrModule} from '../../projects/contexr/src';
 import {SomemoduleModule} from './somemodule/somemodule.module';
 import {ContexrService} from 'contexr/lib/providers/contexr.service';
-import { ExampleListComponent } from './example-list/example-list.component';
 
 const context: any = [
-  {
-    text: 'Add a person',
-    context: ['people-list'],
-    action: () => { console.log('Adding a person'); }
-  },
-  {
-    text: 'Log message',
-    context: ['person'],
-    action: (args: any) => { console.log(args.message); }
-  },
-  {
-    text: 'Delete',
-    context: ['person'],
-    action: (args: any) => { console.log('Deleting ' + args.name); }
-  },
   {
     text: 'Say hello',
     context: ['block'],
@@ -52,8 +35,7 @@ export function onInitialize(contexr: ContexrService): () => Promise<any> {
 
 @NgModule({
   declarations: [
-    AppComponent,
-    ExampleListComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
