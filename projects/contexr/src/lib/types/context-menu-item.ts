@@ -2,6 +2,7 @@ import {ContextMenuEntry} from './context-menu-entry';
 
 export class ContextMenuItem extends ContextMenuEntry {
   context: string[];
-  action: () => void;
+  action: (args: any) => void;
   hotkey?: string | string[];
+  args?: any;
 }

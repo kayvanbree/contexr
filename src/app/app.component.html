@@ -1,51 +1,12 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
-  <h1>
-    Welcome to Contexr!
-  </h1>
+  <app-example-list></app-example-list>
   <div
-    ctx="yellow-square"
-    style="
-      background: yellow;
-      width: 300px;
-      height: 300px;
-      margin: 0 auto;
-    "
+    style="background: grey; height: 200px; width: 200px;"
+    [ctx]="'block'"
+    [ctxArgs]="'Something'"
   >
-    Right click for context menu!
-    <div
-      ctx="orange-square"
-      style="
-        background: orange;
-        width: 100px;
-        height: 100px;
-        margin: 50px auto 0;
-      "
-    >Right click for inner context!
-    </div>
-  </div>
-  <div
-    ctx="blue-square"
-    style="
-      background: blue;
-      width: 300px;
-      height: 300px;
-      margin: 0 auto;
-    "
-  >
-    Right click for context menu!
-    <div
-      ctx="green-square"
-      style="
-        background: green;
-        width: 100px;
-        height: 100px;
-        margin: 50px auto 0;
-      "
-    >Right click for inner context!
-    </div>
-    <app-some style="display: compact;"></app-some>
+    Right click on this block and click 'Say hello' or use the shortcut key 'h'
   </div>
 </div>
 <ctx-context-menu id="ctx"></ctx-context-menu>
-

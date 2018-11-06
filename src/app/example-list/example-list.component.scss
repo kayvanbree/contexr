@@ -1,0 +1,14 @@
+.table {
+  .header {
+    background: grey;
+  }
+
+  .item {
+    background: #d9d9d9;
+
+    &:hover {
+      background: #c2c2c2;
+    }
+  }
+}
+
