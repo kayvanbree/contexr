@@ -7,6 +7,7 @@
 action like this `action: (args: any) => { console.log('Deleting ' + args.name); }` and
 add the arguments to your HTML element like this
 `[ctxArgs]="{id: person.id, name: person.name, message: person.message}"`.
+- Slight improvement on the demo app
 
 ### BREAKING CHANGES
 

@@ -7,7 +7,7 @@ import {SomemoduleModule} from './somemodule/somemodule.module';
 import {ContexrService} from 'contexr/lib/providers/contexr.service';
 import { ExampleListComponent } from './example-list/example-list.component';
 
-const context = [
+const context: any = [
   {
     text: 'Add a person',
     context: ['people-list'],
