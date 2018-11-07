@@ -8,11 +8,20 @@ import {MatButtonModule, MatToolbarModule} from '@angular/material';
 import {InstallationComponent} from './pages/installation/installation.component';
 import {ImportRoutingModule} from './modules/import-routing.module';
 import {ExamplePageComponent} from './pages/example-page/example-page.component';
-import {PeopleListComponent} from './modules/example-list/people-list-component.module';
+import {PeopleListModule} from './modules/example-list/people-list-component.module';
 import {HomeComponent} from './pages/home/home.component';
 import {HighlightModule} from 'ngx-highlightjs';
+import { SimpleExample1Component } from './modules/installation-examples/simple-example1/simple-example1.component';
 
 const context: any = [
+  {
+    text: 'My first context!',
+    context: ['my-first-context'],
+    action: () => {
+      console.log('You just clicked the first context item!');
+    },
+    hotkey: 'y'
+  },
   {
     text: 'Say hello',
     context: ['block'],
@@ -45,7 +54,8 @@ export function onInitialize(contexr: ContexrService): () => Promise<any> {
     AppComponent,
     InstallationComponent,
     ExamplePageComponent,
-    HomeComponent
+    HomeComponent,
+    SimpleExample1Component
   ],
   imports: [
     BrowserModule,
@@ -54,7 +64,7 @@ export function onInitialize(contexr: ContexrService): () => Promise<any> {
     MatToolbarModule,
     MatButtonModule,
     ImportRoutingModule,
-    PeopleListComponent,
+    PeopleListModule,
     HighlightModule.forRoot({ theme: 'agate'})
   ],
   providers: [

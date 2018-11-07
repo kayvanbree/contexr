@@ -28,10 +28,10 @@ chapter called `Creating the context menu data structure`.
 ```javascript
 const context: any = [
   {
-    text: 'Yellow square',
-    context: ['yellow-square'],
+    text: 'Say my name',
+    context: ['say-my-name'],
     action: (args: any) => {
-      console.log('Say something about the arguments: ' + args.something);
+      console.log('My name is ' + args.name);
     },
     hotkey: 'y'
   }

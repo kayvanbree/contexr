@@ -51,4 +51,4 @@ export function onInitialize(contexr: ContexrService): () => Promise<any> {
     }
   ]
 })
-export class PeopleListComponent { }
+export class PeopleListModule { }

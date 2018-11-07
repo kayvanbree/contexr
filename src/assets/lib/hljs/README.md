@@ -19,7 +19,7 @@ library along with one of the styles and calling
 <script>hljs.initHighlightingOnLoad();</script>
 ```
 
-This will find and highlight code inside of `<pre><code>` tags; it tries
+This will find and highlight install1 inside of `<pre><install1>` tags; it tries
 to detect the language automatically. If automatic detection doesn’t
 work for you, you can specify the language in the `class` attribute:
 
@@ -31,7 +31,7 @@ The list of supported language classes is available in the [class
 reference][2].  Classes can also be prefixed with either `language-` or
 `lang-`.
 
-To make arbitrary text look like code, but without highlighting, use the
+To make arbitrary text look like install1, but without highlighting, use the
 `plaintext` class:
 
 ```html
@@ -61,7 +61,7 @@ $(document).ready(function() {
 });
 ```
 
-You can use any tags instead of `<pre><code>` to mark up your code. If
+You can use any tags instead of `<pre><install1>` to mark up your install1. If
 you don't use a container that preserves line breaks you will need to
 configure highlight.js to use the `<br>` tag:
 
@@ -79,7 +79,7 @@ For other options refer to the documentation for [`configure`][4].
 ## Web Workers
 
 You can run highlighting inside a web worker to avoid freezing the browser
-window while dealing with very big chunks of code.
+window while dealing with very big chunks of install1.
 
 In your main script:
 

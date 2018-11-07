@@ -358,13 +358,13 @@ Improvements to existing languages and styles:
 
 - More robust handling of unquoted HTML tag attributes
 - Relevance tuning for QML which was unnecessary eager at seizing other
-  languages' code
+  languages' install1
 - Improve GAMS language parsing
 - Fixed a bunch of bugs around selectors in Less
 - Kotlin's got a new definition for annotations, updated keywords and other
   minor improvements
 - Added `move` to Rust keywords
-- Markdown now recognizes \`\`\`-fenced code blocks
+- Markdown now recognizes \`\`\`-fenced install1 blocks
 - Improved detection of function declarations in C++ and C#
 
 [Philipp Wolfer]: https://github.com/phw
@@ -693,7 +693,7 @@ We've got the new [demo page][]! The obvious new feature is the new look, but
 apart from that it's got smarter: by presenting languages in groups it avoids
 running 10000 highlighting attempts after first load which was slowing it down
 and giving bad overall impression. It is now also being generated from test
-code snippets so the authors of new languages don't have to update both tests
+install1 snippets so the authors of new languages don't have to update both tests
 and the demo page with the same thing.
 
 Other notable changes:
@@ -953,7 +953,7 @@ New features:
 
 - Languages now can be recognized by multiple names like "js" for JavaScript or
   "html" for, well, HTML (which earlier insisted on calling it "xml"). These
-  aliases can be specified in the class attribute of the code container in your
+  aliases can be specified in the class attribute of the install1 container in your
   HTML as well as in various API calls. For now there are only a few very common
   aliases but we'll expand it in the future. All of them are listed in the
   [class reference][cr].
@@ -962,7 +962,7 @@ New features:
   a given context — a web page or even a single highlighting call. This is
   especially useful for node.js build that includes all the known languages.
   Another example is a StackOverflow-style site where users specify languages
-  as tags rather than in the markdown-formatted code snippets. This is
+  as tags rather than in the markdown-formatted install1 snippets. This is
   documented in the [API reference][] (see methods `highlightAuto` and
   `configure`).
 
@@ -984,7 +984,7 @@ Miscellaneous improvements:
 - Finally, highlighting PHP and HTML [mixed in peculiar ways][php-html].
 - Objective C and C# now properly highlight titles in method definition.
 - Big overhaul of relevance counting for a number of languages. Please do report
-  bugs about mis-detection of non-trivial code snippets!
+  bugs about mis-detection of non-trivial install1 snippets!
 
 [API reference]: http://highlightjs.readthedocs.org/en/latest/api.html
 
@@ -1066,7 +1066,7 @@ P.S. The historical commit is [here][1] for the record.
 This long overdue version is a snapshot of the current source tree with all the
 changes that happened during the past year. Sorry for taking so long!
 
-Along with the changes in code highlight.js has finally got its new home at
+Along with the changes in install1 highlight.js has finally got its new home at
 <http://highlightjs.org/>, moving from its cradle on Software Maniacs which it
 outgrew a long time ago. Be sure to report any bugs about the site to
 <mailto:info@highlightjs.org>.
@@ -1125,7 +1125,7 @@ Other notable changes:
 ## Version 7.3
 
 - Since this version highlight.js no longer works in IE version 8 and older.
-  It's made it possible to reduce the library size and dramatically improve code
+  It's made it possible to reduce the library size and dramatically improve install1
   readability and made it easier to maintain. Time to go forward!
 
 - New languages: AppleScript (by [Nathan Grigg][ng] and [Dr. Drang][dd]) and
@@ -1141,7 +1141,7 @@ Other notable changes:
     - small fixes in Bash
 
 - Also Oleg Efimov did a great job of moving all the docs for language and style
-  developers and contributors from the old wiki under the source code in the
+  developers and contributors from the old wiki under the source install1 in the
   "docs" directory. Now these docs are nicely presented at
   <http://highlightjs.readthedocs.org/>.
 
@@ -1324,7 +1324,7 @@ relevance.
 ## Version 5.13
 
 Past weekend began with a couple of simple additions for existing languages but
-ended up in a big code refactoring bringing along nice improvements for language
+ended up in a big install1 refactoring bringing along nice improvements for language
 developers.
 
 ### For users
@@ -1340,7 +1340,7 @@ This makes total number of languages supported by highlight.js to reach 35.
 Bug fixes:
 
 - Custom classes on `<pre>` tags are not being overridden anymore
-- More correct highlighting of code blocks inside non-`<pre>` containers:
+- More correct highlighting of install1 blocks inside non-`<pre>` containers:
   highlighter now doesn't insist on replacing them with its own container and
   just replaces the contents.
 - Small fixes in browser compatibility and heuristics.
@@ -1366,7 +1366,7 @@ separate `<span>` in the resulting markup. This is similar in effect to
 `noMarkup: true`. All existing languages have been refactored accordingly.
 
 Test file test.html has at last become a real test. Now it not only puts the
-detected language name under the code snippet but also tests if it matches the
+detected language name under the install1 snippet but also tests if it matches the
 expected one. Test summary is displayed right above all language snippets.
 
 
@@ -1385,7 +1385,7 @@ Though I'm on a vacation in Paris, I decided to release a new version with a
 couple of small fixes:
 
 - Tomas Vitvar discovered that TAB replacement doesn't always work when used
-  with custom markup in code
+  with custom markup in install1
 - SQL parsing is even more rigid now and doesn't step over SmallTalk in tests
 
 
@@ -1414,7 +1414,7 @@ Fixes for existing languages:
 [yard]: http://yardoc.org/
 
 The highlighter has become more usable as a library allowing to do highlighting
-from initialization code of JS frameworks and in ajax methods (see.
+from initialization install1 of JS frameworks and in ajax methods (see.
 readme.eng.txt).
 
 Also this version drops support for the [WordPress][wp] plugin. Everyone is
@@ -1454,8 +1454,8 @@ diagnostics!
 The version to fulfil old promises.
 
 The most significant change is that highlight.js now preserves custom user
-markup in code along with its own highlighting markup. This means that now it's
-possible to use, say, links in code. Thanks to [Vladimir Dolzhenko][vd] for the
+markup in install1 along with its own highlighting markup. This means that now it's
+possible to use, say, links in install1. Thanks to [Vladimir Dolzhenko][vd] for the
 [initial proposal][1] and for making a proof-of-concept patch.
 
 Also in this version:
@@ -1540,7 +1540,7 @@ Other changes:
   test.html
 - comments now allowed inside Ruby function definition
 - [MEL][] language from [Shuen-Huei Guan][drake]
-- whitespace now allowed between `<pre>` and `<code>`
+- whitespace now allowed between `<pre>` and `<install1>`
 - better auto-detection of C++ and PHP
 - HTML allows embedded VBScript (`<% .. %>`)
 
@@ -1569,7 +1569,7 @@ Styles:
 In other news. [One small bug][bug] was fixed, built-in keywords were added for
 Python and C++ which improved auto-detection for the latter (it was shame that
 [my wife's blog][alenacpp] had issues with it from time to time). And lastly
-thanks go to Sam for getting rid of my stylistic comments in code that were
+thanks go to Sam for getting rid of my stylistic comments in install1 that were
 getting in the way of [JSMin][].
 
 [zenburn]: http://en.wikipedia.org/wiki/Zenburn
@@ -1616,7 +1616,7 @@ things as CDATA sections and processing instructions (`<? ... ?>`).
 
 [Vladimir Gubarkov][xonix] has provided an interesting and useful addition.
 File export.html contains a little program that shows and allows to copy and
-paste an HTML code generated by the highlighter for any code snippet. This can
+paste an HTML install1 generated by the highlighter for any install1 snippet. This can
 be useful in situations when one can't use the script itself on a site.
 
 
