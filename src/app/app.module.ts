@@ -9,6 +9,7 @@ import { InstallationComponent } from './pages/installation/installation.compone
 import {ImportRoutingModule} from './modules/import-routing.module';
 import {ExamplePageComponent} from './pages/example-page/example-page.component';
 import {PeopleListComponent} from './modules/example-list/people-list-component.module';
+import { HomeComponent } from './pages/home/home.component';
 
 const context: any = [
   {
@@ -42,7 +43,8 @@ export function onInitialize(contexr: ContexrService): () => Promise<any> {
   declarations: [
     AppComponent,
     InstallationComponent,
-    ExamplePageComponent
+    ExamplePageComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
