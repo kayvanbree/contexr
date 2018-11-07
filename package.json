@@ -13,7 +13,8 @@
     "e2e": "ng e2e",
     "prepublish": "npm run build:lib",
     "publish": "cd ./dist/contexr && npm publish",
-    "publish:pages": "npm run build:lib && cpx dist/contexr/**/* docs"
+    "build:pages": "ng build --prod --base-href \"https://kayvanbree.github.io/contexr/\"",
+    "publish:pages": "npm run build:pages && ngh --dir=dist/contexr-demo"
   },
   "private": true,
   "dependencies": {
@@ -42,7 +43,6 @@
     "@types/node": "~8.9.4",
     "codelyzer": "~4.2.1",
     "cpx": "^1.5.0",
-    "ctx": "^0.3.0",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~1.7.1",
