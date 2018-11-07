@@ -5,11 +5,12 @@ import {ContexrModule} from '../../projects/contexr/src';
 import {ContexrService} from 'contexr/lib/providers/contexr.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule, MatToolbarModule} from '@angular/material';
-import { InstallationComponent } from './pages/installation/installation.component';
+import {InstallationComponent} from './pages/installation/installation.component';
 import {ImportRoutingModule} from './modules/import-routing.module';
 import {ExamplePageComponent} from './pages/example-page/example-page.component';
 import {PeopleListComponent} from './modules/example-list/people-list-component.module';
-import { HomeComponent } from './pages/home/home.component';
+import {HomeComponent} from './pages/home/home.component';
+import {HighlightModule} from 'ngx-highlightjs';
 
 const context: any = [
   {
@@ -53,7 +54,8 @@ export function onInitialize(contexr: ContexrService): () => Promise<any> {
     MatToolbarModule,
     MatButtonModule,
     ImportRoutingModule,
-    PeopleListComponent
+    PeopleListComponent,
+    HighlightModule.forRoot({ theme: 'agate'})
   ],
   providers: [
     {
