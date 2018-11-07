@@ -4,6 +4,8 @@ import {AppComponent} from './app.component';
 import {ContexrModule} from '../../projects/contexr/src';
 import {SomemoduleModule} from './somemodule/somemodule.module';
 import {ContexrService} from 'contexr/lib/providers/contexr.service';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatButtonModule, MatToolbarModule} from '@angular/material';
 
 const context: any = [
   {
@@ -40,7 +42,10 @@ export function onInitialize(contexr: ContexrService): () => Promise<any> {
   imports: [
     BrowserModule,
     SomemoduleModule,
-    ContexrModule
+    ContexrModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatButtonModule
   ],
   providers: [
     {
