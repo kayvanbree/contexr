@@ -8,6 +8,10 @@ different contexts and actions and they will appear in the context menu when you
 to your HTML element. You can add a shortcut for every context menu person there is, which will be 
 the same all throughout your application. 
 
+## Demo page
+
+[Demo page](https://kayvanbree.github.io/contexr/)
+
 ## Installation
 
 ### Adding the Contexr module
