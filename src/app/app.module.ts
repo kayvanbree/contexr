@@ -2,10 +2,26 @@ import {BrowserModule} from '@angular/platform-browser';
 import {APP_INITIALIZER, NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {ContexrModule} from '../../projects/contexr/src';
-import {SomemoduleModule} from './somemodule/somemodule.module';
 import {ContexrService} from 'contexr/lib/providers/contexr.service';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatButtonModule, MatToolbarModule} from '@angular/material';
+import {InstallationComponent} from './pages/installation/installation.component';
+import {ImportRoutingModule} from './modules/import-routing.module';
+import {ExamplePageComponent} from './pages/example-page/example-page.component';
+import {PeopleListModule} from './modules/example-list/people-list-component.module';
+import {HomeComponent} from './pages/home/home.component';
+import {HighlightModule} from 'ngx-highlightjs';
+import { SimpleExample1Component } from './modules/installation-examples/simple-example1/simple-example1.component';
 
 const context: any = [
+  {
+    text: 'My first context!',
+    context: ['my-first-context'],
+    action: () => {
+      console.log('You just clicked the first context item!');
+    },
+    hotkey: 'y'
+  },
   {
     text: 'Say hello',
     context: ['block'],
@@ -35,12 +51,21 @@ export function onInitialize(contexr: ContexrService): () => Promise<any> {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    InstallationComponent,
+    ExamplePageComponent,
+    HomeComponent,
+    SimpleExample1Component
   ],
   imports: [
     BrowserModule,
-    SomemoduleModule,
-    ContexrModule
+    ContexrModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatButtonModule,
+    ImportRoutingModule,
+    PeopleListModule,
+    HighlightModule.forRoot({ theme: 'agate'})
   ],
   providers: [
     {

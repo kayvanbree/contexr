@@ -1,7 +1,7 @@
 import {APP_INITIALIZER, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ContexrModule} from 'contexr';
-import {ContexrService} from 'contexr/lib/providers/contexr.service';
+import {ContexrService} from 'projects/contexr/src/lib/providers/contexr.service';
 import {ExampleListComponent} from './example-list/example-list.component';
 
 const context = [
@@ -51,4 +51,4 @@ export function onInitialize(contexr: ContexrService): () => Promise<any> {
     }
   ]
 })
-export class SomemoduleModule { }
+export class PeopleListModule { }

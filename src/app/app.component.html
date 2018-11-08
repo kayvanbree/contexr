@@ -1,12 +1,15 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <app-example-list></app-example-list>
-  <div
-    style="background: grey; height: 200px; width: 200px;"
-    [ctx]="'block'"
-    [ctxArgs]="'Something'"
-  >
-    Right click on this block and click 'Say hello' or use the shortcut key 'h'
-  </div>
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span>Contexr</span>
+    <span class="filler"></span>
+    <button mat-button routerLink="/">Home</button>
+    <button mat-button routerLink="/installation">Installation</button>
+    <button mat-button routerLink="/example">Example</button>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<div class="container">
+  <router-outlet></router-outlet>
 </div>
-<ctx-context-menu id="ctx"></ctx-context-menu>
+
+<ctx-context-menu></ctx-context-menu>

@@ -1,0 +1,73 @@
+<h1>Contexr</h1>
+
+<span>
+  Stop redundantly defining your shortcuts in your shortcut library and your context menu. Start using Contexr!
+
+  Contexr is a context menu integrated with a shortcut module for Angular. Provide the module with
+  different contexts and actions and they will appear in the context menu when you add `ctx="context-name`
+  to your HTML element. You can add a shortcut for every context menu person there is, which will be
+  the same all throughout your application.
+</span>
+
+<h2>Installation</h2>
+
+Start by installing Contexr using npm.
+
+<pre><code highlight [code]="install1"></code></pre>
+
+<!--<h2>Setup</h2>-->
+
+After installation, we will start by defining a simple context menu containing one item. We will do
+this in app.module.ts (or any module you want to use Contexr in).
+
+<pre><code highlight [code]="install2"></code></pre>
+
+Now that we have created our context menu items, we add the following method to our module.
+
+<pre><code highlight [code]="install3"></code></pre>
+
+<!--This method will register our context menu items to the Contexr module on startup. For that to work-->
+<!--we need to provide the constant context to Contexr using an app initializer.-->
+
+<!--<pre><code highlight [code]="install4"></code></pre>-->
+
+<!--The app initializer will feed your context menu to Contexr from any module. You can add different-->
+<!--context menus to different modules using the approach from this chapter.-->
+
+<!--The last remaining step is to add the context menu to your html. This will probably be in your app.component.html,-->
+<!--as you don't want multiple versions of this element on your page.-->
+
+<!--<pre><code highlight [code]="install5"></code></pre>-->
+
+<!--<h2>Adding context to HTML elements</h2>-->
+
+<!--Now you can use the context anywhere in your application. Just add [ctx]="'context-name'" to any HTML element-->
+<!--on your page!-->
+
+<!--<pre><code highlight [code]="install6"></code></pre>-->
+
+<h3>Example</h3>
+
+<div
+  [ctx]="'my-first-context'"
+  style="background: yellow"
+>
+  This div has a context menu
+</div>
+
+
+<!--<h2>Adding arguments to your context</h2>-->
+
+<!--Adding arguments can be done using two simple steps. First, create a context item in your app.module.ts.-->
+<!--Add args: any to the method signature of the action method.-->
+
+<pre><code highlight [code]="install7"></code></pre>
+
+<!--Off course, you need to do something in your action method. We added a log statement that call out a name.-->
+
+<!--The second step is to add the context to your HTML elements. This time, we will add [ctxArgs]="some object" to-->
+<!--the element to pass our argument.-->
+
+<!--<pre><code highlight [code]="install8"></code></pre>-->
+
+<!--TODO: Add example-->
