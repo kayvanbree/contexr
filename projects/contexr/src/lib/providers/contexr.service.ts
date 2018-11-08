@@ -75,7 +75,7 @@ export class ContexrService {
     this.contextStateSubject.next({
       open: true,
       context: this.currentContext,
-      top: event.clientY,
+      top: event.clientY + window.pageYOffset,
       left: event.clientX
     });
   }
