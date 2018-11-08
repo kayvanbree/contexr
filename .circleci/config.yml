@@ -17,6 +17,9 @@ jobs:
 #  release:
 #    docker:
 #      - image: circleci/node
+#    branches:
+#      only:
+#        - master
 #    steps:
 #      - checkout
 #      - run:
