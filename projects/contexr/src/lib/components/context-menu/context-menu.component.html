@@ -3,7 +3,7 @@
   (click)="onClick($event)"
   *ngIf="open"
   class="context-menu menu"
-  [ngStyle]="{'top.px': contextState.top + window.pageYOffset, 'left.px': contextState.left}"
+  [ngStyle]="{'top.px': contextState.top, 'left.px': contextState.left}"
 >
   <ul class="context-list">
     <ng-container *ngFor="let item of contextState.context">
