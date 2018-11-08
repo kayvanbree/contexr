@@ -12,7 +12,6 @@ export class ContextDirective {
 
   @HostListener('contextmenu', ['$event'])
   public onContextMenu(event) {
-    console.log('Adding context: ' + this.ctx + ' with args: ' + this.ctxArgs);
     this.contexr.addCurrentContext(this.ctx, this.ctxArgs);
   }
 }
