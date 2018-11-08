@@ -12,3 +12,22 @@ jobs:
       - run:
           name: build
           command: 'npm run build:lib'
+
+
+#  release:
+#    docker:
+#      - image: circleci/node
+#    steps:
+#      - checkout
+#      - run:
+#          name: install
+#          command: 'npm install'
+#      - run:
+#          name: build
+#          command: 'npm run build:lib'
+#      - run:
+#          name: publish-demo-site
+#          command: 'npm run publish:pages'
+#      - run:
+#          name: publish
+#          command: 'npm run publish'
