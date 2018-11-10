@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
 import {ContexrService} from '../../projects/contexr/src/lib/providers/contexr.service';
-import {ContextMenuItem} from 'contexr/lib/types/context-menu-item';
 
 @Component({
   selector: 'app-root',
