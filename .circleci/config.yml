@@ -1,10 +1,27 @@
 version: 2.1
 
 jobs:
+  install:
+    docker:
+    - image: circleci/node
+    steps:
+      - checkout
+      - run:
+          name: install
+          command: 'npm install'
+      - save_cache:
+          key: node_modules
+          paths:
+            - node_modules
+
   test:
     docker:
       - image: weboaks/node-karma-protractor-chrome
     steps:
+    - checkout
+    - restore_cache:
+        keys:
+          - node_modules
     - run:
         name: test
         command: 'npm run test:ci'
@@ -14,9 +31,9 @@ jobs:
       - image: circleci/node
     steps:
       - checkout
-      - run:
-          name: install
-          command: 'npm install'
+      - restore_cache:
+          keys:
+          - node_modules
       - run:
           name: build
           command: 'npm run build:lib'
