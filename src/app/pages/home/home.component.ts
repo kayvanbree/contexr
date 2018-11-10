@@ -22,7 +22,8 @@ export class HomeComponent {
       context: ['increase-count'],
       action: () => {
         this.count++;
-      }
+      },
+      hotkey: 'i'
     }
   ];
 
@@ -33,7 +34,8 @@ context = [
     context: ['increase-count'],
     action: () => {
       this.count++;
-    }
+    },
+    hotkey: 'i'
   }
 ];`;
 

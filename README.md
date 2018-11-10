@@ -44,7 +44,8 @@ context = [
     context: ['increase-count'],
     action: () => {
       this.count++;
-    }
+    },
+    hotkey: 'i'
   }
 ];
 ```
@@ -57,7 +58,8 @@ constructor(private contexr: ContexrService) {
 }
 ```
 
-Now add an HTML element to your page. Use the [ctx] attribute to add a context.
+This method will register your context menu item and configure the hotkey given. Now add an 
+HTML element to your page. Use the [ctx] attribute to add a context.
 
 ```html
 <div

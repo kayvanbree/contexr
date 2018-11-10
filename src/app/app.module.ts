@@ -4,7 +4,6 @@ import {AppComponent} from './app.component';
 import {ContexrModule} from '../../projects/contexr/src';
 import {ContexrService} from 'contexr/lib/providers/contexr.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatToolbarModule} from '@angular/material';
 import {ImportRoutingModule} from './modules/import-routing.module';
 import {ExamplePageComponent} from './pages/example-page/example-page.component';
 import {PeopleListModule} from './modules/example-list/people-list-component.module';
