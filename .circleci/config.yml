@@ -1,9 +1,12 @@
 version: 2.1
 
 jobs:
-  install:
+  defaults: &defaults
+    working_directory: /tmp/workspace
     docker:
     - image: circleci/node
+
+  install:
     steps:
       - checkout
       - run:
@@ -26,8 +29,6 @@ jobs:
         command: 'npm run test:ci'
 
   build:
-    docker:
-      - image: circleci/node
     steps:
       - checkout
       - attach_workspace:
@@ -35,45 +36,3 @@ jobs:
       - run:
           name: build
           command: 'npm run build:lib'
-
-workflows:
-  version: 2.1
-  everything:
-    jobs:
-      - install
-      - test
-          requires:
-            - install
-      - build:
-          requires:
-            - install
-            - test
-#      - deploy:
-#          requires:
-#            - build
-#          filters:
-#            branches:
-#              only:
-#                - master
-
-
-#  release:
-#    docker:
-#      - image: circleci/node
-#    branches:
-#      only:
-#        - master
-#    steps:
-#      - checkout
-#      - run:
-#          name: install
-#          command: 'npm install'
-#      - run:
-#          name: build
-#          command: 'npm run build:lib'
-#      - run:
-#          name: publish-demo-site
-#          command: 'npm run publish:pages'
-#      - run:
-#          name: publish
-#          command: 'npm run publish'
