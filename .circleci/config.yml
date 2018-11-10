@@ -36,18 +36,18 @@ jobs:
           name: build
           command: 'npm run build:lib'
 
-workflows:
-  version: 2
-  everything:
-    jobs:
-      - install
-      - test
-          requires:
-            - install
-      - build:
-          requires:
-            - install
-            - test
+#workflows:
+#  version: 2
+#  everything:
+#    jobs:
+#      - install
+#      - test
+#          requires:
+#            - install
+#      - build:
+#          requires:
+#            - install
+#            - test
 #      - deploy:
 #          requires:
 #            - build
