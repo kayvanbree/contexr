@@ -11,6 +11,7 @@ import {PeopleListModule} from './modules/example-list/people-list-component.mod
 import {HomeComponent} from './pages/home/home.component';
 import {HighlightModule} from 'ngx-highlightjs';
 import { SimpleExample1Component } from './modules/installation-examples/simple-example1/simple-example1.component';
+import {ImportMaterialModule} from './modules/import-material.module';
 
 const context: any = [
   {
@@ -66,11 +67,10 @@ export function onInitialize(contexr: ContexrService): () => Promise<any> {
     BrowserModule,
     ContexrModule,
     BrowserAnimationsModule,
-    MatToolbarModule,
-    MatButtonModule,
     ImportRoutingModule,
     PeopleListModule,
-    HighlightModule.forRoot({ theme: 'agate'})
+    HighlightModule.forRoot({ theme: 'agate'}),
+    ImportMaterialModule
   ],
   providers: [
     {
