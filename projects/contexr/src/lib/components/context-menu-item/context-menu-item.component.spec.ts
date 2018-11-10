@@ -25,7 +25,7 @@ describe('ContextMenuItemComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ContextMenuItemComponent);
     component = fixture.componentInstance;
-    component.person = testItem;
+    component.item = testItem;
     contexr = fixture.componentRef.injector.get(ContexrService);
     fixture.detectChanges();
   });

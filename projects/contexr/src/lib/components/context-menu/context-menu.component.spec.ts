@@ -58,7 +58,7 @@ describe('ContextMenuComponent', () => {
 
   it('should react to a new state', () => {
     component.ngOnInit();
-    contexr.open(new MouseEvent('contextmenu'), 'test1');
+    contexr.open(new MouseEvent('contextmenu'));
 
     fixture.whenStable().then(() => {
       expect(component.open).toBe(true);
