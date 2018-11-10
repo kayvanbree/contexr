@@ -40,7 +40,12 @@ export class ContexrService {
    * @param context
    */
   public registerContextMenuItem(context: ContextMenuEntry): void {
-    this.context.push(context);
+    const index = this.indexOfContext(context);
+    if (index !== -1) {
+      this.context[index] = context;
+    } else {
+      this.context.push(context);
+    }
     if ((context as any).hotkey &&  (context as any).hotkey) {
       this.hotkeysService.add(new Hotkey((context as any).hotkey, (event: KeyboardEvent): boolean => {
         (context as any).action();
@@ -108,6 +113,20 @@ export class ContexrService {
         }
       }
     }
+  }
+
+  /**
+   * Recursively check if a context string already exists
+   * @param items
+   * @param context
+   */
+  private indexOfContext(item: ContextMenuEntry): number {
+    for (let i = 0; i < this.context.length; i++) {
+      if (JSON.stringify(this.context[i]) === JSON.stringify(item)) {
+        return i;
+      }
+    }
+    return -1;
   }
 
   /**
