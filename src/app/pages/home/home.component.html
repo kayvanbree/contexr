@@ -15,52 +15,42 @@ Start by installing Contexr using npm.
 
 <pre><code highlight [code]="install1"></code></pre>
 
-<h2>Setup</h2>
-
-After installation, we will start by defining a simple context menu containing one item. We will do
-this in app.module.ts (or any module you want to use Contexr in).
+Now the only thing remaining to do is to add the ctx-context-menu tag to app.component.html.
 
 <pre><code highlight [code]="install2"></code></pre>
 
-Now that we have created our context menu items, we add the following method to our module.
+<h2>Using Contexr</h2>
 
-<pre><code highlight [code]="install3"></code></pre>
+After installation, you can add context to any component! For example, if you want to
+increase the number displayed in a div using a context menu item, start by creating a
+field for our count and create a field for the context.
 
-This method will register our context menu items to the Contexr module on startup. For that to work
-we need to provide the constant context to Contexr using an app initializer.
+<pre><code highlight [code]="example1_code1"></code></pre>
 
-<pre><code highlight [code]="install4"></code></pre>
+Next, inject the ContexrService and register the context within the constructor.
 
-The app initializer will feed your context menu to Contexr from any module. You can add different
-context menus to different modules using the approach from this chapter.
+<pre><code highlight [code]="example1_code2"></code></pre>
 
-The last remaining step is to add the context menu to your html. This will probably be in your app.component.html,
-as you don't want multiple versions of this element on your page.
+Now add an HTML element to your page. Use the [ctx] attribute to add a context.
 
-<pre><code highlight [code]="install5"></code></pre>
+<pre><code highlight [code]="example1_code3"></code></pre>
 
-<h2>Adding context to HTML elements</h2>
-
-Now you can use the context anywhere in your application. Just add [ctx]="'context-name'" to any HTML element
-on your page!
-
-<pre><code highlight [code]="install6"></code></pre>
-
-The code above is rendered here. Try to right click the yellow div and check out the context menu. You will see
-it has it's own context, but also an item called 'All'. That item was added to the context 'all' so it will show
-up everywhere.
+When you run your application, the following div will be shown on your page. Try to
+use the context menu to increase the count. 
 
 <br /><br />
 <div
-  [ctx]="'my-first-context'"
-  style="background: yellow"
+  [ctx]="'increase-count'"
+  style="background: lightblue; padding: 20px;"
 >
-  This div has a context menu
+  Use the context menu to increase the count.
+  <br />
+  Count: {{count}}
 </div>
 
 <h2>Adding arguments to your context</h2>
 
-Adding arguments can be done using two simple steps. First, create a context item in your app.module.ts.
+Adding arguments can be done using two simple steps. First, create a context item in your component.
 Add args: any to the method signature of the action method.
 
 <pre><code highlight [code]="install7"></code></pre>
@@ -92,4 +82,3 @@ This HTML will result in the following. Try using the context menu.
     <td>USA</td>
   </tr>
 </table>
-

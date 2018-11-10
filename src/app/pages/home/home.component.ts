@@ -1,61 +1,53 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import {ContexrService} from 'contexr/lib/providers/contexr.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
+  public install1 = `npm install --save contexr`;
 
-  install1 = `npm install --save contexr`;
+  public install2 = `<!-- Your application code -->
+<ctx-context-menu></ctx-context-menu>`;
 
-  install2 = `const context: any = [
+  /**
+   * Example 1
+   */
+  count = 0;
+  context = [
+    {
+      text: 'Increase',
+      context: ['increase-count'],
+      action: () => {
+        this.count++;
+      }
+    }
+  ];
+
+  public example1_code1 = `count = 0;
+context = [
   {
-    text: 'My first context!',
-    context: ['my-first-context'],
+    text: 'Increase',
+    context: ['increase-count'],
     action: () => {
-      console.log('You just clicked the first context item!');
-    },
-    hotkey: 'y'
+      this.count++;
+    }
   }
 ];`;
 
-  install3 = `export function onInitialize(contexr: ContexrService): () => Promise<any> {
-  return (): Promise<any> => {
-    return new Promise((resolve, reject) => {
-      contexr.registerContextMenuItems(context);
-      resolve();
-    });
-  };
+  public example1_code2 = `constructor(private contexr: ContexrService) {
+  this.contexr.registerContextMenuItems(this.context);
 }`;
-  install4 = `@NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    ContexrModule
-  ],
-  providers: [
-      {
-        provide: APP_INITIALIZER,
-        useFactory: onInitialize,
-        multi: true,
-        deps: [ContexrService]
-      }
-    ],
-  bootstrap: [AppComponent]
-})
-export class AppModule { }`;
 
-  install5 = `<!-- Your application code -->
-<ctx-context-menu id="ctx"></ctx-context-menu>`;
-
-  install6 = `<div
-  [ctx]="'my-first-context'"
-  style="background: yellow"
+  public example1_code3 = `<div
+  [ctx]="'increase-count'"
+  style="background: lightblue; padding: 20px;"
 >
-  This div has a context menu
+  Use the context menu to increase the count.
+  <br />
+  Count: {{count}}
 </div>`;
 
   install7 = `const context: any = [
@@ -87,9 +79,7 @@ export class AppModule { }`;
   </tr>
 </table>`;
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(private contexr: ContexrService) {
+    this.contexr.registerContextMenuItems(this.context);
   }
-
 }
