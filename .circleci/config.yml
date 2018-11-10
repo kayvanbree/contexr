@@ -9,8 +9,8 @@ jobs:
       - run:
           name: install
           command: 'npm install'
-      - save_cache:
-          key: node_modules
+      - persist_to_workspace:
+          root: workspace
           paths:
             - node_modules
 
@@ -19,9 +19,8 @@ jobs:
       - image: weboaks/node-karma-protractor-chrome
     steps:
     - checkout
-    - restore_cache:
-        keys:
-          - node_modules
+    - attach_workspace:
+        at: /tmp/node_modules
     - run:
         name: test
         command: 'npm run test:ci'
@@ -31,12 +30,31 @@ jobs:
       - image: circleci/node
     steps:
       - checkout
-      - restore_cache:
-          keys:
-          - node_modules
+      - attach_workspace:
+          at: /tmp/node_modules
       - run:
           name: build
           command: 'npm run build:lib'
+
+workflows:
+  version: 2
+  everything:
+    jobs:
+      - install
+      - test
+          requires:
+            - install
+      - build:
+          requires:
+            - install
+            - test
+#      - deploy:
+#          requires:
+#            - build
+#          filters:
+#            branches:
+#              only:
+#                - master
 
 
 #  release:
