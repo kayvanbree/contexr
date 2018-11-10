@@ -11,6 +11,7 @@ import {HomeComponent} from './pages/home/home.component';
 import {HighlightModule} from 'ngx-highlightjs';
 import { SimpleExample1Component } from './modules/installation-examples/simple-example1/simple-example1.component';
 import {ImportMaterialModule} from './modules/import-material.module';
+import { ListWithContextComponent } from './components/list-with-context/list-with-context.component';
 
 const context: any = [
   {
@@ -60,7 +61,8 @@ export function onInitialize(contexr: ContexrService): () => Promise<any> {
     AppComponent,
     ExamplePageComponent,
     HomeComponent,
-    SimpleExample1Component
+    SimpleExample1Component,
+    ListWithContextComponent
   ],
   imports: [
     BrowserModule,

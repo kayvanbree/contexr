@@ -46,9 +46,13 @@ export class ContexrService {
     } else {
       this.context.push(context);
     }
-    if ((context as any).hotkey &&  (context as any).hotkey) {
+    if ((context as any).hotkey && (context as any).hotkey) {
       this.hotkeysService.add(new Hotkey((context as any).hotkey, (event: KeyboardEvent): boolean => {
         (context as any).action();
+        /**
+         * TODO: Look up corresponding action using hotkey
+         * The used context should be a list of all clicked/right-clicked contexts
+         */
         return false;
       }));
     }
