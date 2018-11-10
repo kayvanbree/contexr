@@ -20,7 +20,6 @@ export class ContextMenuComponent implements OnInit, OnDestroy {
     // Event capturing (not possible in real Angular yet)
     document.addEventListener('contextmenu', (event) => {
       event.preventDefault();
-      console.log('Reset context menu and prevent default');
       this.contexr.reset();
     }, true);
   }
@@ -55,7 +54,6 @@ export class ContextMenuComponent implements OnInit, OnDestroy {
    */
   @HostListener('document:contextmenu', ['$event'])
   onDocumentContextMenu(event): void {
-    console.log('Open context menu');
     this.contexr.open(event);
   }
 

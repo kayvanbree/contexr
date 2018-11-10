@@ -1,5 +1,17 @@
 # Changelog
 
+## v1.2.0
+
+- Update readme
+- Add demo page
+- Add easier way to add context from components
+- Update readme to reflect easier way for adding context
+- Set up CircleCI
+
+## v1.1.1
+
+- Fixes a bug where the context menu would show in incorrect positions when scrolled.
+
 ## v1.1.0
 
 - Context now shows correctly everywhere

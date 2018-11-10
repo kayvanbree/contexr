@@ -1,9 +1,21 @@
 version: 2.1
 
 jobs:
+  test:
+    docker:
+      - image: weboaks/node-karma-protractor-chrome
+    steps:
+    - checkout
+    - run:
+        name: install
+        command: 'npm install'
+    - run:
+        name: test
+        command: 'npm run test:ci'
+
   build:
     docker:
-      - image: circleci/node
+    - image: circleci/node
     steps:
       - checkout
       - run:
@@ -12,25 +24,3 @@ jobs:
       - run:
           name: build
           command: 'npm run build:lib'
-
-
-#  release:
-#    docker:
-#      - image: circleci/node
-#    branches:
-#      only:
-#        - master
-#    steps:
-#      - checkout
-#      - run:
-#          name: install
-#          command: 'npm install'
-#      - run:
-#          name: build
-#          command: 'npm run build:lib'
-#      - run:
-#          name: publish-demo-site
-#          command: 'npm run publish:pages'
-#      - run:
-#          name: publish
-#          command: 'npm run publish'
