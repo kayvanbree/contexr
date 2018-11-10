@@ -40,6 +40,10 @@ export class ContexrService {
    * @param context
    */
   public registerContextMenuItem(context: ContextMenuEntry): void {
+    if (this.hasContext(context)) {
+      console.log(`Context ${context.text} was already registered, skipping`);
+      return;
+    }
     this.context.push(context);
     if ((context as any).hotkey &&  (context as any).hotkey) {
       this.hotkeysService.add(new Hotkey((context as any).hotkey, (event: KeyboardEvent): boolean => {
@@ -108,6 +112,20 @@ export class ContexrService {
         }
       }
     }
+  }
+
+  /**
+   * Recursively check if a context string already exists
+   * @param items
+   * @param context
+   */
+  private hasContext(item: ContextMenuEntry): boolean {
+    for (let i = 0; i < this.context.length; i++) {
+      if (JSON.stringify(this.context[i]) === JSON.stringify(item)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   /**
