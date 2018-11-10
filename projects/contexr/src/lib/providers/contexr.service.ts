@@ -40,11 +40,12 @@ export class ContexrService {
    * @param context
    */
   public registerContextMenuItem(context: ContextMenuEntry): void {
-    if (this.hasContext(context)) {
-      console.log(`Context ${context.text} was already registered, skipping`);
-      return;
+    const index = this.indexOfContext(context);
+    if (index !== -1) {
+      this.context[index] = context;
+    } else {
+      this.context.push(context);
     }
-    this.context.push(context);
     if ((context as any).hotkey &&  (context as any).hotkey) {
       this.hotkeysService.add(new Hotkey((context as any).hotkey, (event: KeyboardEvent): boolean => {
         (context as any).action();
@@ -119,13 +120,13 @@ export class ContexrService {
    * @param items
    * @param context
    */
-  private hasContext(item: ContextMenuEntry): boolean {
+  private indexOfContext(item: ContextMenuEntry): number {
     for (let i = 0; i < this.context.length; i++) {
       if (JSON.stringify(this.context[i]) === JSON.stringify(item)) {
-        return true;
+        return i;
       }
     }
-    return false;
+    return -1;
   }
 
   /**
