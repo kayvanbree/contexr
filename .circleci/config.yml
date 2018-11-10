@@ -1,38 +1,26 @@
 version: 2.1
 
 jobs:
-  defaults: &defaults
-    working_directory: /tmp/workspace
-    docker:
-    - image: circleci/node
-
-  install:
-    steps:
-      - checkout
-      - run:
-          name: install
-          command: 'npm install'
-      - persist_to_workspace:
-          root: workspace
-          paths:
-            - node_modules
-
   test:
     docker:
       - image: weboaks/node-karma-protractor-chrome
     steps:
     - checkout
-    - attach_workspace:
-        at: /tmp/node_modules
+    - run:
+        name: install
+        command: 'npm install'
     - run:
         name: test
         command: 'npm run test:ci'
 
   build:
+    docker:
+    - image: circleci/node
     steps:
       - checkout
-      - attach_workspace:
-          at: /tmp/node_modules
+      - run:
+          name: install
+          command: 'npm install'
       - run:
           name: build
           command: 'npm run build:lib'
