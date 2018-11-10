@@ -10,10 +10,10 @@ the same all throughout your application.
 
 ## Links
 
-[Demo page](https://kayvanbree.github.io/contexr/)
-[Github](https://github.com/kayvanbree/contexr)
-[npmjs](https://www.npmjs.com/package/contexr)
-[CircleCi](https://circleci.com/gh/kayvanbree/contexr)
+- [Demo page](https://kayvanbree.github.io/contexr/)
+- [Github](https://github.com/kayvanbree/contexr)
+- [npmjs](https://www.npmjs.com/package/contexr)
+- [CircleCi](https://circleci.com/gh/kayvanbree/contexr)
 
 ## Installation
 

@@ -5,13 +5,13 @@ import {ContexrModule} from '../../projects/contexr/src';
 import {ContexrService} from 'contexr/lib/providers/contexr.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule, MatToolbarModule} from '@angular/material';
-import {InstallationComponent} from './pages/installation/installation.component';
 import {ImportRoutingModule} from './modules/import-routing.module';
 import {ExamplePageComponent} from './pages/example-page/example-page.component';
 import {PeopleListModule} from './modules/example-list/people-list-component.module';
 import {HomeComponent} from './pages/home/home.component';
 import {HighlightModule} from 'ngx-highlightjs';
 import { SimpleExample1Component } from './modules/installation-examples/simple-example1/simple-example1.component';
+import {ImportMaterialModule} from './modules/import-material.module';
 
 const context: any = [
   {
@@ -29,6 +29,13 @@ const context: any = [
       alert('HELLO');
     },
     hotkey: 'h'
+  },
+  {
+    text: 'Say my name',
+    context: ['say-my-name'],
+    action: (args: any) => {
+      alert('My name is ' + args.name);
+    }
   },
   {
     text: 'All',
@@ -52,7 +59,6 @@ export function onInitialize(contexr: ContexrService): () => Promise<any> {
 @NgModule({
   declarations: [
     AppComponent,
-    InstallationComponent,
     ExamplePageComponent,
     HomeComponent,
     SimpleExample1Component
@@ -61,11 +67,10 @@ export function onInitialize(contexr: ContexrService): () => Promise<any> {
     BrowserModule,
     ContexrModule,
     BrowserAnimationsModule,
-    MatToolbarModule,
-    MatButtonModule,
     ImportRoutingModule,
     PeopleListModule,
-    HighlightModule.forRoot({ theme: 'agate'})
+    HighlightModule.forRoot({ theme: 'agate'}),
+    ImportMaterialModule
   ],
   providers: [
     {

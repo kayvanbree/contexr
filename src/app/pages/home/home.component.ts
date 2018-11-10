@@ -51,7 +51,12 @@ export class AppModule { }`;
   install5 = `<!-- Your application code -->
 <ctx-context-menu id="ctx"></ctx-context-menu>`;
 
-  install6 = `<table class="table" [ctx]="'my-first-context'">`;
+  install6 = `<div
+  [ctx]="'my-first-context'"
+  style="background: yellow"
+>
+  This div has a context menu
+</div>`;
 
   install7 = `const context: any = [
   // Your other context items
@@ -64,8 +69,23 @@ export class AppModule { }`;
   }
 ];`;
 
-  install8 = `<div [ctx]="'say-my-name'" [ctxArgs]="{name: 'Henk'}"></div>
-<div [ctx]="'say-my-name'" [ctxArgs]="{name: 'Peter'}"></div>`;
+  install8 = `<table style="background: grey;">
+  <tr>
+    <td>Name</td>
+    <td>City</td>
+    <td>Country</td>
+  </tr>
+  <tr style="background: #b0b0b0;" [ctx]="'say-my-name'" [ctxArgs]="{name: 'Heisenberg'}">
+    <td>Heisenberg</td>
+    <td>Albuquerque</td>
+    <td>Henk</td>
+  </tr>
+  <tr style="background: #b0b0b0;" [ctx]="'say-my-name'" [ctxArgs]="{name: 'Jesse'}">
+    <td>Jesse</td>
+    <td>Albuquerque</td>
+    <td>Peter</td>
+  </tr>
+</table>`;
 
   constructor() { }
 
