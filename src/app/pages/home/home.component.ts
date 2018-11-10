@@ -50,7 +50,7 @@ context = [
   Count: {{count}}
 </div>`;
 
-  install7 = `const context: any = [
+  public example2_code1 = `const context: any = [
   // Your other context items
   {
     text: 'Say my name',
@@ -61,7 +61,7 @@ context = [
   }
 ];`;
 
-  install8 = `<table style="background: grey;">
+  public example2_code2 = `<table style="background: grey;">
   <tr>
     <td>Name</td>
     <td>City</td>
