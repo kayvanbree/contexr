@@ -5,7 +5,6 @@ import {ContexrModule} from '../../projects/contexr/src';
 import {ContexrService} from 'contexr/lib/providers/contexr.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule, MatToolbarModule} from '@angular/material';
-import {InstallationComponent} from './pages/installation/installation.component';
 import {ImportRoutingModule} from './modules/import-routing.module';
 import {ExamplePageComponent} from './pages/example-page/example-page.component';
 import {PeopleListModule} from './modules/example-list/people-list-component.module';
@@ -31,6 +30,13 @@ const context: any = [
     hotkey: 'h'
   },
   {
+    text: 'Say my name',
+    context: ['say-my-name'],
+    action: (args: any) => {
+      alert('My name is ' + args.name);
+    }
+  },
+  {
     text: 'All',
     context: ['all'],
     action: () => {
@@ -52,7 +58,6 @@ export function onInitialize(contexr: ContexrService): () => Promise<any> {
 @NgModule({
   declarations: [
     AppComponent,
-    InstallationComponent,
     ExamplePageComponent,
     HomeComponent,
     SimpleExample1Component
