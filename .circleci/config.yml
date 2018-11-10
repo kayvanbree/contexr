@@ -10,6 +10,9 @@ jobs:
           name: install
           command: 'npm install'
       - run:
+          name: test
+          command: 'npm run test:ci'
+      - run:
           name: build
           command: 'npm run build:lib'
 
