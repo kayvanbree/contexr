@@ -42,8 +42,7 @@ const context: any = [
     context: ['all'],
     action: () => {
       console.log('This appears on all context menus');
-    },
-    hotkey: 'a'
+    }
   }
 ];
 

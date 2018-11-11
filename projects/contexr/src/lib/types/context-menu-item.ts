@@ -5,4 +5,5 @@ export class ContextMenuItem extends ContextMenuEntry {
   action: (args: any) => void;
   hotkey?: string | string[];
   args?: any;
+  id?: Symbol;
 }

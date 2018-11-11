@@ -23,7 +23,8 @@ export class ListWithContextComponent implements OnInit {
       context: ['element-list'],
       action: (args: any) => {
         args.list.addElement();
-      }
+      },
+      hotkey: 'a'
     },
     {
       text: 'Select element',

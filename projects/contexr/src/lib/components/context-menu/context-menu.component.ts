@@ -18,6 +18,10 @@ export class ContextMenuComponent implements OnInit, OnDestroy {
 
   constructor(public contexr: ContexrService) {
     // Event capturing (not possible in real Angular yet)
+    document.addEventListener('click', (event) => {
+      event.preventDefault();
+      this.contexr.reset();
+    }, true);
     document.addEventListener('contextmenu', (event) => {
       event.preventDefault();
       this.contexr.reset();

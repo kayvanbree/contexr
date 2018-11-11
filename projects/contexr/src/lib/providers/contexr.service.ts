@@ -13,6 +13,7 @@ export class ContexrService {
 
   private context: ContextMenuEntry[] = [];
   private currentContext: ContextMenuEntry[] = [];
+  private actions: any[] = [];
 
   private contextStateSubject: Subject<ContextState> = new Subject<ContextState>();
   private contextStateObservable: Observable<ContextState> = this.contextStateSubject.asObservable();
@@ -31,8 +32,8 @@ export class ContexrService {
    * @param context
    * @param arguments
    */
-  public addCurrentContext(context: string, args: any) {
-    this.addItemsInContext(this.context, context, args);
+  public addCurrentContext(context: string, args: any, id: Symbol) {
+    this.addItemsInContext(this.context, context, id, args);
   }
 
   /**
@@ -46,13 +47,16 @@ export class ContexrService {
     } else {
       this.context.push(context);
     }
-    if ((context as any).hotkey && (context as any).hotkey) {
+    if ((context as any).hotkey && (context as any).hotkey && !this.hotkeysService.get((context as any).hotkey)) {
       this.hotkeysService.add(new Hotkey((context as any).hotkey, (event: KeyboardEvent): boolean => {
-        (context as any).action();
-        /**
-         * TODO: Look up corresponding action using hotkey
-         * The used context should be a list of all clicked/right-clicked contexts
-         */
+        const key = (context as any).hotkey;
+
+        for (let i = 0; i < this.currentContext.length; i++) {
+          const item = this.currentContext[i] as any;
+          if (item.hotkey === key) {
+            item.action(item.args);
+          }
+        }
         return false;
       }));
     }
@@ -80,7 +84,7 @@ export class ContexrService {
    * Open the context menu
    */
   public open(event: MouseEvent): void {
-    this.addItemsInContext(this.context, 'all', null);
+    this.addItemsInContext(this.context, 'all', Symbol(), null);
     this.contextStateSubject.next({
       open: true,
       context: this.currentContext,
@@ -95,13 +99,14 @@ export class ContexrService {
    * @param context
    * @returns
    */
-  private addItemsInContext(items: ContextMenuEntry[], context: string, args: any) {
+  private addItemsInContext(items: ContextMenuEntry[], context: string, id: Symbol, args: any) {
     for (let i = 0; i < items.length; i++) {
       if ((items[i] as ContextMenuItem).action) {
         const action = Object.assign({}, items[i]) as ContextMenuItem;
         if (args !== null) {
           action.args = args;
         }
+        action.id = id;
         if (action.context.indexOf(context) !== -1) {
           this.currentContext.push(action);
         }
@@ -110,7 +115,8 @@ export class ContexrService {
         this.addItemsInContext(
           (items[i] as Submenu).children,
           context,
-          args
+          id,
+          args,
         );
         if (submenu.children.length > 0) {
           this.currentContext.push(submenu);
