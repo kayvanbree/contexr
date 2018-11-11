@@ -60,8 +60,6 @@ export class ListWithContextComponent implements OnInit {
   }
 
   private removeElement(element) {
-    console.log('Removing element');
-    console.log(element);
     const index = this.elements.indexOf(element);
     if (index > -1) {
       this.elements.splice(index, 1);
