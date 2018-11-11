@@ -32,23 +32,25 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row
       *matRowDef="let row;
-    columns: displayedColumns;"
+      columns: displayedColumns;"
       [ctx]="'element'"
       [ctxArgs]="{list: this, element: row}"
+      (click)="onSelectRow($event, row)"
+      [style.background]="selected && selected.indexOf(row) != -1 ? 'lightblue' : ''"
   ></tr>
 </table>
 
 <div class="element" *ngIf="selected">
   <h1>Selected element</h1>
 
-  <mat-card>
+  <mat-card *ngFor="let item of selected">
     <mat-card-header>
-      {{selected.name}}
+      {{item.name}}
     </mat-card-header>
     <mat-card-content>
       <ul>
-        <li>Weight: <b>{{selected.weight}}</b></li>
-        <li>Symbol: <b>{{selected.symbol}}</b></li>
+        <li>Weight: <b>{{item.weight}}</b></li>
+        <li>Symbol: <b>{{item.symbol}}</b></li>
       </ul>
     </mat-card-content>
   </mat-card>
