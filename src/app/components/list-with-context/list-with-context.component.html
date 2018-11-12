@@ -31,12 +31,14 @@
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row
-      *matRowDef="let row;
+      #row
+      *matRowDef="let element;
       columns: displayedColumns;"
       [ctx]="'element'"
-      [ctxArgs]="{list: this, element: row}"
-      (click)="onSelectRow($event, row)"
-      [style.background]="selected && selected.indexOf(row) != -1 ? 'lightblue' : ''"
+      [ctxArgs]="{list: this, element: element}"
+      (click)="onSelectRow($event, element)"
+      (contextmenu)="onSelectRow($event, element)"
+      [style.background]="selected && selected.indexOf(element) != -1 ? 'lightblue' : ''"
   ></tr>
 </table>
 

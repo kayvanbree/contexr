@@ -4,6 +4,7 @@ import {ContexrService} from '../../providers/contexr.service';
 import {Subscription} from 'rxjs';
 import {ContextMenuItem} from '../../types/context-menu-item';
 import {ContextMenuEntry} from '../../types/context-menu-entry';
+import {Submenu} from 'contexr/lib/types/submenu';
 
 @Component({
   selector: 'ctx-context-menu',
@@ -84,6 +85,10 @@ export class ContextMenuComponent implements OnInit, OnDestroy {
    * @returns
    */
   public isAction(item: ContextMenuEntry): boolean {
-    return !!(item as ContextMenuItem).action;
+    return (item as ContextMenuItem).hasMenu !== false;
+  }
+
+  public isSubmenu(item: ContextMenuEntry): boolean {
+    return !!(item as Submenu).children;
   }
 }
