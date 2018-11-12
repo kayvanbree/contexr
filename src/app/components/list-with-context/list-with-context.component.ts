@@ -26,7 +26,7 @@ export class ListWithContextComponent implements OnInit {
       action: (args: any) => {
         args.list.addElement();
       },
-      hotkey: 'a'
+      hotkey: 'ins'
     },
     {
       text: 'Delete element',
