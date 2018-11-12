@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.3.0
+
+- Add optional hasMenu to ContextMenuItem. Now you can set it to false to use hotkeys
+only.
+- Update demo page
+
 ## v1.2.0
 
 - Update readme
