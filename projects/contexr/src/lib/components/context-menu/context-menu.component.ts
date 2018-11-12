@@ -88,6 +88,10 @@ export class ContextMenuComponent implements OnInit, OnDestroy {
     return (item as ContextMenuItem).hasMenu !== false;
   }
 
+  /**
+   * Is this context menu entry a submenu?
+   * @param item
+   */
   public isSubmenu(item: ContextMenuEntry): boolean {
     return !!(item as Submenu).children;
   }

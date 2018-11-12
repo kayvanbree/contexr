@@ -1,7 +1,6 @@
 import {ChangeDetectorRef, Component, ElementRef, Input, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {ContexrService} from 'contexr/lib/providers/contexr.service';
 import {MatRow, MatTableDataSource} from '@angular/material';
-import {ContextMenuEntry} from 'contexr/lib/types/context-menu-entry';
 
 @Component({
   selector: 'app-list-with-context',
@@ -65,6 +64,11 @@ export class ListWithContextComponent implements OnInit {
     this.dataSource = new MatTableDataSource(this.elements);
   }
 
+  /**
+   * Select a row, use ctrl + click to select multiple
+   * @param event
+   * @param row
+   */
   public onSelectRow(event: MouseEvent, row: any): void {
     if (event && event.ctrlKey) {
       this.selected.push(row);
@@ -73,6 +77,9 @@ export class ListWithContextComponent implements OnInit {
     }
   }
 
+  /**
+   * Remove the selected elements from this list
+   */
   private removeSelection() {
     let index;
     const maxSelectedIndex = this.getMaxSelectedIndex();
@@ -96,6 +103,9 @@ export class ListWithContextComponent implements OnInit {
     }
   }
 
+  /**
+   * Click on the previous element to get into context
+   */
   private selectPrevious() {
     const minSelected = this.getMinSelectedIndex();
     if (minSelected > 0) {
@@ -103,6 +113,9 @@ export class ListWithContextComponent implements OnInit {
     }
   }
 
+  /**
+   * Click on the next element to get it into context
+   */
   private selectNext() {
     const maxSelected = this.getMaxSelectedIndex();
     if (maxSelected < this.elements.length) {
@@ -110,24 +123,37 @@ export class ListWithContextComponent implements OnInit {
     }
   }
 
+  /**
+   * Click on the element at this index to get it into context
+   * @param index
+   */
   private selectAtIndex(index: number): void {
     if (this.rows.toArray()[index]) {
       this.rows.toArray()[index].nativeElement.click();
     }
   }
 
+  /**
+   * Returns the first index of the selection
+   */
   private getMinSelectedIndex() {
     return Math.min.apply(Math, this.selected.map((o) => {
       return this.elements.indexOf(o);
     }));
   }
 
+  /**
+   * Returns the last index of the selection
+   */
   private getMaxSelectedIndex() {
     return Math.max.apply(Math, this.selected.map((o) => {
       return this.elements.indexOf(o);
     }));
   }
 
+  /**
+   * This adds a new empty element to the list
+   */
   private addElement() {
     this.elements.push(
       {position: this.elements.length + 1, name: '', weight: 0, symbol: ''}

@@ -7,15 +7,12 @@ import {ContexrService} from 'contexr/lib/providers/contexr.service';
 export class ContextDirective {
   @Input('ctx') ctx: string;
   @Input('ctxArgs') ctxArgs: any;
-  id: Symbol;
 
-  constructor(private contexr: ContexrService) {
-    this.id = Symbol();
-  }
+  constructor(private contexr: ContexrService) {}
 
   @HostListener('contextmenu', ['$event'])
   @HostListener('click', ['$event'])
   public onContextMenu(event) {
-    this.contexr.addCurrentContext(this.ctx, this.ctxArgs, this.id);
+    this.contexr.addCurrentContext(this.ctx, this.ctxArgs);
   }
 }

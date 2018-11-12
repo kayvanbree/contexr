@@ -13,7 +13,6 @@ export class ContexrService {
 
   private context: ContextMenuEntry[] = [];
   private currentContext: ContextMenuEntry[] = [];
-  private actions: any[] = [];
 
   private contextStateSubject: Subject<ContextState> = new Subject<ContextState>();
   private contextStateObservable: Observable<ContextState> = this.contextStateSubject.asObservable();
@@ -32,8 +31,8 @@ export class ContexrService {
    * @param context
    * @param arguments
    */
-  public addCurrentContext(context: string, args: any, id: Symbol) {
-    this.addItemsInContext(this.context, context, id, args);
+  public addCurrentContext(context: string, args: any) {
+    this.addItemsInContext(this.context, context, args);
   }
 
   /**
@@ -84,7 +83,7 @@ export class ContexrService {
    * Open the context menu
    */
   public open(event: MouseEvent): void {
-    this.addItemsInContext(this.context, 'all', Symbol(), null);
+    this.addItemsInContext(this.context, 'all', null);
     this.contextStateSubject.next({
       open: true,
       context: this.currentContext,
@@ -99,14 +98,13 @@ export class ContexrService {
    * @param context
    * @returns
    */
-  private addItemsInContext(items: ContextMenuEntry[], context: string, id: Symbol, args: any) {
+  private addItemsInContext(items: ContextMenuEntry[], context: string, args: any) {
     for (let i = 0; i < items.length; i++) {
       if ((items[i] as ContextMenuItem).action) {
         const action = Object.assign({}, items[i]) as ContextMenuItem;
         if (args !== null) {
           action.args = args;
         }
-        action.id = id;
         if (action.context.indexOf(context) !== -1) {
           this.currentContext.push(action);
         }
@@ -115,7 +113,6 @@ export class ContexrService {
         this.addItemsInContext(
           (items[i] as Submenu).children,
           context,
-          id,
           args,
         );
         if (submenu.children.length > 0) {
