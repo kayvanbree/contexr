@@ -45,7 +45,7 @@ workflows:
   version: 2.1
   test_and_release:
     jobs:
-      - install:
+      - install
       - test:
           requires:
             - install
