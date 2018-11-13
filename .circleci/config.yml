@@ -17,6 +17,7 @@ jobs:
           paths:
             - node_modules
   test:
+    <<: *defaults
     docker:
     - image: weboaks/node-karma-protractor-chrome
     steps:
@@ -27,6 +28,7 @@ jobs:
           name: test
           command: 'npm run test:ci'
   build:
+    <<: *defaults
     steps:
       - checkout
       - attach_workspace:
