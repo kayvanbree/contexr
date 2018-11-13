@@ -49,8 +49,9 @@ workflows:
       - test:
           requires:
             - install
-      - deploy:
+      - build:
           requires:
+            - install
             - test
           filters:
             tags:
