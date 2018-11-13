@@ -50,12 +50,12 @@ workflows:
       - test:
           requires:
             - install
-      - build:
-          requires:
-            - install
-            - test
-          filters:
-            tags:
-              only:
-                - master
+#      - build:
+#          requires:
+#            - install
+#            - test
+#          filters:
+#            tags:
+#              only:
+#                - master
 
