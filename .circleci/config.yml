@@ -40,18 +40,18 @@ jobs:
             - dist
 
 workflows:
-  version: 2
+  version: 2.1
   test_and_release:
     jobs:
       - install:
       - test:
-          requires:
-            - install
+        requires:
+          - install
       - deploy:
-          requires:
-            - test
-          filters:
-            tags:
-              only:
-                - master
+        requires:
+          - test
+        filters:
+          tags:
+            only:
+              - master
 
