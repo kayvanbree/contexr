@@ -13,7 +13,7 @@ jobs:
           name: install
           command: 'npm install'
       - persist_to_workspace:
-          root: workspace
+          root: /tmp
           paths:
             - node_modules
   test:
@@ -23,7 +23,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: workspace
+          at: /tmp/node_modules
       - run:
           name: test
           command: 'npm run test:ci'
@@ -32,12 +32,12 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: workspace
+          at: /tmp/node_modules
       - run:
           name: build
           command: 'npm run build:lib'
       - persist_to_workspace:
-          root: workspace
+          root: /tmp
           paths:
             - dist
 
