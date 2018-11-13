@@ -47,13 +47,13 @@ workflows:
     jobs:
       - install:
       - test:
-        requires:
-          - install
+          requires:
+            - install
       - deploy:
-        requires:
-          - test
-        filters:
-          tags:
-            only:
-              - master
+          requires:
+            - test
+          filters:
+            tags:
+              only:
+                - master
 
