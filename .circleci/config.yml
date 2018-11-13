@@ -38,7 +38,7 @@ jobs:
           name: build
           command: 'npm run build:lib'
       - persist_to_workspace:
-          root: /app
+          root: /
           paths:
             - dist
 
