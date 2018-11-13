@@ -12,7 +12,6 @@ jobs:
     - run:
         name: test
         command: 'npm run test:ci'
-
   build:
     docker:
     - image: circleci/node
