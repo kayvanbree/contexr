@@ -2,7 +2,7 @@ version: 2.1
 
 defaults: &defaults
   docker:
-    - image: circleci/node
+    - image: mhart/alpine-node
   working_directory: /app
 
 jobs:
