@@ -3,7 +3,7 @@ import {TestBed, inject} from '@angular/core/testing';
 import {ContexrService} from './contexr.service';
 import {HotkeysService} from 'angular2-hotkeys';
 import {Hotkey} from 'angular2-hotkeys/src/hotkey.model';
-import {ContextMenuItem} from 'contexr';
+import {ContextMenuItem} from '../components/context-menu-item/context-menu-item.component';
 
 describe('ContexrService', () => {
   beforeEach(() => {
