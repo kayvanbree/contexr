@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.2.1
+
+- Fixes a bug where ContexrService wasn't imported correctly, rendering this
+library useless.
+
 ## v1.2.0
 
 - Update readme
