@@ -3,17 +3,19 @@ version: 2.1
 defaults: &defaults
   docker:
     - image: circleci/node
+  working_directory: /app
 
 jobs:
   install:
     <<: *defaults
     steps:
+      - run: mkdir -p app
       - checkout
       - run:
           name: install
           command: 'npm install'
       - persist_to_workspace:
-          root: /
+          root: /app
           paths:
             - node_modules
   test:
@@ -37,7 +39,7 @@ jobs:
           name: build
           command: 'npm run build:lib'
       - persist_to_workspace:
-          root: /
+          root: /app
           paths:
             - dist
 
