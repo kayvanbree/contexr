@@ -1,5 +1,5 @@
 import {Directive, HostListener, Input} from '@angular/core';
-import {ContexrService} from 'contexr/lib/providers/contexr.service';
+import {ContexrService} from '../providers/contexr.service';
 
 @Directive({
   selector: '[ctx]'
