@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {ModuleWithProviders, NgModule} from '@angular/core';
 import {ContextMenuComponent} from './components/context-menu/context-menu.component';
 import {CommonModule} from '@angular/common';
 import {ContexrService} from './providers/contexr.service';
@@ -20,11 +20,17 @@ import { ContextDirective } from './directives/context.directive';
   ],
   exports: [
     ContextMenuComponent,
-    ContextDirective,
-    ContexrService
+    ContextDirective
   ],
   providers: [
     ContexrService
   ]
 })
-export class ContexrModule {}
+export class ContexrModule {
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: ContexrModule,
+      providers: [ ContexrService ]
+    };
+  }
+}
