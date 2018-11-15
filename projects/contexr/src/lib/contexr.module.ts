@@ -20,7 +20,8 @@ import { ContextDirective } from './directives/context.directive';
   ],
   exports: [
     ContextMenuComponent,
-    ContextDirective
+    ContextDirective,
+    ContexrService
   ],
   providers: [
     ContexrService
