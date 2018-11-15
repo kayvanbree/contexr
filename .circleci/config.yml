@@ -3,20 +3,27 @@ version: 2.1
 defaults: &defaults
   docker:
     - image: circleci/node
-  working_directory: /app
+  working_directory: ~/app
 
 jobs:
   install:
     <<: *defaults
     steps:
       - checkout
-      - run:
-          name: install
-          command: 'npm install'
+      - attach_workspace:
+          at: ~/app/node_modules
+      - restore_cache:
+          keys:
+          - yarn-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          - yarn-cache-{{ .Branch }}
+          - yarn-cache-
+      - run: npm install
+      - save_cache:
+          key: yarn-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          paths: node_modules
       - persist_to_workspace:
-          root: ./
-          paths:
-            - node_modules
+          root: .
+          paths: .
   test:
     <<: *defaults
     docker:
@@ -24,23 +31,18 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: /node_modules
-      - run:
-          name: test
-          command: 'npm run test:ci'
+          at: ~/app/node_modules
+      - run: npm run test:ci
   build:
     <<: *defaults
     steps:
       - checkout
       - attach_workspace:
-          at: /node_modules
-      - run:
-          name: build
-          command: 'npm run build:lib'
+          at: ~/app/node_modules
+      - run: npm run build:lib
       - persist_to_workspace:
-          root: ./
-          paths:
-            - dist
+          root: .
+          paths: .
 
 workflows:
   version: 2.1
@@ -50,12 +52,12 @@ workflows:
       - test:
           requires:
             - install
-#      - build:
-#          requires:
-#            - install
-#            - test
-#          filters:
-#            tags:
-#              only:
-#                - master
+      - build:
+          requires:
+            - install
+            - test
+          filters:
+            tags:
+              only:
+                - master
 
