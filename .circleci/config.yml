@@ -11,7 +11,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: ~/app/node_modules
+          at: ~/app
       - restore_cache:
           keys:
           - npm-cache-{{ .Branch }}-{{ checksum "package-lock.json" }}
@@ -24,6 +24,7 @@ jobs:
       - persist_to_workspace:
           root: .
           paths: .
+
   test:
     <<: *defaults
     docker:
@@ -31,14 +32,15 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: ~/app/node_modules
+          at: ~/app
       - run: npm run test:ci
+
   build:
     <<: *defaults
     steps:
       - checkout
       - attach_workspace:
-          at: ~/app/node_modules
+          at: ~/app
       - run: npm run build:lib
       - persist_to_workspace:
           root: .
