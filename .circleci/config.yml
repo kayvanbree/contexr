@@ -14,12 +14,12 @@ jobs:
           at: ~/app/node_modules
       - restore_cache:
           keys:
-          - yarn-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
-          - yarn-cache-{{ .Branch }}
-          - yarn-cache-
+          - npm-cache-{{ .Branch }}-{{ checksum "package-lock.json" }}
+          - npm-cache-{{ .Branch }}
+          - npm-cache-
       - run: npm install
       - save_cache:
-          key: yarn-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          key: npm-cache-{{ .Branch }}-{{ checksum "package-lock.json" }}
           paths: node_modules
       - persist_to_workspace:
           root: .
