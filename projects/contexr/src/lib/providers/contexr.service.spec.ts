@@ -1,9 +1,23 @@
 import {TestBed, inject} from '@angular/core/testing';
-
 import {ContexrService} from './contexr.service';
 import {HotkeysService} from 'angular2-hotkeys';
 import {Hotkey} from 'angular2-hotkeys/src/hotkey.model';
-import {ContextMenuItem} from '../components/context-menu-item/context-menu-item.component';
+
+const testItem = {
+  text: 'test',
+  context: ['test'],
+  action: () => {},
+  hotkey: 't'
+};
+
+export class HotkeysMockService {
+  public add(hotkey: Hotkey | Hotkey[], specificEvent?: string): Hotkey | Hotkey[] {
+    return hotkey;
+  }
+  public get(hotkey: Hotkey | Hotkey[], specificEvent?: string): Hotkey | Hotkey[] {
+    return null;
+  }
+}
 
 describe('ContexrService', () => {
   beforeEach(() => {
@@ -42,19 +56,19 @@ describe('ContexrService', () => {
           context: ['test'],
           action: () => {},
           hotkey: 't'
-        } as ContextMenuItem,
+        },
         {
           text: 'test',
           context: ['test'],
           action: () => {},
           hotkey: 'x'
-        } as ContextMenuItem,
+        },
         {
           text: 'test',
           context: ['test'],
           action: () => {}
-        } as ContextMenuItem
-      ]);
+        }
+      ] as any);
 
       // Assert
       expect(hotkeyService.add).toHaveBeenCalledTimes(2);
@@ -66,27 +80,13 @@ describe('ContexrService', () => {
       spyOn(hotkeyService, 'add');
 
       // Act
-      service.registerContextMenuItem({
+      service.registerContextMenuItems([{
         text: 'test',
         context: ['test'],
         action: () => {}
-      } as ContextMenuItem);
+      }] as any);
 
       // Assert
       expect(hotkeyService.add).not.toHaveBeenCalled();
     }));
 });
-
-const testItem = {
-  text: 'test',
-  context: ['test'],
-  action: () => {},
-  hotkey: 't'
-};
-
-export class HotkeysMockService {
-  public add(hotkey: Hotkey | Hotkey[], specificEvent?: string): Hotkey | Hotkey[] {
-    return hotkey;
-  }
-}
-

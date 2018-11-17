@@ -1,8 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ContextMenuItemComponent } from './context-menu-item.component';
 import { ContexrService } from '../../providers/contexr.service';
 import {HotkeysService} from 'angular2-hotkeys';
+import {ContextMenuItem} from 'contexr';
+
+class HotkeysMockService {}
+
+const testItem = {
+  text: 'test1',
+  context: ['test1-context', 'test2-context'],
+  action: () => {
+    // Do nothing
+  },
+  hotkey: 't'
+} as ContextMenuItem;
 
 describe('ContextMenuItemComponent', () => {
   let component: ContextMenuItemComponent;
@@ -42,14 +53,3 @@ describe('ContextMenuItemComponent', () => {
     expect(component.item.action).toHaveBeenCalled();
   });
 });
-
-class HotkeysMockService {}
-
-const testItem = {
-  text: 'test1',
-  context: ['test1-context', 'test2-context'],
-  action: () => {
-    // Do nothing
-  },
-  hotkey: 't'
-};

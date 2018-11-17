@@ -1,10 +1,18 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-
 import {ContextMenuComponent} from './context-menu.component';
 import {HotkeysService} from 'angular2-hotkeys';
 import {ContexrService} from '../../providers/contexr.service';
 import {SubmenuComponent} from '../submenu/submenu.component';
 import {ContextMenuItemComponent} from '../context-menu-item/context-menu-item.component';
+
+class HotkeysMockService {}
+
+const testState = {
+  open: false,
+  context: [],
+  top: 0,
+  left: 0
+};
 
 describe('ContextMenuComponent', () => {
   let component: ContextMenuComponent;
@@ -65,12 +73,3 @@ describe('ContextMenuComponent', () => {
     });
   });
 });
-
-class HotkeysMockService {}
-
-const testState = {
-  open: false,
-  context: [],
-  top: 0,
-  left: 0
-};

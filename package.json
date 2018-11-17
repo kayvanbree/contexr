@@ -8,14 +8,14 @@
     "build:lib": "ng build contexr --prod",
     "postbuild:lib": "cpx README.md dist/contexr && cpx LICENSE.md dist/contexr",
     "test": "ng test contexr",
-    "test:ci": "ng test contexr --browsers ChromeHeadless --watch=false",
+    "test:ci": "ng test contexr --browsers Chromium_no_sandbox --watch=false",
     "test:coverage": "ng test contexr --watch=false --code-coverage",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "prepublish": "npm run build:lib",
     "publish": "cd ./dist/contexr && npm publish",
     "build:pages": "ng build --prod --base-href \"https://kayvanbree.github.io/contexr/\"",
-    "publish:pages": "npm run build:pages && ngh --dir=dist/contexr-demo"
+    "publish:pages": "npm run build:pages && ngh  --repo=https://GH_TOKEN@github.com/contexr.git --dir=dist/contexr-demo"
   },
   "private": true,
   "dependencies": {
@@ -45,6 +45,7 @@
     "@types/jasmine": "~2.8.6",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
+    "angular-cli-ghpages": "^0.5.3",
     "codelyzer": "~4.2.1",
     "cpx": "^1.5.0",
     "jasmine-core": "~2.99.1",
