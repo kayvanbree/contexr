@@ -47,11 +47,11 @@ jobs:
 
   publish_pages:
     <<: *defaults
-      steps:
-      - checkout
-      - attach_workspace:
-          at: ~/app
-      - run: npm run publish:pages
+    steps:
+    - checkout
+    - attach_workspace:
+        at: ~/app
+    - run: npm run publish:pages
 
 workflows:
   version: 2.1
