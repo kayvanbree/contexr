@@ -56,19 +56,19 @@ describe('ContexrService', () => {
           context: ['test'],
           action: () => {},
           hotkey: 't'
-        } as ContextMenuItem,
+        },
         {
           text: 'test',
           context: ['test'],
           action: () => {},
           hotkey: 'x'
-        } as ContextMenuItem,
+        },
         {
           text: 'test',
           context: ['test'],
           action: () => {}
-        } as ContextMenuItem
-      ]);
+        }
+      ] as any);
 
       // Assert
       expect(hotkeyService.add).toHaveBeenCalledTimes(2);
@@ -80,11 +80,11 @@ describe('ContexrService', () => {
       spyOn(hotkeyService, 'add');
 
       // Act
-      service.registerContextMenuItem({
+      service.registerContextMenuItems([{
         text: 'test',
         context: ['test'],
         action: () => {}
-      } as ContextMenuItem);
+      }] as any);
 
       // Assert
       expect(hotkeyService.add).not.toHaveBeenCalled();
