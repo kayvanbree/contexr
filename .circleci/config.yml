@@ -47,6 +47,8 @@ jobs:
 
   publish_pages:
     <<: *defaults
+    environment:
+      GH_TOKEN: $GH_TOKEN
     steps:
     - checkout
     - attach_workspace:
