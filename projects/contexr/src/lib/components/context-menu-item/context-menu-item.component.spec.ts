@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ContextMenuItemComponent } from './context-menu-item.component';
 import { ContexrService } from '../../providers/contexr.service';
 import {HotkeysService} from 'angular2-hotkeys';
+import {ContextMenuItem} from 'contexr';
 
 describe('ContextMenuItemComponent', () => {
   let component: ContextMenuItemComponent;
@@ -52,4 +53,4 @@ const testItem = {
     // Do nothing
   },
   hotkey: 't'
-};
+} as ContextMenuItem;

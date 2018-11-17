@@ -82,11 +82,14 @@ const testItem = {
   context: ['test'],
   action: () => {},
   hotkey: 't'
-};
+} as ContextMenuItem;
 
 export class HotkeysMockService {
   public add(hotkey: Hotkey | Hotkey[], specificEvent?: string): Hotkey | Hotkey[] {
     return hotkey;
+  }
+  public get(hotkey: Hotkey | Hotkey[], specificEvent?: string): Hotkey | Hotkey[] {
+    return null;
   }
 }
 

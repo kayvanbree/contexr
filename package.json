@@ -8,7 +8,7 @@
     "build:lib": "ng build contexr --prod",
     "postbuild:lib": "cpx README.md dist/contexr && cpx LICENSE.md dist/contexr",
     "test": "ng test contexr",
-    "test:ci": "ng test contexr --browsers ChromeHeadless --watch=false",
+    "test:ci": "ng test contexr --browsers Chromium_no_sandbox --watch=false",
     "test:coverage": "ng test contexr --watch=false --code-coverage",
     "lint": "ng lint",
     "e2e": "ng e2e",

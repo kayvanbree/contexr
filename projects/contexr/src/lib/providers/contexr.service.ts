@@ -46,9 +46,16 @@ export class ContexrService {
     } else {
       this.context.push(context);
     }
-    if ((context as any).hotkey &&  (context as any).hotkey) {
+    if ((context as any).hotkey && (context as any).hotkey && !this.hotkeysService.get((context as any).hotkey)) {
       this.hotkeysService.add(new Hotkey((context as any).hotkey, (event: KeyboardEvent): boolean => {
-        (context as any).action();
+        const key = (context as any).hotkey;
+
+        for (let i = 0; i < this.currentContext.length; i++) {
+          const item = this.currentContext[i] as any;
+          if (item.hotkey === key) {
+            item.action(item.args);
+          }
+        }
         return false;
       }));
     }
@@ -106,7 +113,7 @@ export class ContexrService {
         this.addItemsInContext(
           (items[i] as Submenu).children,
           context,
-          args
+          args,
         );
         if (submenu.children.length > 0) {
           this.currentContext.push(submenu);

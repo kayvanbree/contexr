@@ -1,6 +1,17 @@
 # Changelog
 
-## v1.2.1
+## v1.3.0
+
+NEW FEATURES
+
+- Add optional hideMenu to ContextMenuItem. Now you can set it to false to use hotkeys
+only.
+
+CHANGES
+
+- Update demo page
+
+## v1.2.2
 
 - Fixes a bug where ContexrService wasn't imported correctly, rendering this
 library useless.
