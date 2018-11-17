@@ -31,8 +31,7 @@ jobs:
     - image: weboaks/node-karma-protractor-chrome
     steps:
     - checkout
-    - attach_workspace:
-        at: ~/app
+    - run: npm install
     - run: npm run test:ci
 
   build:
@@ -51,9 +50,7 @@ workflows:
   test_and_release:
     jobs:
     - install
-    - test:
-        requires:
-        - install
+    - test
     - build:
         requires:
         - install
