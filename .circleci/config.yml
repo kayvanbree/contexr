@@ -45,6 +45,14 @@ jobs:
         root: .
         paths: .
 
+  publish_pages:
+    <<: *defaults
+    steps:
+    - checkout
+    - attach_workspace:
+        at: ~/app
+    - run: npm run publish:pages
+
 workflows:
   version: 2.1
   test_and_release:
@@ -55,7 +63,9 @@ workflows:
         requires:
         - install
         - test
+    - publish_pages:
+        requires:
+          - build
         filters:
-          tags:
-            only:
-            - master
+          branches:
+            only: master
