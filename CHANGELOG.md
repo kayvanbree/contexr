@@ -11,6 +11,11 @@ CHANGES
 
 - Update demo page
 
+## v1.2.2
+
+- Fixes a bug where ContexrService wasn't imported correctly, rendering this
+library useless.
+
 ## v1.2.0
 
 - Update readme
