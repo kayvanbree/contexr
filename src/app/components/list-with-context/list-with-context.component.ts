@@ -43,7 +43,7 @@ export class ListWithContextComponent implements OnInit {
         args.list.selectPrevious();
       },
       hotkey: 'up',
-      hasMenu: false
+      hideMenu: true
     },
     {
       text: 'Select next',
@@ -52,7 +52,7 @@ export class ListWithContextComponent implements OnInit {
         args.list.selectNext();
       },
       hotkey: 'down',
-      hasMenu: false
+      hideMenu: true
     }
   ];
 

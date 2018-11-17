@@ -4,7 +4,7 @@
 
 NEW FEATURES
 
-- Add optional hasMenu to ContextMenuItem. Now you can set it to false to use hotkeys
+- Add optional hideMenu to ContextMenuItem. Now you can set it to false to use hotkeys
 only.
 
 CHANGES
