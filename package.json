@@ -13,7 +13,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "prepublish": "npm run build:lib",
-    "publish": "npm publish ./dist/contexr",
+    "publish": "cd /dist/contexr && ci-publish",
     "prepublish:pages": "ng build --prod --base-href \"https://kayvanbree.github.io/contexr/\"",
     "publish:pages": "ngh --repo=https://GH_TOKEN@github.com/contexr.git --dir=dist/contexr-demo"
   },
@@ -46,6 +46,7 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
     "angular-cli-ghpages": "^0.5.3",
+    "ci-publish": "^1.3.1",
     "codelyzer": "~4.2.1",
     "cpx": "^1.5.0",
     "jasmine-core": "~2.99.1",

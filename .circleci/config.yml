@@ -64,16 +64,12 @@ jobs:
     - checkout
     - attach_workspace:
         at: ~/app
-    - run:
-        name: Login to npm
-        command: echo \"//registry.npmjs.org/:_authToken=${NPM_TOKEN}\" >> ~/app/.npmrc
-    - run: cat ~/app/.npmrc
     #    - run: npm install dot-json
     #    - run: dot-json dist/contexr/package.json version $CIRCLE_TAG
     #    - run: cat ~/app/dist/contexr/package.json
     - run:
         name: Publish library
-        command: npm run publish --access=public
+        command: npm run publish
 
 workflows:
   version: 2.1
