@@ -27,7 +27,7 @@ export class ContexrService {
       this.addItemsInContext(this.context, 'all', null);
       this.contextMenuService.open({
         context: this.currentContext,
-        top: event.clientY + window.pageYOffset,
+        top: event.clientY,
         left: event.clientX
       });
     });
@@ -41,6 +41,11 @@ export class ContexrService {
       this.reset();
       this.close();
     }, true);
+    window.addEventListener('scroll', (event) => {
+      event.preventDefault();
+      this.reset();
+      this.close();
+    });
   }
 
   public reset() {
