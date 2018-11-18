@@ -14,12 +14,12 @@ jobs:
         at: ~/app
     - restore_cache:
         keys:
-        - npm-cache-{{ .Branch }}-{{ checksum "package-lock.json" }}
+        - npm-cache-{{ .Branch }}-{{ checksum \"package-lock.json\" }}
         - npm-cache-{{ .Branch }}
         - npm-cache-
     - run: npm install
     - save_cache:
-        key: npm-cache-{{ .Branch }}-{{ checksum "package-lock.json" }}
+        key: npm-cache-{{ .Branch }}-{{ checksum \"package-lock.json\" }}
         paths: node_modules
     - persist_to_workspace:
         root: .
@@ -55,19 +55,54 @@ jobs:
         at: ~/app
     - run: npm run publish:pages
 
+  deploy:
+    <<: *defaults
+    environment:
+      GH_TOKEN: $GH_TOKEN
+      NPM_TOKEN: $NPM_TOKEN
+    steps:
+    - checkout
+    - attach_workspace:
+        at: ~/app
+    - run:
+        name: Login to npm
+        command: echo \"//registry.npmjs.org/:_authToken=${NPM_TOKEN}\" >> ~/app/.npmrc
+    - run: cat ~/app/.npmrc
+    #    - run: npm install dot-json
+    #    - run: dot-json dist/contexr/package.json version $CIRCLE_TAG
+    #    - run: cat ~/app/dist/contexr/package.json
+    - run:
+        name: Publish library
+        command: npm run publish --access=public
+
 workflows:
   version: 2.1
   test_and_release:
     jobs:
-    - install
-    - test
+    - install:
+        filters:
+          tags:
+            only: /.*/
+    - test:
+        filters:
+          tags:
+            only: /.*/
     - build:
         requires:
         - install
         - test
-    - publish_pages:
+    #    - publish_pages:
+    #        requires:
+    #          - build
+    #        filters:
+    #          branches:
+    #            only: master
+    - deploy:
         requires:
-          - build
+        - install
+        - test
         filters:
           branches:
-            only: master
+            ignore: /.*/
+          tags:
+            only: /^v.*/

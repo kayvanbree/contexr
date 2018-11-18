@@ -13,7 +13,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "prepublish": "npm run build:lib",
-    "publish": "cd ./dist/contexr && npm publish",
+    "publish": "npm publish ./dist/contexr",
     "prepublish:pages": "ng build --prod --base-href \"https://kayvanbree.github.io/contexr/\"",
     "publish:pages": "ngh --repo=https://GH_TOKEN@github.com/contexr.git --dir=dist/contexr-demo"
   },
