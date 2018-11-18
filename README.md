@@ -17,17 +17,10 @@ the same all throughout your application.
 
 ## Installation
 
-Start by installing Contexr using npm:
+Installing Contexr is as simple as running the install command.
 
 ```
-npm install contexr
-```
-
-Now the only thing remaining to do is to add the ctx-context-menu tag to app.component.html.
-
-```html
-<!-- Your application code -->
-<ctx-context-menu></ctx-context-menu>`
+npm install contexr --save
 ```
 
 ## Using Contexr

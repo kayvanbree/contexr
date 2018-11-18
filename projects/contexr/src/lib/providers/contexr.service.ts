@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
-import {Observable, Subject} from 'rxjs';
 import {ContextState} from '../types/context-state';
 import {ContextMenuItem} from '../types/context-menu-item';
 import {Hotkey, HotkeysService} from 'angular2-hotkeys';
 import {ContextMenuEntry} from '../types/context-menu-entry';
 import {Submenu} from '../types/submenu';
+import {ContextMenuService} from './context-menu.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,16 +14,41 @@ export class ContexrService {
   private context: ContextMenuEntry[] = [];
   private currentContext: ContextMenuEntry[] = [];
 
-  private contextStateSubject: Subject<ContextState> = new Subject<ContextState>();
-  private contextStateObservable: Observable<ContextState> = this.contextStateSubject.asObservable();
+  private contextState: ContextState;
 
-  constructor(private hotkeysService: HotkeysService) { }
+  constructor(
+    private hotkeysService: HotkeysService,
+    private contextMenuService: ContextMenuService
+  ) {
+    window.addEventListener('click', (event: MouseEvent) => {
+      this.contextMenuService.close();
+    });
+    window.addEventListener('contextmenu', (event: MouseEvent) => {
+      this.addItemsInContext(this.context, 'all', null);
+      this.contextMenuService.open({
+        context: this.currentContext,
+        top: event.clientY + window.pageYOffset,
+        left: event.clientX
+      });
+    });
+    // Event capturing (not possible in real Angular yet)
+    window.addEventListener('click', (event) => {
+      event.preventDefault();
+      this.reset();
+    }, true);
+    window.addEventListener('contextmenu', (event) => {
+      event.preventDefault();
+      this.reset();
+      this.close();
+    }, true);
+  }
 
-  /**
-   * Reset the current context
-   */
   public reset() {
     this.currentContext = [];
+  }
+
+  public close() {
+    this.contextMenuService.close();
   }
 
   /**
@@ -75,21 +100,8 @@ export class ContexrService {
    * Returns the state of the context menu
    * @returns
    */
-  public getContextState(): Observable<ContextState> {
-    return this.contextStateObservable;
-  }
-
-  /**
-   * Open the context menu
-   */
-  public open(event: MouseEvent): void {
-    this.addItemsInContext(this.context, 'all', null);
-    this.contextStateSubject.next({
-      open: true,
-      context: this.currentContext,
-      top: event.clientY + window.pageYOffset,
-      left: event.clientX
-    });
+  public getContextState(): ContextState {
+    return this.contextState;
   }
 
   /**
@@ -134,14 +146,5 @@ export class ContexrService {
       }
     }
     return -1;
-  }
-
-  /**
-   * Close the context menu
-   */
-  public close(): void {
-    this.contextStateSubject.next({
-      open: false
-    });
   }
 }

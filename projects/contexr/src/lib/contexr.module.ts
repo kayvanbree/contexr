@@ -6,11 +6,13 @@ import {HotkeyModule} from 'angular2-hotkeys';
 import {SubmenuComponent} from './components/submenu/submenu.component';
 import {ContextMenuItemComponent} from './components/context-menu-item/context-menu-item.component';
 import { ContextDirective } from './directives/context.directive';
+import {OverlayModule} from '@angular/cdk/overlay';
 
 @NgModule({
   imports: [
     CommonModule,
-    HotkeyModule.forRoot()
+    HotkeyModule.forRoot(),
+    OverlayModule
   ],
   declarations: [
     ContextMenuComponent,
@@ -24,6 +26,9 @@ import { ContextDirective } from './directives/context.directive';
   ],
   providers: [
     ContexrService
+  ],
+  entryComponents: [
+    ContextMenuComponent
   ]
 })
 export class ContexrModule {
