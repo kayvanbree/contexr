@@ -20,7 +20,7 @@ export class ContextMenuService {
     const overlayConfig = this.getOverlayConfig(state);
     this.overlayRef = this.overlay.create(overlayConfig);
     const contextMenuRef = new ContextMenuOverlayRef(this.overlayRef);
-    const overlayComponent = this.attachDialogContainer(this.overlayRef, state, contextMenuRef);
+    this.attachDialogContainer(this.overlayRef, state, contextMenuRef);
   }
 
   private getOverlayConfig(state: ContextState) {
@@ -46,8 +46,7 @@ export class ContextMenuService {
   private attachDialogContainer(overlayRef: OverlayRef, state: ContextState, contextMenuOverlayRef: ContextMenuOverlayRef) {
     const injector = this.createInjector(state, contextMenuOverlayRef);
     const containerPortal = new ComponentPortal(ContextMenuComponent, null, injector);
-    const containerRef: ComponentRef<ContextMenuComponent> = overlayRef.attach(containerPortal);
-    return containerRef.instance;
+    overlayRef.attach(containerPortal);
   }
 
   public close() {

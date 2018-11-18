@@ -1,4 +1,4 @@
-import {Component, Inject, InjectionToken, OnInit} from '@angular/core';
+import {Component, ElementRef, Inject, InjectionToken, OnInit} from '@angular/core';
 import {ContextState} from '../../types/context-state';
 import {ContextMenuItem} from '../../types/context-menu-item';
 import {ContextMenuEntry} from '../../types/context-menu-entry';
@@ -14,7 +14,6 @@ export const CONTEXT_MENU_OVERLAY_DATA = new InjectionToken<ContextState>('CONTE
 })
 export class ContextMenuComponent {
   constructor(
-    private overlayRef: ContextMenuOverlayRef,
     @Inject(CONTEXT_MENU_OVERLAY_DATA) public contextState: ContextState
   ) {}
 
