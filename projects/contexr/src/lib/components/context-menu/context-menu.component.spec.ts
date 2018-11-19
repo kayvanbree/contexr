@@ -45,31 +45,11 @@ describe('ContextMenuComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  // TODO: MAKE THIS TEST BETTER
-  it('should close on document click', () => {
-    spyOn(contexr, 'close');
-    component.onDocumentClick();
-
-    fixture.whenStable().then(() => {
-      expect(contexr.close).toHaveBeenCalled();
-    });
-  });
-
   it('should open the context menu', () => {
     component.contextState = {
-      open: false,
       context: [],
       top: 0,
       left: 0
     };
-  });
-
-  it('should react to a new state', () => {
-    component.ngOnInit();
-    contexr.open(new MouseEvent('contextmenu'));
-
-    fixture.whenStable().then(() => {
-      expect(component.open).toBe(true);
-    });
   });
 });
