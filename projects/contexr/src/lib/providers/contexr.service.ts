@@ -25,7 +25,7 @@ export class ContexrService {
     });
     window.addEventListener('contextmenu', (event: MouseEvent) => {
       this.addItemsInContext(this.context, 'all', null);
-      this.contextMenuService.open({
+      this.contextMenuService.open(event, {
         context: this.currentContext,
         top: event.clientY,
         left: event.clientX
