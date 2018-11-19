@@ -1,6 +1,6 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { ContextMenuService } from './overlay.service';
+import { ContextMenuService } from './context-menu.service';
 
 describe('ContextMenuService', () => {
   beforeEach(() => {
