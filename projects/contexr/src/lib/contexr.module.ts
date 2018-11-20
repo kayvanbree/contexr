@@ -1,13 +1,21 @@
-import {ModuleWithProviders, NgModule} from '@angular/core';
+import {APP_INITIALIZER, ModuleWithProviders, NgModule} from '@angular/core';
 import {ContextMenuComponent} from './components/context-menu/context-menu.component';
 import {CommonModule} from '@angular/common';
 import {ContexrService} from './providers/contexr.service';
 import {HotkeyModule} from 'angular2-hotkeys';
 import {SubmenuComponent} from './components/submenu/submenu.component';
 import {ContextMenuItemComponent} from './components/context-menu-item/context-menu-item.component';
-import { ContextDirective } from './directives/context.directive';
+import {ContextDirective} from './directives/context.directive';
 import {OverlayModule} from '@angular/cdk/overlay';
-import { ContextMenuDeprecatedComponent } from './components/context-menu-deprecated/context-menu-deprecated.component';
+import {ContextMenuDeprecatedComponent} from './components/context-menu-deprecated/context-menu-deprecated.component';
+import {ContextMenuService} from 'contexr/lib/providers/context-menu.service';
+
+/**
+ * Bootstrap the ContextMenuService
+ */
+export function contextMenuServiceFactory(contextMenuService: ContextMenuService) {
+  return () => contextMenuService.initialize();
+}
 
 @NgModule({
   imports: [
@@ -27,7 +35,14 @@ import { ContextMenuDeprecatedComponent } from './components/context-menu-deprec
     ContextMenuDeprecatedComponent
   ],
   providers: [
-    ContexrService
+    ContexrService,
+    ContextMenuService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: contextMenuServiceFactory,
+      deps: [ContextMenuService],
+      multi: true
+    }
   ],
   entryComponents: [
     ContextMenuComponent

@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ContextMenuItem} from '../../types/context-menu-item';
 import {ContexrService} from '../../providers/contexr.service';
+import {ContextMenuService} from 'contexr/lib/providers/context-menu.service';
 
 @Component({
   selector: 'ctx-context-menu-item',
@@ -11,7 +12,7 @@ export class ContextMenuItemComponent implements OnInit {
 
   @Input() item: ContextMenuItem;
 
-  constructor(private contexr: ContexrService) { }
+  constructor(private contextMenuService: ContextMenuService) { }
 
   ngOnInit() {
   }
@@ -22,6 +23,6 @@ export class ContextMenuItemComponent implements OnInit {
    */
   public act(): void {
     this.item.action(this.item.args);
-    this.contexr.close();
+    this.contextMenuService.close();
   }
 }
