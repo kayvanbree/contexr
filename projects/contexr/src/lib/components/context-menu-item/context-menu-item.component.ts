@@ -1,6 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {ContextMenuItem} from '../../types/context-menu-item';
-import {ContexrService} from '../../providers/contexr.service';
 import {ContextMenuService} from 'contexr/lib/providers/context-menu.service';
 
 @Component({
@@ -8,14 +7,11 @@ import {ContextMenuService} from 'contexr/lib/providers/context-menu.service';
   templateUrl: './context-menu-item.component.html',
   styleUrls: ['./context-menu-item.component.css']
 })
-export class ContextMenuItemComponent implements OnInit {
+export class ContextMenuItemComponent {
 
   @Input() item: ContextMenuItem;
 
   constructor(private contextMenuService: ContextMenuService) { }
-
-  ngOnInit() {
-  }
 
   /**
    * Call an action and close the context menu
