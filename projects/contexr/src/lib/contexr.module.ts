@@ -14,7 +14,8 @@ import {ContextMenuService} from 'contexr/lib/providers/context-menu.service';
  * Bootstrap the ContextMenuService
  */
 export function contextMenuServiceFactory(contextMenuService: ContextMenuService) {
-  return () => contextMenuService.initialize();
+  const value = () => contextMenuService.initialize();
+  return value;
 }
 
 @NgModule({
