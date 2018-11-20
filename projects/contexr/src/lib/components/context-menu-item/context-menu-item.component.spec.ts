@@ -2,7 +2,10 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ContextMenuItemComponent } from './context-menu-item.component';
 import { ContexrService } from '../../providers/contexr.service';
 import {HotkeysService} from 'angular2-hotkeys';
-import {ContextMenuItem} from 'contexr';
+import {CONTEXT_MENU_OVERLAY_DATA, ContextMenuItem} from 'contexr';
+import {Overlay} from '@angular/cdk/overlay';
+import {ContextMenuService} from '../../providers/context-menu.service';
+import {ContextState} from '../../types/context-state';
 
 class HotkeysMockService {}
 
@@ -14,6 +17,9 @@ const testItem = {
   },
   hotkey: 't'
 } as ContextMenuItem;
+
+class OverlayMock {}
+class ContextMenuMockService {}
 
 describe('ContextMenuItemComponent', () => {
   let component: ContextMenuItemComponent;
@@ -27,7 +33,9 @@ describe('ContextMenuItemComponent', () => {
       ],
       providers: [
         ContexrService,
-        { provide: HotkeysService, useClass: HotkeysMockService }
+        { provide: HotkeysService, useClass: HotkeysMockService },
+        { provide: Overlay, useClass: OverlayMock },
+        { provide: ContextMenuService, useClass: ContextMenuMockService }
       ]
     })
     .compileComponents();
