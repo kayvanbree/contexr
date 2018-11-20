@@ -8,7 +8,7 @@ import {ContextMenuOverlayRef} from 'contexr/lib/types/context-menu-overlay-ref'
 export const CONTEXT_MENU_OVERLAY_DATA = new InjectionToken<ContextState>('CONTEXT_MENU_OVERLAY_DATA');
 
 @Component({
-  selector: 'ctx-context-menu',
+  selector: 'ctx-context-menu-overlay',
   templateUrl: './context-menu.component.html',
   styleUrls: ['./context-menu.component.scss']
 })

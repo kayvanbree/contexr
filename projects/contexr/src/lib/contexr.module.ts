@@ -7,6 +7,7 @@ import {SubmenuComponent} from './components/submenu/submenu.component';
 import {ContextMenuItemComponent} from './components/context-menu-item/context-menu-item.component';
 import { ContextDirective } from './directives/context.directive';
 import {OverlayModule} from '@angular/cdk/overlay';
+import { ContextMenuDeprecatedComponent } from './components/context-menu-deprecated/context-menu-deprecated.component';
 
 @NgModule({
   imports: [
@@ -18,11 +19,12 @@ import {OverlayModule} from '@angular/cdk/overlay';
     ContextMenuComponent,
     SubmenuComponent,
     ContextMenuItemComponent,
-    ContextDirective
+    ContextDirective,
+    ContextMenuDeprecatedComponent
   ],
   exports: [
-    ContextMenuComponent,
-    ContextDirective
+    ContextDirective,
+    ContextMenuDeprecatedComponent
   ],
   providers: [
     ContexrService

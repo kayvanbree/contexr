@@ -12,11 +12,11 @@ CHANGES
 - Update demo page
 - Update readme
 
-BREAKING CHANGES
+Deprecation
 
 - There is no need to add `<ctx-context-menu></ctx-context-menu>` anywhere in your code anymore. 
-Doing this will in fact break Contexr from now on. This change was made to remove one of the 
-installation steps. 
+Doing this will in fact break Contexr from the next major version. This change was made to remove 
+one of the installation steps.
 
 UPDATING
 
