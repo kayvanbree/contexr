@@ -23,7 +23,7 @@ export class ContextMenuComponent {
    * @returns
    */
   public isAction(item: ContextMenuEntry): boolean {
-    return !(item as ContextMenuItem).hideMenu;
+    return !!(item as ContextMenuItem).action && !(item as ContextMenuItem).hideMenu;
   }
 
   /**
