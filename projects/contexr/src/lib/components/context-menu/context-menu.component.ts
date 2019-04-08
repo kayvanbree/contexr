@@ -68,7 +68,7 @@ export class ContextMenuComponent implements OnInit, OnDestroy {
   public ngOnInit() {
     this.contextStateSub = this.contexr.getContextState().subscribe((value) => {
       this.contextState = value;
-      this.open = !!this.contextState.context;
+      this.open = !!this.contextState.context && value.context.length > 0;
     });
   }
 
