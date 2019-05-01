@@ -1,10 +1,4 @@
-<div
-  (contextmenu)="onContextMenu($event)"
-  (click)="onClick($event)"
-  *ngIf="open"
-  class="context-menu menu"
-  [ngStyle]="{'top.px': contextState.top, 'left.px': contextState.left}"
->
+<div class="context-menu">
   <ul class="context-list">
     <ng-container *ngFor="let item of contextState.context">
       <ctx-context-menu-item *ngIf="isAction(item)" [item]="item"></ctx-context-menu-item>

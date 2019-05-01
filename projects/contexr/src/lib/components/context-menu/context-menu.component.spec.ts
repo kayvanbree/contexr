@@ -1,23 +1,18 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {ContextMenuComponent} from './context-menu.component';
-import {HotkeysService} from 'angular2-hotkeys';
-import {ContexrService} from '../../providers/contexr.service';
+import {CONTEXT_MENU_OVERLAY_DATA, ContextMenuComponent} from './context-menu.component';
 import {SubmenuComponent} from '../submenu/submenu.component';
 import {ContextMenuItemComponent} from '../context-menu-item/context-menu-item.component';
+import {ContextState} from '../../types/context-state';
+import {ContextMenuItem} from '../../types/context-menu-item';
+import {Submenu} from '../../types/submenu';
 
-class HotkeysMockService {}
+const CONTEXT_MENU_MOCK_DATA: ContextState = {
 
-const testState = {
-  open: false,
-  context: [],
-  top: 0,
-  left: 0
 };
 
 describe('ContextMenuComponent', () => {
   let component: ContextMenuComponent;
   let fixture: ComponentFixture<ContextMenuComponent>;
-  let contexr: ContexrService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -27,8 +22,7 @@ describe('ContextMenuComponent', () => {
         SubmenuComponent
       ],
       providers: [
-        ContexrService,
-        { provide: HotkeysService, useClass: HotkeysMockService }
+        { provide: CONTEXT_MENU_OVERLAY_DATA, useValue: CONTEXT_MENU_MOCK_DATA }
       ]
     })
       .compileComponents();
@@ -37,7 +31,6 @@ describe('ContextMenuComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ContextMenuComponent);
     component = fixture.componentInstance;
-    contexr = fixture.componentRef.injector.get(ContexrService);
     fixture.detectChanges();
   });
 
@@ -45,31 +38,60 @@ describe('ContextMenuComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  // TODO: MAKE THIS TEST BETTER
-  it('should close on document click', () => {
-    spyOn(contexr, 'close');
-    component.onDocumentClick();
-
-    fixture.whenStable().then(() => {
-      expect(contexr.close).toHaveBeenCalled();
-    });
-  });
-
-  it('should open the context menu', () => {
-    component.contextState = {
-      open: false,
-      context: [],
-      top: 0,
-      left: 0
+  it('should recognize context items', () => {
+    const testItem: ContextMenuItem = {
+      context: ['context'],
+      text: 'Context',
+      action: () => {},
+      hotkey: 'h',
+      args: { argument: 'hello' }
     };
+    const testSubmenu: Submenu = {
+      text: 'Submenu',
+      children: [testItem]
+    };
+
+    const resultItem = component.isAction(testItem);
+    const resultSubmenu = component.isAction(testSubmenu);
+
+    expect(resultItem).toBe(true);
+    expect(resultSubmenu).toBe(false);
   });
 
-  it('should react to a new state', () => {
-    component.ngOnInit();
-    contexr.open(new MouseEvent('contextmenu'));
+  it('should recognize submenus', () => {
+    const testItem: ContextMenuItem = {
+      context: ['context'],
+      text: 'Context',
+      action: () => {},
+      hotkey: 'h',
+      args: { argument: 'hello' }
+    };
+    const testSubmenu: Submenu = {
+      text: 'Submenu',
+      children: [testItem]
+    };
 
-    fixture.whenStable().then(() => {
-      expect(component.open).toBe(true);
-    });
+    const resultItem = component.isSubmenu(testItem);
+    const resultSubmenu = component.isSubmenu(testSubmenu);
+
+    expect(resultItem).toBe(false);
+    expect(resultSubmenu).toBe(true);
+  });
+
+  it('should not handle items with hideMenu=true', () => {
+    const testItem: ContextMenuItem = {
+      context: ['context'],
+      text: 'Context',
+      action: () => {},
+      hotkey: 'h',
+      args: { argument: 'hello' },
+      hideMenu: true
+    };
+
+    const resultItem = component.isAction(testItem);
+    const resultSub = component.isSubmenu(testItem);
+
+    expect(resultItem).toBe(false);
+    expect(resultSub).toBe(false);
   });
 });

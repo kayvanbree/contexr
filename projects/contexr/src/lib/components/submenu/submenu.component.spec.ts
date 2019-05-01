@@ -3,6 +3,17 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { SubmenuComponent } from './submenu.component';
 import {ContextMenuItemComponent} from '../context-menu-item/context-menu-item.component';
 import {HotkeysService} from 'angular2-hotkeys';
+import {Overlay} from '@angular/cdk/overlay';
+
+const testSubmenu = {
+  text: 'sub1',
+  children: [
+    { text: 'subitem1', context: ['test'], action: () => {}, hotkey: 't'}
+  ]
+};
+
+class HotkeysMockService {}
+class OverlayMock {}
 
 describe('SubmenuComponent', () => {
   let component: SubmenuComponent;
@@ -15,7 +26,8 @@ describe('SubmenuComponent', () => {
         ContextMenuItemComponent
       ],
       providers: [
-        { provide: HotkeysService, useClass: HotkeysMockService }
+        { provide: HotkeysService, useClass: HotkeysMockService },
+        { provide: Overlay, useClass: OverlayMock }
       ]
     })
     .compileComponents();
@@ -44,12 +56,3 @@ describe('SubmenuComponent', () => {
     expect(component.subMenuStyle).not.toBeNull();
   });
 });
-
-const testSubmenu = {
-  text: 'sub1',
-  children: [
-    { text: 'subitem1', context: ['test'], action: () => {}, hotkey: 't'}
-  ]
-};
-
-class HotkeysMockService {}

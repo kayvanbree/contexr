@@ -10,9 +10,9 @@ export class ContextDirective {
 
   constructor(private contexr: ContexrService) {}
 
-  @HostListener('contextmenu', ['$event'])
-  @HostListener('click', ['$event'])
-  public onContextMenu(event) {
+  @HostListener('contextmenu')
+  @HostListener('click')
+  public onContextMenu() {
     this.contexr.addCurrentContext(this.ctx, this.ctxArgs);
   }
 }

@@ -1,10 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ContextMenuItemComponent } from './context-menu-item.component';
-import { ContexrService } from '../../providers/contexr.service';
-import {HotkeysService} from 'angular2-hotkeys';
 import {ContextMenuItem} from 'contexr';
-
-class HotkeysMockService {}
+import {ContextMenuService} from '../../providers/context-menu.service';
+import {By} from '@angular/platform-browser';
+import {DebugElement} from '@angular/core';
 
 const testItem = {
   text: 'test1',
@@ -15,10 +14,15 @@ const testItem = {
   hotkey: 't'
 } as ContextMenuItem;
 
+class ContextMenuMockService {
+  public close() {}
+}
+
 describe('ContextMenuItemComponent', () => {
   let component: ContextMenuItemComponent;
   let fixture: ComponentFixture<ContextMenuItemComponent>;
-  let contexr: ContexrService;
+  let contextMenuService: ContextMenuService;
+  let element: DebugElement;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -26,8 +30,7 @@ describe('ContextMenuItemComponent', () => {
         ContextMenuItemComponent
       ],
       providers: [
-        ContexrService,
-        { provide: HotkeysService, useClass: HotkeysMockService }
+        { provide: ContextMenuService, useClass: ContextMenuMockService }
       ]
     })
     .compileComponents();
@@ -37,7 +40,8 @@ describe('ContextMenuItemComponent', () => {
     fixture = TestBed.createComponent(ContextMenuItemComponent);
     component = fixture.componentInstance;
     component.item = testItem;
-    contexr = fixture.componentRef.injector.get(ContexrService);
+    contextMenuService = fixture.componentRef.injector.get(ContextMenuService);
+    element = fixture.debugElement.query(By.css('li'));
     fixture.detectChanges();
   });
 
@@ -45,11 +49,15 @@ describe('ContextMenuItemComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should perform an action', () => {
-    spyOn(contexr, 'close');
+  it('should act', () => {
     spyOn(component.item, 'action');
-    component.act();
-    expect(contexr.close).toHaveBeenCalled();
+    element.triggerEventHandler('click', null);
     expect(component.item.action).toHaveBeenCalled();
+  });
+
+  it('should close the menu', () => {
+    spyOn(contextMenuService, 'close');
+    element.triggerEventHandler('click', null);
+    expect(contextMenuService.close).toHaveBeenCalled();
   });
 });

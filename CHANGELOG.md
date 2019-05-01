@@ -1,6 +1,6 @@
 # Changelog
 
-## v1.3.0
+## v2.0.0
 
 NEW FEATURES
 
@@ -10,6 +10,18 @@ only.
 CHANGES
 
 - Update demo page
+- Update readme
+
+Deprecation
+
+- There is no need to add `<ctx-context-menu></ctx-context-menu>` anywhere in your code anymore. 
+Doing this will in fact break Contexr from the next major version. This change was made to remove 
+one of the installation steps.
+
+UPDATING
+
+- Remove `<ctx-context-menu></ctx-context-menu>` from you app.component.html!
+
 
 ## v1.2.3
 

@@ -1,20 +1,17 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {ContextMenuItem} from '../../types/context-menu-item';
-import {ContexrService} from '../../providers/contexr.service';
+import {ContextMenuService} from 'contexr/lib/providers/context-menu.service';
 
 @Component({
   selector: 'ctx-context-menu-item',
   templateUrl: './context-menu-item.component.html',
   styleUrls: ['./context-menu-item.component.css']
 })
-export class ContextMenuItemComponent implements OnInit {
+export class ContextMenuItemComponent {
 
   @Input() item: ContextMenuItem;
 
-  constructor(private contexr: ContexrService) { }
-
-  ngOnInit() {
-  }
+  constructor(private contextMenuService: ContextMenuService) { }
 
   /**
    * Call an action and close the context menu
@@ -22,6 +19,6 @@ export class ContextMenuItemComponent implements OnInit {
    */
   public act(): void {
     this.item.action(this.item.args);
-    this.contexr.close();
+    this.contextMenuService.close();
   }
 }

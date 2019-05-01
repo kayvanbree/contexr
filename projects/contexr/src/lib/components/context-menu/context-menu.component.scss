@@ -1,11 +1,6 @@
-.context-menu {
-  position: absolute;
-  z-index: 9999;
-}
-
-
-
-::ng-deep .menu {
+::ng-deep .context-menu {
+  min-width: 50px;
+  min-height: 20px;
   background: white;
   border: 1px #a7a7a7 solid;
   -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
