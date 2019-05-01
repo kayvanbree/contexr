@@ -41,11 +41,9 @@ workflows:
   version: 2.1
   test_and_release:
     jobs:
-    - install
     - test
     - build:
         requires:
-        - install
         - test
     - publish_pages:
         requires:
