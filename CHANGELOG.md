@@ -23,6 +23,10 @@ UPDATING
 - Remove `<ctx-context-menu></ctx-context-menu>` from you app.component.html!
 
 
+## v1.2.3
+
+- Fixes a bug where the arguments of an action would not be passed. I think this bug only existed on the npm version and was fixed here long before that. 
+
 ## v1.2.2
 
 - Fixes a bug where ContexrService wasn't imported correctly, rendering this
