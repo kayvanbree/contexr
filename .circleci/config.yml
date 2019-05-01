@@ -6,17 +6,6 @@ defaults: &defaults
   working_directory: ~/app
 
 jobs:
-  install:
-    <<: *defaults
-    steps:
-    - checkout
-    - attach_workspace:
-        at: ~/app
-    - run: npm install
-    - persist_to_workspace:
-        root: .
-        paths: .
-
   test:
     <<: *defaults
     docker:
@@ -45,6 +34,7 @@ jobs:
     - checkout
     - attach_workspace:
         at: ~/app
+    - run: npm install
     - run: npm run publish:pages
 
 workflows:
