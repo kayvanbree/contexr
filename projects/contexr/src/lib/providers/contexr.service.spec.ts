@@ -2,6 +2,7 @@ import {TestBed, inject} from '@angular/core/testing';
 import {ContexrService} from './contexr.service';
 import {HotkeysService} from 'angular2-hotkeys';
 import {Hotkey} from 'angular2-hotkeys/src/hotkey.model';
+import {Overlay} from '@angular/cdk/overlay';
 
 const testItem = {
   text: 'test',
@@ -18,13 +19,16 @@ export class HotkeysMockService {
     return null;
   }
 }
+class OverlayMock {}
+
 
 describe('ContexrService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
         ContexrService,
-        {provide: HotkeysService, useClass: HotkeysMockService}
+        {provide: HotkeysService, useClass: HotkeysMockService},
+        { provide: Overlay, useClass: OverlayMock }
       ]
     });
   });
