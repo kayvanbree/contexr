@@ -1,9 +1,8 @@
-import {Component, ElementRef, Inject, InjectionToken, OnInit} from '@angular/core';
+import {Component, Inject, InjectionToken} from '@angular/core';
 import {ContextState} from '../../types/context-state';
 import {ContextMenuItem} from '../../types/context-menu-item';
 import {ContextMenuEntry} from '../../types/context-menu-entry';
 import {Submenu} from 'contexr/lib/types/submenu';
-import {ContextMenuOverlayRef} from 'contexr/lib/types/context-menu-overlay-ref';
 
 export const CONTEXT_MENU_OVERLAY_DATA = new InjectionToken<ContextState>('CONTEXT_MENU_OVERLAY_DATA');
 

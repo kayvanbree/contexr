@@ -59,10 +59,12 @@
        * @param state
        */
       private open(event: MouseEvent, state: ContextState) {
-        const overlayConfig = this.getContextMenuConfig(event, state);
-        this.overlayRef = this.overlay.create(overlayConfig);
-        const contextMenuRef = new ContextMenuOverlayRef(this.overlayRef);
-        this.attachContextMenuOverlay(this.overlayRef, state, contextMenuRef);
+        if (state.context && state.context.length > 0) {
+          const overlayConfig = this.getContextMenuConfig(event, state);
+          this.overlayRef = this.overlay.create(overlayConfig);
+          const contextMenuRef = new ContextMenuOverlayRef(this.overlayRef);
+          this.attachContextMenuOverlay(this.overlayRef, state, contextMenuRef);
+        }
       }
 
       /**

@@ -36,13 +36,6 @@ const context: any = [
     action: (args: any) => {
       alert('My name is ' + args.name);
     }
-  },
-  {
-    text: 'All',
-    context: ['all'],
-    action: () => {
-      console.log('This appears on all context menus');
-    }
   }
 ];
 
