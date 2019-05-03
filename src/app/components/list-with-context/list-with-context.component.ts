@@ -21,12 +21,14 @@ export class ListWithContextComponent implements OnInit {
 
   context = [
     {
+      id: 'add-item',
       text: 'Add element',
       context: ['element-list'],
       action: (args: any) => {
         args.list.addElement();
       },
-      hotkey: 'ins'
+      hotkey: 'ins',
+      icon: 'plus'
     },
     {
       text: 'Delete element',

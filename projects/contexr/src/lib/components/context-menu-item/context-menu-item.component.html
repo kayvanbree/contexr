@@ -1,5 +1,6 @@
 <li (click)="act()" class="context-list-item">
   <div class="flex-container">
+    <i *ngIf="item.icon" class="fas fa-{{item.icon}}"></i>
     <span class="context">{{item.text}}</span>
     <span style="flex: 1 1 auto;"></span>
     <span class="shortcut">{{item.hotkey}}</span>
