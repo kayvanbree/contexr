@@ -7,6 +7,7 @@ import {ComponentPortal, PortalInjector} from '@angular/cdk/portal';
 import {CONTEXT_MENU_OVERLAY_DATA, ContextMenuComponent} from '../components/context-menu/context-menu.component';
 import {ContextState} from '../types/context-state';
 import {ContextMenuOverlayRef} from '../types/context-menu-overlay-ref';
+import {ContextMenuEntry} from '../types/context-menu-entry';
 import {ContexrService} from './contexr.service';
 
 @Injectable({
@@ -14,6 +15,7 @@ import {ContexrService} from './contexr.service';
 })
 export class ContextMenuService {
   private overlayRef: OverlayRef;
+  private context: ContextMenuEntry[];
 
   constructor(
     private overlay: Overlay,
@@ -25,13 +27,19 @@ export class ContextMenuService {
    * Bootstrap our document click, contextmenu and scrol eventListeners.
    */
   public initialize() {
+    this.contexr.getContext().subscribe(value => {
+      this.context = value;
+    });
     window.addEventListener('click', (event: MouseEvent) => {
+      this.contexr.addCurrentContext('all', null);
+      this.contexr.prepareContext();
       this.close();
     });
     window.addEventListener('contextmenu', (event: MouseEvent) => {
       this.contexr.addCurrentContext('all', null);
+      this.contexr.prepareContext();
       this.open(event, {
-        context: this.contexr.getCurrentContext(),
+        context: this.context,
         top: event.clientY,
         left: event.clientX
       });
