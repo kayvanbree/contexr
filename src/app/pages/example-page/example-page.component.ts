@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ContexrService} from '../../../../projects/contexr/src/lib/providers/contexr.service';
 
 @Component({
@@ -6,7 +6,7 @@ import {ContexrService} from '../../../../projects/contexr/src/lib/providers/con
   templateUrl: './example-page.component.html',
   styleUrls: ['./example-page.component.css']
 })
-export class ExamplePageComponent {
+export class ExamplePageComponent implements OnInit {
 
   dataSource1 = [
     {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
@@ -33,4 +33,14 @@ export class ExamplePageComponent {
     {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
     {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
   ];
+
+  public currentContext;
+
+  constructor(private contexr: ContexrService) {}
+
+  ngOnInit() {
+    this.contexr.getContext().subscribe(value => {
+      this.currentContext = value;
+    });
+  }
 }

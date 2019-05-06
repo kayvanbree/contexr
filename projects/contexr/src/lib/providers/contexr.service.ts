@@ -3,7 +3,7 @@ import {ContextMenuItem} from '../types/context-menu-item';
 import {Hotkey, HotkeysService} from 'angular2-hotkeys';
 import {ContextMenuEntry} from '../types/context-menu-entry';
 import {Submenu} from '../types/submenu';
-import {Observable, Subject} from 'rxjs';
+import {BehaviorSubject, Observable, Subject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,13 +13,13 @@ export class ContexrService {
   private context: ContextMenuEntry[] = [];
   private currentContext: ContextMenuEntry[] = [];
 
-  private contextMenuSubject: Subject<ContextMenuEntry[]> = new Subject<ContextMenuEntry[]>();
-  private contextObservable: Observable<ContextMenuEntry[]> = this.contextMenuSubject.asObservable();
+  private currentContextSubject: Subject<ContextMenuEntry[]> = new BehaviorSubject<ContextMenuEntry[]>([]);
+  private currentContextObservable: Observable<ContextMenuEntry[]> = this.currentContextSubject.asObservable();
 
   constructor(private hotkeysService: HotkeysService) {}
 
   public getContext(): Observable<ContextMenuEntry[]> {
-    return this.contextObservable;
+    return this.currentContextObservable;
   }
 
   /**
@@ -37,6 +37,7 @@ export class ContexrService {
    */
   public addCurrentContext(context: string, args: any) {
     this.addItemsInContext(this.context, context, args);
+    this.currentContextSubject.next(this.currentContext);
   }
 
   /**
@@ -54,7 +55,6 @@ export class ContexrService {
     for (let i = 0; i < context.length; i++) {
       this.registerContextMenuItem(context[i]);
     }
-    this.contextMenuSubject.next(this.context);
   }
 
   /**

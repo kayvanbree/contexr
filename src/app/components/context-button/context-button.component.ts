@@ -8,16 +8,9 @@ import {ContextMenuItem} from 'contexr/lib/types/context-menu-item';
   styleUrls: ['./context-button.component.css']
 })
 export class ContextButtonComponent implements OnInit {
-  @Input() id: string;
-  contextItem: ContextMenuItem;
+  @Input() contextItem: ContextMenuItem;
 
   constructor(private contexr: ContexrService) {}
 
-  public ngOnInit(): void {
-    this.contexr.getContext().subscribe(value => {
-      this.contextItem = value.find(item => {
-        return (item as ContextMenuItem).id === this.id;
-      }) as ContextMenuItem;
-    });
-  }
+  public ngOnInit(): void {}
 }

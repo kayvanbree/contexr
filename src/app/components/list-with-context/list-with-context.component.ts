@@ -36,25 +36,8 @@ export class ListWithContextComponent implements OnInit {
       action: (args: any) => {
         args.list.removeSelection();
       },
-      hotkey: 'del'
-    },
-    {
-      text: 'Select previous',
-      context: ['element'],
-      action: (args: any) => {
-        args.list.selectPrevious();
-      },
-      hotkey: 'up',
-      hideMenu: true
-    },
-    {
-      text: 'Select next',
-      context: ['element'],
-      action: (args: any) => {
-        args.list.selectNext();
-      },
-      hotkey: 'down',
-      hideMenu: true
+      hotkey: 'del',
+      icon: 'trash-alt'
     }
   ];
 

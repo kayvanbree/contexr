@@ -1,1 +1,7 @@
-<button><i class="fas fa-{{icon}}"></i></button>
+<button
+  *ngIf="contextItem"
+  (click)="contextItem.action(contextItem.args)"
+  title="{{contextItem.text}}"
+>
+  <i class="fas fa-{{contextItem.icon}}"></i>
+</button>
