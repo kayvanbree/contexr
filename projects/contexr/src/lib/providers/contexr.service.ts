@@ -16,7 +16,7 @@ export class ContexrService {
   private currentContextSubject: Subject<ContextMenuEntry[]> = new BehaviorSubject<ContextMenuEntry[]>([]);
   private currentContextObservable: Observable<ContextMenuEntry[]> = this.currentContextSubject.asObservable();
 
-  private currentContextArgs: any[];
+  private currentContextArgs: any[] = [];
 
   constructor(private hotkeysService: HotkeysService) {}
 
@@ -34,11 +34,12 @@ export class ContexrService {
   }
 
   public prepareContext() {
-    this.doSomeRecursiveStuff(this.context);
+    this.currentContext = [];
+    this.parseContextItems(this.context);
     this.currentContextSubject.next(this.currentContext);
   }
 
-  private doSomeRecursiveStuff(items: ContextMenuEntry[]) {
+  private parseContextItems(items: ContextMenuEntry[]) {
     for (let i = 0; i < items.length; i++) {
       if ((items[i] as ContextMenuItem).action) {
         const item = items[i] as ContextMenuItem;
@@ -48,20 +49,21 @@ export class ContexrService {
         for (let j = 0; j < this.currentContextArgs.length; j++) {
           inContext = item.context.indexOf(this.currentContextArgs[j].context) !== -1;
           if (inContext) {
-            args = this.currentContextArgs[j];
+            args = this.currentContextArgs[j].args;
             break;
           }
         }
+
         const action = {
           ...item,
-          inContext: !!inContext,
+          inContext: inContext,
           args: args
         } as ContextMenuItem;
 
         this.currentContext.push(action);
       } else if ((items[i] as Submenu).children) {
         const submenu = Object.assign({}, items[i]) as Submenu;
-        this.doSomeRecursiveStuff((items[i] as Submenu).children);
+        this.parseContextItems((items[i] as Submenu).children);
         if (submenu.children.length > 0) {
           this.currentContext.push(submenu);
         }
@@ -85,6 +87,7 @@ export class ContexrService {
     for (let i = 0; i < context.length; i++) {
       this.registerContextMenuItem(context[i]);
     }
+    this.prepareContext();
   }
 
   /**
@@ -110,36 +113,6 @@ export class ContexrService {
         }
         return false;
       }));
-    }
-  }
-
-  /**
-   * Filter all context items with our context string
-   * @param items
-   * @param context
-   * @returns
-   */
-  private addItemsInContext(items: ContextMenuEntry[], context: string, args: any) {
-    for (let i = 0; i < items.length; i++) {
-      if ((items[i] as ContextMenuItem).action) {
-        const action = Object.assign({}, items[i]) as ContextMenuItem;
-        if (args !== null) {
-          action.args = args;
-        }
-        if (action.context.indexOf(context) !== -1) {
-          this.currentContext.push(action);
-        }
-      } else if ((items[i] as Submenu).children) {
-        const submenu = Object.assign({}, items[i]) as Submenu;
-        this.addItemsInContext(
-          (items[i] as Submenu).children,
-          context,
-          args,
-        );
-        if (submenu.children.length > 0) {
-          this.currentContext.push(submenu);
-        }
-      }
     }
   }
 

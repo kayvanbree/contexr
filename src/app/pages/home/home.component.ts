@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ContexrService} from 'contexr/lib/providers/contexr.service';
 
 @Component({
@@ -6,7 +6,7 @@ import {ContexrService} from 'contexr/lib/providers/contexr.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   public install1 = `npm install --save contexr`;
 
   public install2 = `<!-- Your application code -->
@@ -81,7 +81,9 @@ context = [
   </tr>
 </table>`;
 
-  constructor(private contexr: ContexrService) {
+  constructor(private contexr: ContexrService) {}
+
+  public ngOnInit(): void {
     this.contexr.registerContextMenuItems(this.context);
   }
 }

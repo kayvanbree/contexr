@@ -39,13 +39,20 @@ export class ListWithContextComponent implements OnInit {
       hotkey: 'del',
       icon: 'trash-alt'
     }
+    ,
+    {
+      text: 'Lalalala',
+      context: ['element'],
+      action: (args: any) => {
+        console.log('Lalalala');
+      }
+    }
   ];
 
-  constructor(private contexr: ContexrService, private changeDetector: ChangeDetectorRef) {
-    this.contexr.registerContextMenuItems(this.context);
-  }
+  constructor(private contexr: ContexrService, private changeDetector: ChangeDetectorRef) {}
 
   public ngOnInit(): void {
+    this.contexr.registerContextMenuItems(this.context);
     this.dataSource = new MatTableDataSource(this.elements);
   }
 
