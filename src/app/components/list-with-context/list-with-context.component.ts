@@ -45,7 +45,8 @@ export class ListWithContextComponent implements OnInit {
       context: ['element'],
       action: (args: any) => {
         console.log('Lalalala');
-      }
+      },
+      icon: 'far fa-comment'
     }
   ];
 

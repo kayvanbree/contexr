@@ -6,7 +6,6 @@ import {ContexrService} from 'contexr/lib/providers/contexr.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ImportRoutingModule} from './modules/import-routing.module';
 import {ExamplePageComponent} from './pages/example-page/example-page.component';
-import {PeopleListModule} from './modules/example-list/people-list-component.module';
 import {HomeComponent} from './pages/home/home.component';
 import {HighlightModule} from 'ngx-highlightjs';
 import { SimpleExample1Component } from './modules/installation-examples/simple-example1/simple-example1.component';
@@ -17,26 +16,29 @@ import { ContextButtonComponent } from './components/context-button/context-butt
 const context: any = [
   {
     text: 'My first context!',
-    context: ['my-first-context'],
+    context: ['all'],
     action: () => {
       console.log('You just clicked the first context item!');
     },
-    hotkey: 'y'
+    hotkey: 'y',
+    icon: 'fas fa-exclamation'
   },
   {
     text: 'Say hello',
-    context: ['block'],
+    context: ['all'],
     action: () => {
       alert('HELLO');
     },
-    hotkey: 'h'
+    hotkey: 'h',
+    icon: 'fas fa-water'
   },
   {
     text: 'Say my name',
     context: ['say-my-name'],
     action: (args: any) => {
       alert('My name is ' + args.name);
-    }
+    },
+    icon: 'far fa-comment-dots'
   }
 ];
 
@@ -63,7 +65,6 @@ export function onInitialize(contexr: ContexrService): () => Promise<any> {
     ContexrModule,
     BrowserAnimationsModule,
     ImportRoutingModule,
-    PeopleListModule,
     HighlightModule.forRoot({ theme: 'agate'}),
     ImportMaterialModule
   ],

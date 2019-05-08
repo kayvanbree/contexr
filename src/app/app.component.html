@@ -8,5 +8,10 @@
 </mat-toolbar>
 
 <div class="container">
+  <app-context-button
+    *ngFor="let contextButton of currentContext"
+    [contextItem]="contextButton"
+  ></app-context-button>
+
   <router-outlet></router-outlet>
 </div>

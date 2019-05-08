@@ -1,5 +1,4 @@
 import {Directive, HostListener, Input} from '@angular/core';
-import {ContexrService} from '../providers/contexr.service';
 import {ContextMenuItem} from '../types/context-menu-item';
 
 @Directive({
@@ -7,8 +6,6 @@ import {ContextMenuItem} from '../types/context-menu-item';
 })
 export class ContextButtonDirective {
   @Input() ctxButton: ContextMenuItem;
-
-  constructor(private contexr: ContexrService) { }
 
   @HostListener('click')
   public onClick() {

@@ -44,7 +44,8 @@ describe('ContextMenuComponent', () => {
       text: 'Context',
       action: () => {},
       hotkey: 'h',
-      args: { argument: 'hello' }
+      args: { argument: 'hello' },
+      inContext: true
     };
     const testSubmenu: Submenu = {
       text: 'Submenu',

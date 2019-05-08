@@ -23,7 +23,8 @@ export class HomeComponent implements OnInit {
       action: () => {
         this.count++;
       },
-      hotkey: 'i'
+      hotkey: 'i',
+      icon: 'fas fa-plus-circle'
     }
   ];
 
