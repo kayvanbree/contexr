@@ -28,7 +28,7 @@ export class ListWithContextComponent implements OnInit {
         args.list.addElement();
       },
       hotkey: 'ins',
-      icon: 'plus'
+      icon: 'fas fa-plus'
     },
     {
       text: 'Delete element',
@@ -37,7 +37,7 @@ export class ListWithContextComponent implements OnInit {
         args.list.removeSelection();
       },
       hotkey: 'del',
-      icon: 'trash-alt'
+      icon: 'far fa-trash-alt'
     }
     ,
     {

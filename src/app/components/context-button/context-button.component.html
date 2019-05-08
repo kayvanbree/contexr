@@ -1,7 +1,7 @@
 <button
-  *ngIf="contextItem"
-  (click)="contextItem.action(contextItem.args)"
+  [disabled]="!contextItem.inContext"
+  [ctxButton]="contextItem"
   title="{{contextItem.text}}"
 >
-  <i class="fas fa-{{contextItem.icon}}"></i>
+  <i class="{{contextItem.icon}}"></i>
 </button>

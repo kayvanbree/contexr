@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {ContextMenuItem} from '../../types/context-menu-item';
-import {ContextMenuService} from 'contexr/lib/providers/context-menu.service';
+import {ContextMenuService} from '../../providers/context-menu.service';
 
 @Component({
   selector: 'ctx-context-menu-item',

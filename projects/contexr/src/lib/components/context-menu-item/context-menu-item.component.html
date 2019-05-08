@@ -1,7 +1,7 @@
 <li (click)="act()" class="context-list-item">
   <div class="flex-container">
     <div class="icon-holder">
-      <i *ngIf="item.icon" class="fas fa-{{item.icon}}"></i>
+      <i *ngIf="item.icon" class="{{item.icon}}"></i>
     </div>
     <span class="context">{{item.text}}</span>
     <span style="flex: 1 1 auto;"></span>

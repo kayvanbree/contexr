@@ -8,7 +8,8 @@ import {ContextMenuItemComponent} from './components/context-menu-item/context-m
 import {ContextDirective} from './directives/context.directive';
 import {OverlayModule} from '@angular/cdk/overlay';
 import {ContextMenuDeprecatedComponent} from './components/context-menu-deprecated/context-menu-deprecated.component';
-import {ContextMenuService} from 'contexr/lib/providers/context-menu.service';
+import {ContextMenuService} from './providers/context-menu.service';
+import { ContextButtonDirective } from './directives/context-button.directive';
 
 /**
  * Bootstrap the ContextMenuService
@@ -29,11 +30,13 @@ export function contextMenuServiceFactory(contextMenuService: ContextMenuService
     SubmenuComponent,
     ContextMenuItemComponent,
     ContextDirective,
-    ContextMenuDeprecatedComponent
+    ContextMenuDeprecatedComponent,
+    ContextButtonDirective
   ],
   exports: [
     ContextDirective,
-    ContextMenuDeprecatedComponent
+    ContextMenuDeprecatedComponent,
+    ContextButtonDirective
   ],
   providers: [
     ContexrService,

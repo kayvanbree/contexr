@@ -31,11 +31,12 @@ export class ContextMenuService {
       this.context = value;
     });
     window.addEventListener('click', (event: MouseEvent) => {
+      this.close();
       this.contexr.addCurrentContext('all', null);
       this.contexr.prepareContext();
-      this.close();
     });
     window.addEventListener('contextmenu', (event: MouseEvent) => {
+      this.close();
       this.contexr.addCurrentContext('all', null);
       this.contexr.prepareContext();
       this.open(event, {
@@ -46,17 +47,13 @@ export class ContextMenuService {
     });
     // Event capturing (not possible in real Angular yet)
     window.addEventListener('click', (event) => {
-      event.preventDefault();
       this.contexr.reset();
     }, true);
     window.addEventListener('contextmenu', (event) => {
       event.preventDefault();
-      this.contexr.reset();
-      this.close();
     }, true);
     window.addEventListener('scroll', (event) => {
       event.preventDefault();
-      this.contexr.reset();
       this.close();
     });
   }

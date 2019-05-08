@@ -12,7 +12,7 @@
     "test:coverage": "ng test contexr --watch=false --code-coverage",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "prepublishOnly": "npm run build:lib",
+    "prepublish": "npm run build:lib",
     "publish": "cd dist/contexr && npm publish",
     "prepublish:pages": "ng build --prod --base-href \"https://kayvanbree.github.io/contexr/\"",
     "publish:pages": "ngh --repo=https://GH_TOKEN@github.com/contexr.git --dir=dist/contexr-demo"
