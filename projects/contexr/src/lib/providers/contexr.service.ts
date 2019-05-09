@@ -18,6 +18,8 @@ export class ContexrService {
 
   private currentContextArgs: any[] = [];
 
+  private contextPrepared = false;
+
   constructor(private hotkeysService: HotkeysService) {}
 
   public getContext(): Observable<ContextMenuEntry[]> {
@@ -30,6 +32,10 @@ export class ContexrService {
    * @param arguments
    */
   public addCurrentContext(context: string, args: any) {
+    if (this.contextPrepared) {
+      this.contextPrepared = false;
+      this.reset();
+    }
     this.currentContextArgs.push({context: context, args: args});
   }
 
@@ -37,6 +43,7 @@ export class ContexrService {
     this.currentContext = [];
     this.parseContextItems(this.context);
     this.currentContextSubject.next(this.currentContext);
+    this.contextPrepared = true;
   }
 
   private parseContextItems(items: ContextMenuEntry[]) {

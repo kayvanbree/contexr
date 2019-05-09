@@ -30,12 +30,13 @@ export class ContextMenuService {
     this.contexr.getContext().subscribe(value => {
       this.context = value;
     });
-    window.addEventListener('click', (event: MouseEvent) => {
+    window.addEventListener('click', () => {
       this.close();
       this.contexr.addCurrentContext('all', null);
       this.contexr.prepareContext();
     });
     window.addEventListener('contextmenu', (event: MouseEvent) => {
+      event.preventDefault();
       this.close();
       this.contexr.addCurrentContext('all', null);
       this.contexr.prepareContext();
@@ -45,15 +46,7 @@ export class ContextMenuService {
         left: event.clientX
       });
     });
-    // Event capturing (not possible in real Angular yet)
-    window.addEventListener('click', (event) => {
-      this.contexr.reset();
-    }, true);
-    window.addEventListener('contextmenu', (event) => {
-      event.preventDefault();
-    }, true);
-    window.addEventListener('scroll', (event) => {
-      event.preventDefault();
+    window.addEventListener('scroll', () => {
       this.close();
     });
   }
