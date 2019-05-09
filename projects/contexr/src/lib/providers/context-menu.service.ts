@@ -51,6 +51,7 @@ export class ContextMenuService {
     }, true);
     window.addEventListener('contextmenu', (event) => {
       event.preventDefault();
+      this.contexr.reset();
     }, true);
     window.addEventListener('scroll', (event) => {
       event.preventDefault();

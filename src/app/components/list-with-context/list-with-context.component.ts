@@ -38,15 +38,28 @@ export class ListWithContextComponent implements OnInit {
       },
       hotkey: 'del',
       icon: 'far fa-trash-alt'
-    }
-    ,
+    },
     {
-      text: 'Lalalala',
+      text: 'Beryllium',
       context: ['element'],
       action: (args: any) => {
         console.log('Lalalala');
       },
-      icon: 'far fa-comment'
+      icon: 'fas fa-glasses',
+      condition: (args: any) => {
+        return args && args.element.name === 'Beryllium';
+      }
+    },
+    {
+      text: 'Not Beryllium',
+      context: ['element'],
+      action: (args: any) => {
+        console.log('Lalalala');
+      },
+      icon: 'fas fa-blind',
+      condition: (args: any) => {
+        return args && args.element.name !== 'Beryllium';
+      }
     }
   ];
 
