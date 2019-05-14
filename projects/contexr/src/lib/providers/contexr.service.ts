@@ -60,7 +60,9 @@ export class ContexrService {
           args: args
         } as ContextMenuItem;
 
-        this.currentContext.push(action);
+        if ((!action.condition || action.condition(action.args))) {
+          this.currentContext.push(action);
+        }
       } else if ((items[i] as Submenu).children) {
         const submenu = Object.assign({}, items[i]) as Submenu;
         this.parseContextItems((items[i] as Submenu).children);

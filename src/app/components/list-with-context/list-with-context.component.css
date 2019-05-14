@@ -1,3 +1,7 @@
 table {
   width: 100%;
 }
+
+.marked td:first-child {
+  border-left: 3px red solid;
+}

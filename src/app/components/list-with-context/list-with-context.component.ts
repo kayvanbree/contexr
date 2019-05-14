@@ -40,25 +40,25 @@ export class ListWithContextComponent implements OnInit {
       icon: 'far fa-trash-alt'
     },
     {
-      text: 'Beryllium',
+      text: 'Mark',
       context: ['element'],
       action: (args: any) => {
-        console.log('Lalalala');
+        args.element.marked = !args.element.marked;
       },
-      icon: 'fas fa-glasses',
+      icon: 'fas fa-pencil-alt',
       condition: (args: any) => {
-        return args && args.element.name === 'Beryllium';
+        return args && !args.element.marked;
       }
     },
     {
-      text: 'Not Beryllium',
+      text: 'Unmark',
       context: ['element'],
       action: (args: any) => {
-        console.log('Lalalala');
+        args.element.marked = !args.element.marked;
       },
-      icon: 'fas fa-blind',
+      icon: 'fas fa-eraser',
       condition: (args: any) => {
-        return args && args.element.name !== 'Beryllium';
+        return args && args.element.marked;
       }
     }
   ];
