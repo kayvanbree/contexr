@@ -21,7 +21,7 @@ export class ContextMenuItemComponent {
    * Call an action and close the context menu
    * @param context
    */
-  public act(): void {
+  public act(event: MouseEvent): void {
     event.preventDefault();
     event.stopPropagation();
     this.contexr.act(this.item);
