@@ -9,4 +9,5 @@ export class ContextMenuItem extends ContextMenuEntry {
   hideMenu?: boolean;
   icon?: boolean;
   inContext?: boolean;
+  condition?: (args: any) => boolean;
 }

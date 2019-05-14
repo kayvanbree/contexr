@@ -39,6 +39,7 @@
       (click)="onSelectRow($event, element)"
       (contextmenu)="onSelectRow($event, element)"
       [style.background]="selected && selected.indexOf(element) != -1 ? 'lightblue' : ''"
+      [ngClass]="{'marked': element.marked}"
   ></tr>
 </table>
 

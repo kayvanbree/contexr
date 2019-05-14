@@ -22,6 +22,11 @@ export class ContexrService {
 
   constructor(private hotkeysService: HotkeysService) {}
 
+  public act(item: ContextMenuItem) {
+    item.action(item.args);
+    this.prepareContext();
+  }
+
   public getContext(): Observable<ContextMenuEntry[]> {
     return this.currentContextObservable;
   }
@@ -67,7 +72,9 @@ export class ContexrService {
           args: args
         } as ContextMenuItem;
 
-        this.currentContext.push(action);
+        if ((!action.condition || action.condition(action.args))) {
+          this.currentContext.push(action);
+        }
       } else if ((items[i] as Submenu).children) {
         const submenu = Object.assign({}, items[i]) as Submenu;
         this.parseContextItems((items[i] as Submenu).children);

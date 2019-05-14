@@ -1,5 +1,6 @@
 import {Directive, ElementRef, HostListener, Input, OnChanges, Renderer2} from '@angular/core';
 import {ContextMenuItem} from '../types/context-menu-item';
+import {ContexrService} from '../providers/contexr.service';
 
 @Directive({
   selector: '[ctxButton]'
@@ -11,10 +12,14 @@ export class ContextButtonDirective implements OnChanges {
   public onClick(): void {
     event.preventDefault();
     event.stopPropagation();
-    this.ctxButton.action(this.ctxButton.args);
+    this.contexr.act(this.ctxButton);
   }
 
-  constructor(private element: ElementRef, private renderer: Renderer2) {}
+  constructor(
+    private element: ElementRef,
+    private renderer: Renderer2,
+    private contexr: ContexrService
+  ) {}
 
   public ngOnChanges(): void {
     if (this.ctxButton.inContext) {

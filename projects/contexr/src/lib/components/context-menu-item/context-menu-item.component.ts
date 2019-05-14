@@ -1,6 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {ContextMenuItem} from '../../types/context-menu-item';
 import {ContextMenuService} from '../../providers/context-menu.service';
+import {ContexrService} from '../../providers/contexr.service';
 
 @Component({
   selector: 'ctx-context-menu-item',
@@ -11,14 +12,19 @@ export class ContextMenuItemComponent {
 
   @Input() item: ContextMenuItem;
 
-  constructor(private contextMenuService: ContextMenuService) { }
+  constructor(
+    private contextMenuService: ContextMenuService,
+    private contexr: ContexrService
+  ) { }
 
   /**
    * Call an action and close the context menu
    * @param context
    */
   public act(): void {
-    this.item.action(this.item.args);
+    event.preventDefault();
+    event.stopPropagation();
+    this.contexr.act(this.item);
     this.contextMenuService.close();
   }
 }
