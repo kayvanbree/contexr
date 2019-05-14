@@ -1,8 +1,3 @@
-<button
-  [disabled]="!contextItem.inContext"
-  [ctxButton]="contextItem"
-  title="{{contextItem.text}}"
-  *ngIf="!contextItem.condition || contextItem.condition(contextItem.args)"
->
+<button [ctxButton]="contextItem">
   <i class="{{contextItem.icon}}"></i>
 </button>
