@@ -23,7 +23,7 @@ export class ContexrService {
   constructor(private hotkeysService: HotkeysService) {}
 
   public act(item: ContextMenuItem) {
-    item.action(item.args);
+    item.args ? item.action(item.args) : item.action({});
     this.prepareContext();
   }
 
@@ -123,6 +123,7 @@ export class ContexrService {
           const item = this.currentContext[i] as any;
           if (item.hotkey === key) {
             item.action(item.args);
+            this.prepareContext();
           }
         }
         return false;

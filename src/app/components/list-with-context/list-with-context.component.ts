@@ -40,6 +40,24 @@ export class ListWithContextComponent implements OnInit {
       icon: 'far fa-trash-alt'
     },
     {
+      text: 'Select previous',
+      context: ['element'],
+      action: (args: any) => {
+        args.list.selectPrevious();
+      },
+      hotkey: 'up',
+      hideMenu: true
+    },
+    {
+      text: 'Select next',
+      context: ['element'],
+      action: (args: any) => {
+        args.list.selectNext();
+      },
+      hotkey: 'down',
+      hideMenu: true
+    },
+    {
       text: 'Mark',
       context: ['element'],
       action: (args: any) => {
@@ -48,7 +66,8 @@ export class ListWithContextComponent implements OnInit {
       icon: 'fas fa-pencil-alt',
       condition: (args: any) => {
         return args && !args.element.marked;
-      }
+      },
+      hotkey: 'm'
     },
     {
       text: 'Unmark',
@@ -59,7 +78,8 @@ export class ListWithContextComponent implements OnInit {
       icon: 'fas fa-eraser',
       condition: (args: any) => {
         return args && args.element.marked;
-      }
+      },
+      hotkey: 'm'
     }
   ];
 
