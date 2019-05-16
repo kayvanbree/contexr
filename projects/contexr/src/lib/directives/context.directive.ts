@@ -13,6 +13,6 @@ export class ContextDirective {
   @HostListener('contextmenu')
   @HostListener('click')
   public onContextMenu() {
-    this.contexr.addCurrentContext(this.ctx, this.ctxArgs);
+    this.contexr.addCurrentContext(this);
   }
 }

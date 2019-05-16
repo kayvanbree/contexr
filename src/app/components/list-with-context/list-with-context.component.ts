@@ -90,6 +90,15 @@ export class ListWithContextComponent implements OnInit {
     this.dataSource = new MatTableDataSource(this.elements);
   }
 
+  messEverythingUp(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    this.dataSource.data.forEach((value) => {
+      value.marked = !value.marked;
+    });
+    this.contexr.prepareContext();
+  }
+
   /**
    * Select a row, use ctrl + click to select multiple
    * @param event

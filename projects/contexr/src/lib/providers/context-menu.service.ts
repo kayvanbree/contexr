@@ -32,13 +32,13 @@ export class ContextMenuService {
     });
     window.addEventListener('click', () => {
       this.close();
-      this.contexr.addCurrentContext('all', null);
+      // this.contexr.addCurrentContext('all', null);
       this.contexr.prepareContext();
     });
     window.addEventListener('contextmenu', (event: MouseEvent) => {
       event.preventDefault();
       this.close();
-      this.contexr.addCurrentContext('all', null);
+      // this.contexr.addCurrentContext('all', null);
       this.contexr.prepareContext();
       this.open(event, {
         context: this.context,

@@ -4,6 +4,7 @@ import {Hotkey, HotkeysService} from 'angular2-hotkeys';
 import {ContextMenuEntry} from '../types/context-menu-entry';
 import {Submenu} from '../types/submenu';
 import {BehaviorSubject, Observable, Subject} from 'rxjs';
+import {ContextDirective} from '../directives/context.directive';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class ContexrService {
   private currentContextSubject: Subject<ContextMenuEntry[]> = new BehaviorSubject<ContextMenuEntry[]>([]);
   private currentContextObservable: Observable<ContextMenuEntry[]> = this.currentContextSubject.asObservable();
 
-  private currentContextArgs: any[] = [];
+  private currentContextArgs: ContextDirective[] = [];
 
   private contextPrepared = false;
 
@@ -36,12 +37,12 @@ export class ContexrService {
    * @param context
    * @param arguments
    */
-  public addCurrentContext(context: string, args: any) {
+  public addCurrentContext(directive: ContextDirective) {
     if (this.contextPrepared) {
       this.contextPrepared = false;
       this.reset();
     }
-    this.currentContextArgs.push({context: context, args: args});
+    this.currentContextArgs.push(directive);
   }
 
   public prepareContext() {
@@ -59,9 +60,9 @@ export class ContexrService {
         let inContext = false;
         let args = null;
         for (let j = 0; j < this.currentContextArgs.length; j++) {
-          inContext = item.context.indexOf(this.currentContextArgs[j].context) !== -1;
+          inContext = item.context.indexOf(this.currentContextArgs[j].ctx) !== -1;
           if (inContext) {
-            args = this.currentContextArgs[j].args;
+            args = this.currentContextArgs[j].ctxArgs;
             break;
           }
         }
