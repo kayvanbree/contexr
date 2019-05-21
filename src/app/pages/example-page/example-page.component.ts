@@ -1,11 +1,13 @@
-import {Component} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ContexrService} from 'contexr/lib/providers/contexr.service';
+import {ContextMenuItem} from 'contexr/lib/types/context-menu-item';
 
 @Component({
   selector: 'app-example-page',
   templateUrl: './example-page.component.html',
   styleUrls: ['./example-page.component.css']
 })
-export class ExamplePageComponent {
+export class ExamplePageComponent implements OnInit {
 
   dataSource1 = [
     {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H', marked: true},
@@ -32,4 +34,16 @@ export class ExamplePageComponent {
     {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
     {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
   ];
+
+  button: ContextMenuItem;
+
+  constructor(private contexr: ContexrService, private changeDetector: ChangeDetectorRef) { }
+
+  ngOnInit() {
+    this.contexr.getButtonContext('add-item')
+      .subscribe((value) => {
+        this.button = value as ContextMenuItem;
+        this.changeDetector.detectChanges();
+      });
+  }
 }

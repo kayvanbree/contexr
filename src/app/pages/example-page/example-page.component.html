@@ -1,5 +1,13 @@
 <h1>List 1</h1>
 
+<button
+  *ngIf="button"
+  pButton
+  [ctxButton]="button"
+>
+  <i [class]="button.icon"></i>
+</button>
+
 <app-list-with-context [elements]="dataSource1"></app-list-with-context>
 
 <h1>List 2</h1>

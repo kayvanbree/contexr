@@ -5,6 +5,7 @@ import {ContextMenuEntry} from '../types/context-menu-entry';
 import {Submenu} from '../types/submenu';
 import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import {ContextDirective} from '../directives/context.directive';
+import {first, map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,12 @@ export class ContexrService {
 
   public getContext(): Observable<ContextMenuEntry[]> {
     return this.currentContextObservable;
+  }
+
+  public getButtonContext(id: string) {
+    return this.currentContextObservable.pipe(
+      map((array) => array.find(value => (value as ContextMenuItem).id === id))
+    );
   }
 
   /**
