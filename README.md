@@ -1,5 +1,4 @@
 # Contexr
-[![CircleCI](https://circleci.com/gh/kayvanbree/contexr.svg?style=svg&circle-token=66e7379fa4a7d7da91bc35180f43b639a6847106)](https://circleci.com/gh/kayvanbree/contexr)
 
 Stop redundantly defining your shortcuts in your shortcut library and your context menu. Start using Contexr!
 
@@ -13,7 +12,6 @@ the same all throughout your application.
 - [Demo page](https://kayvanbree.github.io/contexr/)
 - [Github](https://github.com/kayvanbree/contexr)
 - [npmjs](https://www.npmjs.com/package/contexr)
-- [CircleCi](https://circleci.com/gh/kayvanbree/contexr)
 
 ## Installation
 
