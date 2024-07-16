@@ -1,23 +1,32 @@
 import {ChangeDetectorRef, Component, ElementRef, Input, OnInit, QueryList, ViewChildren} from '@angular/core';
-import {ContexrService} from 'contexr/lib/providers/contexr.service';
-import {MatRow, MatTableDataSource} from '@angular/material';
+import { ContexrModule, ContexrService } from '../../../../projects/contexr/src/public-api';
+import {MatRow, MatTableDataSource, MatTableModule} from '@angular/material/table';
+import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
+  standalone: true,
   selector: 'app-list-with-context',
   templateUrl: './list-with-context.component.html',
-  styleUrls: ['./list-with-context.component.css']
+  styleUrls: ['./list-with-context.component.css'],
+  imports: [
+    CommonModule,
+    MatTableModule,
+    MatCardModule,
+    ContexrModule,
+  ]
 })
 export class ListWithContextComponent implements OnInit {
   @Input()
-  public elements: any[];
+  public elements!: any[];
 
   @ViewChildren(MatRow, { read: ElementRef })
   public rows !: QueryList<ElementRef>;
 
-  dataSource: MatTableDataSource<any>;
+  dataSource!: MatTableDataSource<any>;
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
 
-  selected;
+  selected: any;
 
   context = [
     {
@@ -135,18 +144,20 @@ export class ListWithContextComponent implements OnInit {
 
   /**
    * Returns the first index of the selection
+   * TODO: Typesafe any
    */
   private getMinSelectedIndex() {
-    return Math.min.apply(Math, this.selected.map((o) => {
+    return Math.min.apply(Math, this.selected.map((o: any) => {
       return this.elements.indexOf(o);
     }));
   }
 
   /**
    * Returns the last index of the selection
+   * TODO: Typesafe any
    */
   private getMaxSelectedIndex() {
-    return Math.max.apply(Math, this.selected.map((o) => {
+    return Math.max.apply(Math, this.selected.map((o: any) => {
       return this.elements.indexOf(o);
     }));
   }

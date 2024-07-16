@@ -1,17 +1,16 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {APP_INITIALIZER, NgModule} from '@angular/core';
-import {AppComponent} from './app.component';
-import {ContexrModule} from '../../projects/contexr/src';
-import {ContexrService} from 'contexr/lib/providers/contexr.service';
+import {ContexrModule} from '../../projects/contexr/src/public-api';
+import {ContexrService} from '../../projects/contexr/src/public-api';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {ImportRoutingModule} from './modules/import-routing.module';
-import {ExamplePageComponent} from './pages/example-page/example-page.component';
 import {PeopleListModule} from './modules/example-list/people-list-component.module';
-import {HomeComponent} from './pages/home/home.component';
-import {HighlightModule} from 'ngx-highlightjs';
-import { SimpleExample1Component } from './modules/installation-examples/simple-example1/simple-example1.component';
-import {ImportMaterialModule} from './modules/import-material.module';
-import { ListWithContextComponent } from './components/list-with-context/list-with-context.component';
+import {SimpleExample1Component} from './modules/installation-examples/simple-example1/simple-example1.component';
+import {MatButtonModule} from '@angular/material/button';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatTableModule} from '@angular/material/table';
+import {MatCardModule} from '@angular/material/card';
+import { CommonModule } from '@angular/common';
 
 const context: any = [
   {
@@ -50,27 +49,25 @@ export function onInitialize(contexr: ContexrService): () => Promise<any> {
   return (): Promise<any> => {
     return new Promise((resolve, reject) => {
       contexr.registerContextMenuItems(context);
-      resolve();
     });
   };
 }
 
 @NgModule({
   declarations: [
-    AppComponent,
-    ExamplePageComponent,
-    HomeComponent,
-    SimpleExample1Component,
-    ListWithContextComponent
+    SimpleExample1Component
   ],
   imports: [
     BrowserModule,
     ContexrModule,
+    CommonModule,
     BrowserAnimationsModule,
-    ImportRoutingModule,
     PeopleListModule,
-    HighlightModule.forRoot({ theme: 'agate'}),
-    ImportMaterialModule
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatTableModule,
+    MatCardModule
   ],
   providers: [
     {
@@ -80,7 +77,6 @@ export function onInitialize(contexr: ContexrService): () => Promise<any> {
       deps: [ContexrService]
     }
   ],
-  bootstrap: [AppComponent]
 })
 export class AppModule {
 }

@@ -1,7 +1,7 @@
 import {APP_INITIALIZER, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {ContexrModule} from 'contexr';
-import {ContexrService} from 'projects/contexr/src/lib/providers/contexr.service';
+import {ContexrModule} from '../../../../projects/contexr/src/public-api';
+import {ContexrService} from '../../../../projects/contexr/src/public-api';
 import {ExampleListComponent} from './example-list/example-list.component';
 
 const context = [
@@ -26,7 +26,6 @@ export function onInitialize(contexr: ContexrService): () => Promise<any> {
   return (): Promise<any> => {
     return new Promise((resolve, reject) => {
         contexr.registerContextMenuItems(context);
-        resolve();
     });
   };
 }

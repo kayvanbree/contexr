@@ -5,14 +5,19 @@ import {ContexrService} from '../providers/contexr.service';
   selector: '[ctx]'
 })
 export class ContextDirective {
-  @Input('ctx') ctx: string;
+  // TODO: Better way for null thingy (!)?
+  @Input('ctx') ctx!: string;
   @Input('ctxArgs') ctxArgs: any;
 
   constructor(private contexr: ContexrService) {}
 
+  /**
+   * TODO: Typesafe
+   * @param event
+   */
   @HostListener('contextmenu', ['$event'])
   @HostListener('click', ['$event'])
-  public onContextMenu(event) {
+  public onContextMenu(event: any) {
     this.contexr.addCurrentContext(this.ctx, this.ctxArgs);
   }
 }

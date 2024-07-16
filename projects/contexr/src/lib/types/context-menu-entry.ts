@@ -1,3 +1,3 @@
 export class ContextMenuEntry {
-  text: string;
+  text!: string;
 }

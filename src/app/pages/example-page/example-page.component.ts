@@ -1,10 +1,16 @@
 import { Component } from '@angular/core';
-import {ContexrService} from '../../../../projects/contexr/src/lib/providers/contexr.service';
+import { ListWithContextComponent } from '../../components/list-with-context/list-with-context.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
+  standalone: true,
   selector: 'app-example-page',
   templateUrl: './example-page.component.html',
-  styleUrls: ['./example-page.component.css']
+  styleUrls: ['./example-page.component.css'],
+  imports: [
+    CommonModule,
+    ListWithContextComponent,
+  ]
 })
 export class ExamplePageComponent {
 

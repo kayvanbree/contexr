@@ -13,11 +13,11 @@
 
 Start by installing Contexr using npm.
 
-<pre><code highlight [code]="install1"></code></pre>
+<pre><code highlight>{{install1}}</code></pre>
 
 Now the only thing remaining to do is to add the ctx-context-menu tag to app.component.html.
 
-<pre><code highlight [code]="install2"></code></pre>
+<pre><code highlight>{{install2}}</code></pre>
 
 <h2>Using Contexr</h2>
 
@@ -25,16 +25,16 @@ After installation, you can add context to any component! For example, if you wa
 increase the number displayed in a div using a context menu item, start by creating a
 field for our count and create a field for the context.
 
-<pre><code highlight [code]="example1_code1"></code></pre>
+<pre><code highlight>{{example1_code1}}</code></pre>
 
 Next, inject the ContexrService and register the context within the constructor.
 
-<pre><code highlight [code]="example1_code2"></code></pre>
+<pre><code highlight>{{example1_code2}}</code></pre>
 
 This method will register your context menu item and configure the hotkey given. Now add an
 HTML element to your page. Use the [ctx] attribute to add a context.
 
-<pre><code highlight [code]="example1_code3"></code></pre>
+<pre><code highlight>{{example1_code3}}</code></pre>
 
 When you run your application, the following div will be shown on your page. Try to
 use the context menu to increase the count.
@@ -54,14 +54,14 @@ use the context menu to increase the count.
 Adding arguments can be done using two simple steps. First, create a context item in your component.
 Add args: any to the method signature of the action method.
 
-<pre><code highlight [code]="example2_code1"></code></pre>
+<pre><code highlight>{{example2_code1}}</code></pre>
 
-Off course, you need to do something in your action method. We added a log statement that call out a name.
+Of course, you need to do something in your action method. We added a log statement that call out a name.
 
 The second step is to add the context to your HTML elements. This time, we will add [ctxArgs]="some object" to
 the element to pass our argument. Let's add context to some rows of a table.
 
-<pre><code highlight [code]="example2_code2"></code></pre>
+<pre><code highlight>{{example2_code2}}</code></pre>
 
 This HTML will result in the following. Try using the context menu.
 

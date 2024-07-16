@@ -27,7 +27,7 @@ import { ContextDirective } from './directives/context.directive';
   ]
 })
 export class ContexrModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<ContexrModule> {
     return {
       ngModule: ContexrModule,
       providers: [ ContexrService ]

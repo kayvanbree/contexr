@@ -1,10 +1,16 @@
 import { Component } from '@angular/core';
-import {ContexrService} from 'contexr/lib/providers/contexr.service';
+import { ContexrModule, ContexrService } from '../../../../projects/contexr/src/public-api';
+import { CommonModule } from '@angular/common';
 
 @Component({
+  standalone: true,
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  imports: [
+    CommonModule,
+    ContexrModule,
+  ]
 })
 export class HomeComponent {
   public install1 = `npm install --save contexr`;

@@ -9,7 +9,7 @@ import {ContexrService} from '../../providers/contexr.service';
 })
 export class ContextMenuItemComponent implements OnInit {
 
-  @Input() item: ContextMenuItem;
+  @Input() item!: ContextMenuItem;
 
   constructor(private contexr: ContexrService) { }
 

@@ -10,7 +10,7 @@ import {ContextMenuEntry} from '../../types/context-menu-entry';
 })
 export class SubmenuComponent implements OnChanges {
 
-  @Input() item: Submenu;
+  @Input() item!: Submenu;
 
   constructor(private element: ElementRef) { }
 
@@ -26,10 +26,29 @@ export class SubmenuComponent implements OnChanges {
 
   /**
    * Check if this is an action
+   * TODO: Wth is this type checking?
    * @param item
    * @returns
    */
   public isAction(item: ContextMenuEntry): boolean {
     return !!(item as ContextMenuItem).action;
+  }
+
+  /**
+   * TODO: Make this prettier
+   * @param item 
+   * @returns 
+   */
+  public asAction(item: ContextMenuEntry): ContextMenuItem {
+    return item as ContextMenuItem;
+  }
+
+  /**
+   * TODO: Make this prettier
+   * @param item 
+   * @returns 
+   */
+  public asSubmenu(item: ContextMenuEntry): Submenu {
+    return item as Submenu;
   }
 }
