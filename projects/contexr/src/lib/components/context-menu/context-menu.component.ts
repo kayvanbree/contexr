@@ -89,7 +89,7 @@ export class ContextMenuComponent implements OnInit, OnDestroy {
    * @returns
    */
   public isAction(option: Option | Submenu): boolean {
-    return !(option as Option).hideMenu;
+    return (option as Option).action != null;
   }
 
   /**

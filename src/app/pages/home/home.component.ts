@@ -3,6 +3,7 @@ import { ContexrModule, ContexrService } from '../../../../projects/contexr/src/
 import { CommonModule } from '@angular/common';
 import { Option } from '../../../../projects/contexr/src/lib/types/option';
 import { ContextMenu } from '../../../../projects/contexr/src/lib/types/context-menu';
+import { Submenu } from '../../../../projects/contexr/src/lib/types/submenu';
 
 @Component({
   standalone: true,
@@ -25,21 +26,26 @@ export class HomeComponent {
    */
   count = 0;
   example1Context = new ContextMenu([
-    new Option({
-      text: 'Increase',
-      context: ['count'],
-      action: () => {
-        this.count++;
-      },
-      hotkey: 'i'
-    }),
-    new Option({
-      text: 'Decrease',
-      context: ['count'],
-      action: () => {
-        this.count--;
-      },
-      hotkey: 'd'
+    new Submenu({ 
+      text: "Counter",
+      entries: [
+        new Option({
+          text: 'Increase',
+          context: ['count'],
+          action: () => {
+            this.count++;
+          },
+          hotkey: 'i'
+        }),
+        new Option({
+          text: 'Decrease',
+          context: ['count'],
+          action: () => {
+            this.count--;
+          },
+          hotkey: 'd'
+        })
+      ]
     })
   ]);
 
