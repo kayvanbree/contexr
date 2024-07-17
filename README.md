@@ -3,7 +3,7 @@
 Stop redundantly defining your shortcuts in your shortcut library and your context menu. Start using Contexr!
 
 Contexr is a context menu integrated with a shortcut module for Angular. Provide the module with
-different contexts and actions and they will appear in the context menu when you add `ctx="context-name`
+different contexts and actions and they will appear in the context menu when you add `ctx="context-name"`
 to your HTML element. You can add a shortcut for every context menu person there is, which will be 
 the same all throughout your application. 
 
@@ -90,7 +90,7 @@ const context: any = [
 ];
 ```
 
-Off course, you need to do something in your action method. We added a log statement that call out a name.
+Of course, you need to do something in your action method. We added a log statement that call out a name.
 
 The second step is to add the context to your HTML elements. This time, we will add [ctxArgs]="some object" to
 the element to pass our argument. Let's add context to some rows of a table.

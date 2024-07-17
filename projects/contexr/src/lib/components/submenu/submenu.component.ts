@@ -1,5 +1,5 @@
 import {Component, ElementRef, Input, OnChanges} from '@angular/core';
-import {ContextMenuItem} from '../../types/context-menu-item';
+import {Option} from '../../types/option';
 import {Submenu} from '../../types/submenu';
 import {ContextMenuEntry} from '../../types/context-menu-entry';
 
@@ -31,7 +31,7 @@ export class SubmenuComponent implements OnChanges {
    * @returns
    */
   public isAction(item: ContextMenuEntry): boolean {
-    return !!(item as ContextMenuItem).action;
+    return !!(item as Option).action;
   }
 
   /**
@@ -39,8 +39,8 @@ export class SubmenuComponent implements OnChanges {
    * @param item 
    * @returns 
    */
-  public asAction(item: ContextMenuEntry): ContextMenuItem {
-    return item as ContextMenuItem;
+  public asAction(item: ContextMenuEntry): Option {
+    return item as Option;
   }
 
   /**

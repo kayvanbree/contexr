@@ -1,74 +1,31 @@
 import {Injectable} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
 import {ContextState} from '../types/context-state';
-import {ContextMenuItem} from '../types/context-menu-item';
+import {Option} from '../types/option';
 import {Hotkey, HotkeysService} from 'angular2-hotkeys';
-import {ContextMenuEntry} from '../types/context-menu-entry';
 import {Submenu} from '../types/submenu';
+import { ContextMenu } from '../types/context-menu';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContexrService {
-
-  private context: ContextMenuEntry[] = [];
-  private currentContext: ContextMenuEntry[] = [];
+  private menu: ContextMenu;
+  private static currentContext: Array<Option | Submenu>;
 
   private contextStateSubject: Subject<ContextState> = new Subject<ContextState>();
   private contextStateObservable: Observable<ContextState> = this.contextStateSubject.asObservable();
 
-  constructor(private hotkeysService: HotkeysService) { }
+  constructor(private hotkeysService: HotkeysService) { 
+    this.menu = new ContextMenu([]);
+    ContexrService.currentContext = [];
+  }
 
   /**
    * Reset the current context
    */
   public reset() {
-    this.currentContext = [];
-  }
-
-  /**
-   * Add a context
-   * @param context
-   * @param arguments
-   */
-  public addCurrentContext(context: string, args: any) {
-    this.addItemsInContext(this.context, context, args);
-  }
-
-  /**
-   * Register a context menu person to show up at some context
-   * @param context
-   */
-  public registerContextMenuItem(context: ContextMenuEntry): void {
-    const index = this.indexOfContext(context);
-    if (index !== -1) {
-      this.context[index] = context;
-    } else {
-      this.context.push(context);
-    }
-    if ((context as any).hotkey && (context as any).hotkey && !this.hotkeysService.get((context as any).hotkey)) {
-      this.hotkeysService.add(new Hotkey((context as any).hotkey, (event: KeyboardEvent): boolean => {
-        const key = (context as any).hotkey;
-
-        for (let i = 0; i < this.currentContext.length; i++) {
-          const item = this.currentContext[i] as any;
-          if (item.hotkey === key) {
-            item.action(item.args);
-          }
-        }
-        return false;
-      }));
-    }
-  }
-
-  /**
-   * Register an array of context menu items
-   * @param context
-   */
-  public registerContextMenuItems(context: ContextMenuEntry[]): void {
-    for (let i = 0; i < context.length; i++) {
-      this.registerContextMenuItem(context[i]);
-    }
+    ContexrService.currentContext = [];
   }
 
   /**
@@ -83,57 +40,13 @@ export class ContexrService {
    * Open the context menu
    */
   public open(event: MouseEvent): void {
-    this.addItemsInContext(this.context, 'all', null);
+    this.addCurrentContext('all', null);
     this.contextStateSubject.next({
       open: true,
-      context: this.currentContext,
-      top: event.clientY + window.pageYOffset,
+      menu: ContexrService.currentContext,
+      top: event.clientY + window.scrollY,
       left: event.clientX
     });
-  }
-
-  /**
-   * Filter all context items with our context string
-   * @param items
-   * @param context
-   * @returns
-   */
-  private addItemsInContext(items: ContextMenuEntry[], context: string, args: any) {
-    for (let i = 0; i < items.length; i++) {
-      if ((items[i] as ContextMenuItem).action) {
-        const action = Object.assign({}, items[i]) as ContextMenuItem;
-        if (args !== null) {
-          action.args = args;
-        }
-        if (action.context.indexOf(context) !== -1) {
-          this.currentContext.push(action);
-        }
-      } else if ((items[i] as Submenu).children) {
-        const submenu = Object.assign({}, items[i]) as Submenu;
-        this.addItemsInContext(
-          (items[i] as Submenu).children,
-          context,
-          args,
-        );
-        if (submenu.children.length > 0) {
-          this.currentContext.push(submenu);
-        }
-      }
-    }
-  }
-
-  /**
-   * Recursively check if a context string already exists
-   * @param items
-   * @param context
-   */
-  private indexOfContext(item: ContextMenuEntry): number {
-    for (let i = 0; i < this.context.length; i++) {
-      if (JSON.stringify(this.context[i]) === JSON.stringify(item)) {
-        return i;
-      }
-    }
-    return -1;
   }
 
   /**
@@ -143,5 +56,104 @@ export class ContexrService {
     this.contextStateSubject.next({
       open: false
     });
+  }
+
+  /**
+   * Register an array of context menu items
+   * @param newMenu
+   */
+  public registerContextMenu(newMenu: ContextMenu): void {
+    this.menu.addMenu(newMenu);
+  }
+
+  /**
+   * Recursively register hotkeys
+   * @param entries 
+   */
+  private registerHotkeys(entries: Array<Option | Submenu>) {
+    entries.forEach(entry => {
+      if (entry instanceof Option) {
+        this.registerHotkey(entry as Option);
+      } else if (entry instanceof Submenu) {
+        this.registerHotkeys(entry.entries);
+      }
+    })
+  }
+
+  /**
+   * Register the hotkey if it doesn't exist yet
+   * @param option 
+   */
+  private registerHotkey(option: Option) {
+    if (option.hotkey !== null && !this.hotkeysService.get(option.hotkey)) {
+      const hotkey = option.hotkey as string | string[];
+
+      // this.hotkeysService.add(new Hotkey(hotkey, (event: KeyboardEvent): boolean => {
+      //   const key = hotkey;
+
+      //   for (let i = 0; i < this.currentContext.length; i++) {
+      //     const item = this.currentContext[i] as any;
+      //     if (item.hotkey === key) {
+      //       item.action(item.args);
+      //     }
+      //   }
+      //   return false;
+      // }));
+    }
+  }
+
+  /**
+   * Add a context
+   * @param context
+   * @param arguments
+   */
+  public addCurrentContext(context: string, args: any) {
+    ContexrService.currentContext = this.filterCurrentContext(this.menu.entries, ContexrService.currentContext, context, args);
+  }
+
+  /**
+   * Filter all context items with our context string
+   * @param menu
+   * @param context
+   * @returns
+   */
+  private filterCurrentContext(menu: Array<Option | Submenu>, existingContext: Array<Option | Submenu>, context: string, args: any): Array<Option | Submenu> {
+    for (let i = 0; i < menu.length; i++) {
+      if ((menu[i] as Option).action) {
+        const option = Object.assign({}, menu[i]) as Option;
+        if (option.context.includes(context)) {
+          // Add context arguments
+          if (args !== null) {
+            option.args = args;
+          }
+
+          let existingOption = existingContext.find(x => JSON.stringify(x) == JSON.stringify(option));
+          if (existingOption == null) {
+            existingContext.push(option);
+          } else {
+            // If the option already exists, update it with the new args
+            existingContext[existingContext.indexOf(existingOption)] = option;
+          }
+          // TODO: Register hotkey here, instead of at registerContextMenu
+        }
+      } else if ((menu[i] as Submenu).entries) {
+        const submenu = Object.assign({}, menu[i]) as Submenu;
+        let index = existingContext.findIndex(x => x instanceof Submenu && x.text === submenu.text);
+
+        // If the submenu does not exist yet, we can ignore current context to filter submenu entries
+        if (index === -1) {
+          submenu.entries = this.filterCurrentContext(submenu.entries, [], context, args);
+          if (submenu.entries.length > 0) {
+            existingContext.push(submenu);
+          }
+        } else {
+          submenu.entries = this.filterCurrentContext(submenu.entries, (existingContext[index] as Submenu).entries, context, args);
+          if (submenu.entries.length > 0) {
+            existingContext[index] = submenu;
+          }
+        }
+      }
+    }
+    return existingContext;
   }
 }

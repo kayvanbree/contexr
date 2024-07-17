@@ -58,7 +58,7 @@ describe('ContextMenuComponent', () => {
   it('should open the context menu', () => {
     component.contextState = {
       open: false,
-      context: [],
+      menu: [],
       top: 0,
       left: 0
     };

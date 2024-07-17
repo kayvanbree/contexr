@@ -22,24 +22,3 @@ mat-toolbar {
 .filler {
   flex: 1 1 auto;
 }
-
-.container {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.layout {
-  height: 100%;
-
-  margin-top: 20px;
-  .sidebar {
-    min-width: 300px;
-    flex: 1;
-    flex-direction: column;
-  }
-
-  .content {
-    padding: 30px;
-  }
-}

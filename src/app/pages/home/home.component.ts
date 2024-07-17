@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
 import { ContexrModule, ContexrService } from '../../../../projects/contexr/src/public-api';
 import { CommonModule } from '@angular/common';
+import { Option } from '../../../../projects/contexr/src/lib/types/option';
+import { ContextMenu } from '../../../../projects/contexr/src/lib/types/context-menu';
 
 @Component({
   standalone: true,
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
+  styleUrls: ['./home.component.scss'],
   imports: [
     CommonModule,
     ContexrModule,
@@ -22,16 +24,24 @@ export class HomeComponent {
    * Example 1
    */
   count = 0;
-  context = [
-    {
+  example1Context = new ContextMenu([
+    new Option({
       text: 'Increase',
-      context: ['increase-count'],
+      context: ['count'],
       action: () => {
         this.count++;
       },
       hotkey: 'i'
-    }
-  ];
+    }),
+    new Option({
+      text: 'Decrease',
+      context: ['count'],
+      action: () => {
+        this.count--;
+      },
+      hotkey: 'd'
+    })
+  ]);
 
   public example1_code1 = `count = 0;
 context = [
@@ -87,7 +97,34 @@ context = [
   </tr>
 </table>`;
 
+  example2Context: ContextMenu = new ContextMenu([
+    new Option({
+      text: 'My first context!',
+      context: ['my-first-context'],
+      action: () => {
+        console.log('You just clicked the first context item!');
+      },
+      hotkey: 'y'
+    }),
+    new Option({
+      text: 'Say hello',
+      context: ['block'],
+      action: () => {
+        alert('HELLO');
+      },
+      hotkey: 'h'
+    }),
+    new Option({
+      text: 'Say my name',
+      context: ['say-my-name'],
+      action: (args: any) => {
+        alert('My name is ' + args.name);
+      }
+    })
+  ]);
+
   constructor(private contexr: ContexrService) {
-    this.contexr.registerContextMenuItems(this.context);
+    this.contexr.registerContextMenu(this.example1Context);
+    this.contexr.registerContextMenu(this.example2Context);
   }
 }

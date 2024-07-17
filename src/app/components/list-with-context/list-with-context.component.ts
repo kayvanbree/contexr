@@ -3,6 +3,8 @@ import { ContexrModule, ContexrService } from '../../../../projects/contexr/src/
 import {MatRow, MatTableDataSource, MatTableModule} from '@angular/material/table';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
+import { ContextMenu } from '../../../../projects/contexr/src/lib/types/context-menu';
+import { Option } from '../../../../projects/contexr/src/lib/types/option';
 
 @Component({
   standalone: true,
@@ -28,24 +30,24 @@ export class ListWithContextComponent implements OnInit {
 
   selected: any;
 
-  context = [
-    {
+  context = new ContextMenu([
+    new Option({
       text: 'Add element',
       context: ['element-list'],
       action: (args: any) => {
         args.list.addElement();
       },
       hotkey: 'ins'
-    },
-    {
+    }),
+    new Option({
       text: 'Delete element',
       context: ['element'],
       action: (args: any) => {
         args.list.removeSelection();
       },
       hotkey: 'del'
-    },
-    {
+    }),
+    new Option({
       text: 'Select previous',
       context: ['element'],
       action: (args: any) => {
@@ -53,8 +55,8 @@ export class ListWithContextComponent implements OnInit {
       },
       hotkey: 'up',
       hideMenu: true
-    },
-    {
+    }),
+    new Option({
       text: 'Select next',
       context: ['element'],
       action: (args: any) => {
@@ -62,11 +64,11 @@ export class ListWithContextComponent implements OnInit {
       },
       hotkey: 'down',
       hideMenu: true
-    }
-  ];
+    })
+  ]);
 
   constructor(private contexr: ContexrService, private changeDetector: ChangeDetectorRef) {
-    this.contexr.registerContextMenuItems(this.context);
+    this.contexr.registerContextMenu(this.context);
   }
 
   public ngOnInit(): void {

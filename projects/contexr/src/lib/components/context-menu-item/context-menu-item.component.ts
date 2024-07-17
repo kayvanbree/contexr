@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ContextMenuItem} from '../../types/context-menu-item';
+import {Option} from '../../types/option';
 import {ContexrService} from '../../providers/contexr.service';
 
 @Component({
@@ -9,7 +9,7 @@ import {ContexrService} from '../../providers/contexr.service';
 })
 export class ContextMenuItemComponent implements OnInit {
 
-  @Input() item!: ContextMenuItem;
+  @Input() item!: Option;
 
   constructor(private contexr: ContexrService) { }
 

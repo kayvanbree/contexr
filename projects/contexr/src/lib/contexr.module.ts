@@ -1,4 +1,4 @@
-import {ModuleWithProviders, NgModule} from '@angular/core';
+import {ModuleWithProviders, NgModule, Optional, SkipSelf} from '@angular/core';
 import {ContextMenuComponent} from './components/context-menu/context-menu.component';
 import {CommonModule} from '@angular/common';
 import {ContexrService} from './providers/contexr.service';
@@ -27,6 +27,12 @@ import { ContextDirective } from './directives/context.directive';
   ]
 })
 export class ContexrModule {
+  constructor(@Optional() @SkipSelf() parentModule?: ContexrModule) {
+    if (parentModule) {
+      throw new Error("ContexrModule is already loaded. Import it in the AppModule only");
+    }
+  }
+
   static forRoot(): ModuleWithProviders<ContexrModule> {
     return {
       ngModule: ContexrModule,

@@ -1,5 +1,10 @@
-import {ContextMenuEntry} from './context-menu-entry';
+import { Option } from "./option";
 
-export class Submenu extends ContextMenuEntry {
-  children!: ContextMenuEntry[];
+export class Submenu {
+  public text: string = "option";
+  public entries: Array<Option | Submenu> = [];
+
+  public constructor(init?:Partial<Submenu>) {
+    Object.assign(this, init);
+  }
 }

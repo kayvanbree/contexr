@@ -51,7 +51,7 @@ describe('ContexrService', () => {
       spyOn(hotkeyService, 'add');
 
       // Act
-      service.registerContextMenuItems([{
+      service.registerContextMenu([{
           text: 'test',
           context: ['test'],
           action: () => {},
@@ -80,7 +80,7 @@ describe('ContexrService', () => {
       spyOn(hotkeyService, 'add');
 
       // Act
-      service.registerContextMenuItems([{
+      service.registerContextMenu([{
         text: 'test',
         context: ['test'],
         action: () => {}

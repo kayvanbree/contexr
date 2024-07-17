@@ -8,7 +8,6 @@ export class ContextDirective {
   // TODO: Better way for null thingy (!)?
   @Input('ctx') ctx!: string;
   @Input('ctxArgs') ctxArgs: any;
-
   constructor(private contexr: ContexrService) {}
 
   /**

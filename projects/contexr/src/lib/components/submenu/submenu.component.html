@@ -5,7 +5,7 @@
     <span class="shortcut">>>></span>
   </div>
   <ul class="context-list submenu menu" [ngStyle]="subMenuStyle">
-    <ng-container *ngFor="let subItem of item.children">
+    <ng-container *ngFor="let subItem of item.entries">
       <ctx-context-menu-item *ngIf="isAction(subItem)" [item]="asAction(subItem)"></ctx-context-menu-item>
       <ctx-submenu *ngIf="!isAction(subItem)" [item]="asSubmenu(subItem)"></ctx-submenu>
     </ng-container>

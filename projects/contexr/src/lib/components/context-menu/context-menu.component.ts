@@ -2,9 +2,7 @@ import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
 import {ContextState} from '../../types/context-state';
 import {ContexrService} from '../../providers/contexr.service';
 import {Subscription} from 'rxjs';
-import {ContextMenuItem} from '../../types/context-menu-item';
-import {ContextMenuEntry} from '../../types/context-menu-entry';
-import {SubmenuComponent} from '../submenu/submenu.component';
+import {Option} from '../../types/option';
 import { Submenu } from '../../types/submenu';
 
 @Component({
@@ -28,6 +26,9 @@ export class ContextMenuComponent implements OnInit, OnDestroy {
       event.preventDefault();
       this.contexr.reset();
     }, true);
+    this.contextState = {
+      open: false
+    };
   }
 
   /**
@@ -58,11 +59,10 @@ export class ContextMenuComponent implements OnInit, OnDestroy {
 
   /**
    * Show context menu for our context or for all
-   * TODO: Typesafe
    * @param event
    */
   @HostListener('document:contextmenu', ['$event'])
-  onDocumentContextMenu(event: any): void {
+  onDocumentContextMenu(event: MouseEvent): void {
     this.contexr.open(event);
   }
 
@@ -72,7 +72,6 @@ export class ContextMenuComponent implements OnInit, OnDestroy {
   public ngOnInit() {
     this.contextStateSub = this.contexr.getContextState().subscribe((value) => {
       this.contextState = value;
-      this.open = !!this.contextState.context;
     });
   }
 
@@ -86,37 +85,37 @@ export class ContextMenuComponent implements OnInit, OnDestroy {
   /**
    * Check if this is an action
    * TODO: Wth is this ugly way of checking the type?
-   * @param item
+   * @param option
    * @returns
    */
-  public isAction(item: ContextMenuEntry): boolean {
-    return !(item as ContextMenuItem).hideMenu;
+  public isAction(option: Option | Submenu): boolean {
+    return !(option as Option).hideMenu;
   }
 
   /**
    * TODO: Make this prettier
-   * @param item
+   * @param option
    * @returns 
    */
-  public asAction(item: ContextMenuEntry): ContextMenuItem {
-    return item as ContextMenuItem;
+  public asAction(option: Option | Submenu): Option {
+    return option as Option;
   }
 
   /**
    * Is this context menu entry a submenu?
    * TODO: Wth is this ugly way of checking the type?
-   * @param item
+   * @param submenu
    */
-  public isSubmenu(item: ContextMenuEntry): boolean {
-    return !!(item as Submenu).children;
+  public isSubmenu(submenu: Option | Submenu): boolean {
+    return !!(submenu as Submenu).entries;
   }
 
   /**
    * TODO: Make this prettier
-   * @param item
+   * @param submenu
    * @returns 
    */
-  public asSubmenu(item: ContextMenuEntry): Submenu {
-    return item as Submenu;
+  public asSubmenu(submenu: Option | Submenu): Submenu {
+    return submenu as Submenu;
   }
 }

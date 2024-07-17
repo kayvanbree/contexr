@@ -1,9 +1,24 @@
+@use '@angular/material' as mat;
+
+$theme: mat.define-theme();
+
 /* You can add global styles to this file, and also import other style files */
 html, body {
-    margin: 0;
-    height: 100vh;
-    width: 100vw;
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+}
+
+// Cheating a bit with the !important here. Apparently Materials 3 changed the
+// way they do colors and I've got other stuff to do.
+.toolbar {
+  background-color: rgb(60, 60, 206) !important;
+  color: white !important;
+
+  button {
+    color: white !important;
   }
+}
   
-html, body { height: 100%; }
+// html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

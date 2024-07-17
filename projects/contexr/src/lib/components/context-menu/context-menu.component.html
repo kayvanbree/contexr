@@ -1,14 +1,14 @@
 <div
   (contextmenu)="onContextMenu($event)"
   (click)="onClick($event)"
-  *ngIf="open"
+  *ngIf="contextState.open"
   class="context-menu menu"
   [ngStyle]="{'top.px': contextState.top, 'left.px': contextState.left}"
 >
   <ul class="context-list">
-    <ng-container *ngFor="let item of contextState.context">
-      <ctx-context-menu-item *ngIf="isAction(item)" [item]="asAction(item)"></ctx-context-menu-item>
-      <ctx-submenu *ngIf="isSubmenu(item)" [item]="asSubmenu(item)"></ctx-submenu>
+    <ng-container *ngFor="let entry of contextState.menu">
+      <ctx-context-menu-item *ngIf="isAction(entry)" [item]="asAction(entry)"></ctx-context-menu-item>
+      <ctx-submenu *ngIf="isSubmenu(entry)" [item]="asSubmenu(entry)"></ctx-submenu>
     </ng-container>
   </ul>
 </div>

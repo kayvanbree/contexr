@@ -1,9 +1,11 @@
 import {Component} from '@angular/core';
 import {ContexrService} from '../../projects/contexr/src/lib/providers/contexr.service';
-import { MatToolbar, MatToolbarRow } from '@angular/material/toolbar';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { ContexrModule } from '../../projects/contexr/src/public-api';
+import { ContexrModule, Option } from '../../projects/contexr/src/public-api';
 import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { ContextMenu } from '../../projects/contexr/src/lib/types/context-menu';
 
 @Component({
   standalone: true,
@@ -15,48 +17,25 @@ import { CommonModule } from '@angular/common';
     RouterOutlet,
     RouterLink,
     RouterLinkActive,
-    MatToolbar,
-    MatToolbarRow,
+    MatToolbarModule,
+    MatButtonModule,
     ContexrModule
   ]
 })
 export class AppComponent {
   title = 'app';
 
-  context: any = [
-    {
-      text: 'My first context!',
-      context: ['my-first-context'],
-      action: () => {
-        console.log('You just clicked the first context item!');
-      },
-      hotkey: 'y'
-    },
-    {
-      text: 'Say hello',
-      context: ['block'],
-      action: () => {
-        alert('HELLO');
-      },
-      hotkey: 'h'
-    },
-    {
-      text: 'Say my name',
-      context: ['say-my-name'],
-      action: (args: any) => {
-        alert('My name is ' + args.name);
-      }
-    },
-    {
+  context = new ContextMenu([
+    new Option({
       text: 'All',
       context: ['all'],
       action: () => {
         console.log('This appears on all context menus');
       }
-    }
-  ];
+    })
+  ]);
 
   constructor(private contexr: ContexrService) {
-    this.contexr.registerContextMenuItem(this.context);
+    this.contexr.registerContextMenu(this.context);
   }
 }
