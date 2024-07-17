@@ -4,34 +4,42 @@ import {Submenu} from './submenu';
 export class ContextMenu {
     constructor(public entries: Array<Option | Submenu>){}
 
+    /**
+     * Add another context menu to this one
+     * @param menu 
+     */
     public addMenu(menu: ContextMenu) {
-        this.entries = this.entries.concat(menu.entries);
-        // TODO: Merge entries so submenus with the same name are not duplicated
+        this.entries = this.mergeEntries(this.entries, menu.entries);
     }
 
     /**
-     * Merge the entries of a menu recursively
+     * Merge the entries of two menus recursively
      * @param menu1 
      * @param menu2 
      */
-    private static mergeEntries(menu1: Array<Option | Submenu>, menu2: Array<Option | Submenu>): Array<Option | Submenu> {
+    private mergeEntries(menu1: Array<Option | Submenu>, menu2: Array<Option | Submenu>): Array<Option | Submenu> {
         for (let i = 0; i < menu2.length; i++) {
-            if (menu2[i] instanceof Option && menu1.indexOf(menu2[i]) === -1) {
+            if ((menu2[i] as Option).action) {
+                let option = menu2[i] as Option;
+                let index = menu1.findIndex(x => JSON.stringify(x) == JSON.stringify(option));
                 // Insert option if it does not exist yet
-                const entry = Object.assign({}, menu2[i]) as Option;
-                menu1.push(entry);
-            } 
-            // else if (menu2[i] instanceof Submenu) {
-            //     // Look for the index of a submenu with the same text
-            //     var index = menu1.findIndex(x => x instanceof Submenu && x.text === menu2[i].text);
-            //     if (index === -1) {
-            //         // Insert submenu if it does not exist yet
-            //         const entry = Object.assign({}, menu2[i]) as Submenu;
-            //         index = menu1.push(entry);
-            //     }
-            //     // Merge submenus entries
-            //     this.mergeEntries((menu1[index] as Submenu).entries, (menu2[i] as Submenu).entries);
-            // }
+                if (index = -1) {
+                    menu1.push(option);
+                } else {
+                    menu1[index] = option;
+                }
+            } else if ((menu2[i] as Submenu).entries) {
+                let submenu = menu2[i] as Submenu;
+                let existingSubmenu = menu1.find(x => (x as Submenu).entries && x.text == submenu.text) as Submenu;
+                // Look for the index of a submenu with the same text
+                if (existingSubmenu == null) {
+                    // Insert submenu if it does not exist yet
+                    menu1.push(submenu);
+                } else {
+                    // Merge submenus
+                    existingSubmenu.entries = this.mergeEntries(existingSubmenu.entries, submenu.entries);
+                }
+            }
         }
         return menu1;
     }

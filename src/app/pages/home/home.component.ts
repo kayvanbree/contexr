@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { Option } from '../../../../projects/contexr/src/lib/types/option';
 import { ContextMenu } from '../../../../projects/contexr/src/lib/types/context-menu';
 import { Submenu } from '../../../../projects/contexr/src/lib/types/submenu';
+import { CounterComponent } from "../../components/counter/counter.component";
 
 @Component({
   standalone: true,
@@ -13,7 +14,8 @@ import { Submenu } from '../../../../projects/contexr/src/lib/types/submenu';
   imports: [
     CommonModule,
     ContexrModule,
-  ]
+    CounterComponent
+]
 })
 export class HomeComponent {
   public install1 = `npm install --save contexr`;
@@ -24,30 +26,7 @@ export class HomeComponent {
   /**
    * Example 1
    */
-  count = 0;
-  example1Context = new ContextMenu([
-    new Submenu({ 
-      text: "Counter",
-      entries: [
-        new Option({
-          text: 'Increase',
-          context: ['count'],
-          action: () => {
-            this.count++;
-          },
-          hotkey: 'i'
-        }),
-        new Option({
-          text: 'Decrease',
-          context: ['count'],
-          action: () => {
-            this.count--;
-          },
-          hotkey: 'd'
-        })
-      ]
-    })
-  ]);
+  
 
   public example1_code1 = `count = 0;
 context = [
@@ -103,7 +82,7 @@ context = [
   </tr>
 </table>`;
 
-  example2Context: ContextMenu = new ContextMenu([
+  exampleMenu: ContextMenu = new ContextMenu([
     new Option({
       text: 'My first context!',
       context: ['my-first-context'],
@@ -130,7 +109,6 @@ context = [
   ]);
 
   constructor(private contexr: ContexrService) {
-    this.contexr.registerContextMenu(this.example1Context);
-    this.contexr.registerContextMenu(this.example2Context);
+    this.contexr.registerContextMenu(this.exampleMenu);
   }
 }
