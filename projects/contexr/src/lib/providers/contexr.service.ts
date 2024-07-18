@@ -107,6 +107,8 @@ export class ContexrService {
             items: (item as Submenu).items.slice()
           });
         }
+      } else if (item.label = "separator") {
+        mergedItems.push(item);
       }
     }
     return mergedItems.sort((a, b) => {

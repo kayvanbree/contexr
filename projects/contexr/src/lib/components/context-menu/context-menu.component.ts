@@ -97,4 +97,13 @@ export class ContextMenuComponent implements OnInit, OnDestroy {
   public isSubmenu(submenu: MenuItem): boolean {
     return (submenu as Submenu).items != null;
   }
+
+  /**
+   * Is this entry a separator?
+   * @param separator 
+   * @returns 
+   */
+  public isSeparator(separator: MenuItem): boolean {
+    return separator.label == "separator";
+  }
 }

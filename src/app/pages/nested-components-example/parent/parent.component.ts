@@ -20,6 +20,10 @@ export class ParentComponent {
       priority: -100,
       action: () => { alert("Clicked on context menu item 'Alert parent'!"); }
     },
+    { 
+      label: 'separator',
+      priority: 100
+    },
     {
       label: "Submenu",
       priority: 1000,

@@ -8,6 +8,7 @@ import {SubmenuComponent} from './components/submenu/submenu.component';
 import {OptionComponent} from './components/option-component/option.component';
 
 import { ContextDirective } from './directives/context.directive';
+import { SeparatorComponent } from './components/separator/separator.component';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { ContextDirective } from './directives/context.directive';
     ContextMenuComponent,
     SubmenuComponent,
     OptionComponent,
-    ContextDirective
+    ContextDirective,
+    SeparatorComponent
   ],
   exports: [
     ContextMenuComponent,

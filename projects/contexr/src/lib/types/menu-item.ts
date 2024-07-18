@@ -16,9 +16,15 @@ export interface Option<T = any> extends BaseMenuItem {
      */
     action: (args: T) => any;
 
-    hotkey: string;
+    /**
+     * The hotkey that does the same as this context menu option
+     */
+    hotkey?: string;
 
-    args: T;
+    /**
+     * Arguments passed along to the callback (action)
+     */
+    args?: T;
 }
 
 export interface Submenu extends BaseMenuItem {

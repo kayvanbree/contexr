@@ -9,6 +9,7 @@
     <ng-container *ngFor="let entry of contextState.items">
       <ctx-option *ngIf="isOption(entry)" [item]="entry"></ctx-option>
       <ctx-submenu *ngIf="isSubmenu(entry)" [item]="entry"></ctx-submenu>
+      <ctx-separator *ngIf="isSeparator(entry)"></ctx-separator>
     </ng-container>
   </ul>
 </div>

@@ -8,6 +8,7 @@
     <ng-container *ngFor="let subItem of submenu.items">
       <ctx-option *ngIf="isOption(subItem)" [item]="subItem"></ctx-option>
       <ctx-submenu *ngIf="isSubmenu(subItem)" [item]="subItem"></ctx-submenu>
+      <ctx-separator *ngIf="isSeparator(subItem)"></ctx-separator>
     </ng-container>
   </ul>
 </li>
