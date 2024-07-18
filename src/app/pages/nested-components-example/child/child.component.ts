@@ -5,7 +5,7 @@ import { ContexrModule, MenuItem } from '../../../../../projects/contexr/src/pub
   selector: 'app-child',
   standalone: true,
   template: `
-    <div class="example nested-example" style="background-color: tomato;" [ctx]="menu">
+    <div class="example nested-example" [ctx]="menu">
       But right-clicking on the nested component will give you more options!
     </div>
   `,
