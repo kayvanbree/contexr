@@ -2,7 +2,12 @@ export interface BaseMenuItem {
     /**
      * The label for this menu item
      */
-    label: string; 
+    label: string;
+
+    /**
+     * The priority of this menu item in the menu
+     */
+    priority?: number;
 }
 
 export interface Option<T = any> extends BaseMenuItem {

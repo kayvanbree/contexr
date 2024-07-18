@@ -103,11 +103,14 @@ export class ContexrService {
           // If a submenu with the same label is not found, just push a copy into the merged menu
           mergedItems.push({
             label: item.label,
+            priority: item.priority,
             items: (item as Submenu).items.slice()
           });
         }
       }
     }
-    return mergedItems;
+    return mergedItems.sort((a, b) => {
+      return (a.priority ? a.priority : 0) - (b.priority ? b.priority : 0)
+    });
   }
 }

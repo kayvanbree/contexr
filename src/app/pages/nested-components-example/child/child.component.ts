@@ -15,13 +15,16 @@ export class ChildComponent {
   menu: MenuItem[] = [
     {
       label: "Alert nested",
+      priority: 100,
       action: () => { alert("Clicked on context menu item 'Alert nested'!"); }
     },
     {
       label: "Submenu",
+      priority: 1000,
       items: [
         {
           label: "Console message nested",
+          priority: 100,
           action: () => { console.log("Clicked on context menu item 'Console message nested'!"); }
         }
       ]
