@@ -1,10 +1,8 @@
 import {ChangeDetectorRef, Component, ElementRef, Input, OnInit, QueryList, ViewChildren} from '@angular/core';
-import { ContexrModule, ContexrService } from '../../../../projects/contexr/src/public-api';
+import { ContexrModule } from '../../../../projects/contexr/src/public-api';
 import {MatRow, MatTableDataSource, MatTableModule} from '@angular/material/table';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
-import { ContextMenu } from '../../../../projects/contexr/src/lib/types/context-menu';
-import { Option } from '../../../../projects/contexr/src/lib/types/option';
 
 @Component({
   standalone: true,
@@ -30,46 +28,48 @@ export class ListWithContextComponent implements OnInit {
 
   selected: any;
 
-  context = new ContextMenu([
-    new Option({
-      text: 'Add element',
-      context: ['element-list'],
-      action: (args: any) => {
-        args.list.addElement();
-      },
-      hotkey: 'ins'
-    }),
-    new Option({
-      text: 'Delete element',
-      context: ['element'],
-      action: (args: any) => {
-        args.list.removeSelection();
-      },
-      hotkey: 'del'
-    }),
-    new Option({
-      text: 'Select previous',
-      context: ['element'],
-      action: (args: any) => {
-        args.list.selectPrevious();
-      },
-      hotkey: 'up',
-      hideMenu: true
-    }),
-    new Option({
-      text: 'Select next',
-      context: ['element'],
-      action: (args: any) => {
-        args.list.selectNext();
-      },
-      hotkey: 'down',
-      hideMenu: true
-    })
-  ]);
+  menu = [
+    {
+      label: "Selection",
+      items: [
+        {
+          label: 'Select previous',
+          action: (args: any) => {
+            this.selectPrevious();
+          },
+          hotkey: 'up'
+        },
+        {
+          label: 'Select next',
+          action: (args: any) => {
+            this.selectNext();
+          },
+          hotkey: 'down'
+        }
+      ]
+    },
+    {
+      label: "Edit",
+      items: [
+        {
+          label: 'Add element',
+          action: (element: any) => {
+            this.addElement();
+          },
+          hotkey: 'ins'
+        },
+        {
+          label: 'Delete element',
+          action: (element: any) => {
+            this.remove(element);
+          },
+          hotkey: 'del'
+        }
+      ]
+    }
+  ];
 
-  constructor(private contexr: ContexrService, private changeDetector: ChangeDetectorRef) {
-    this.contexr.registerContextMenu(this.context);
-  }
+  constructor(private changeDetector: ChangeDetectorRef) {}
 
   public ngOnInit(): void {
     this.dataSource = new MatTableDataSource(this.elements);
@@ -103,6 +103,23 @@ export class ListWithContextComponent implements OnInit {
         this.elements.splice(index, 1);
       }
     }
+
+    this.dataSource = new MatTableDataSource(this.elements);
+    this.changeDetector.detectChanges();
+
+    if (this.rows.toArray()[newSelection]) {
+      this.selectAtIndex(newSelection);
+    } else if (this.rows.toArray()[newSelection - 1]) {
+      this.selectAtIndex(newSelection - 1);
+    }
+  }
+
+  private remove(element: any) {
+    const maxSelectedIndex = this.getMaxSelectedIndex();
+    const newSelection = maxSelectedIndex - this.selected.length + 1;
+
+    const index = this.elements.indexOf(element);
+    this.elements.splice(index, 1);
 
     this.dataSource = new MatTableDataSource(this.elements);
     this.changeDetector.detectChanges();

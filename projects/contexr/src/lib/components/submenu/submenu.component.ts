@@ -1,7 +1,5 @@
 import {Component, ElementRef, Input, OnChanges} from '@angular/core';
-import {Option} from '../../types/option';
-import {Submenu} from '../../types/submenu';
-import {ContextMenuEntry} from '../../types/context-menu-entry';
+import { MenuItem, Option, Submenu } from '../../types/menu-item';
 
 @Component({
   selector: 'ctx-submenu',
@@ -10,7 +8,10 @@ import {ContextMenuEntry} from '../../types/context-menu-entry';
 })
 export class SubmenuComponent implements OnChanges {
 
-  @Input() item!: Submenu;
+  @Input() set item(item: MenuItem) {
+    this.submenu = item as Submenu;
+  }
+  public submenu!: Submenu;
 
   constructor(private element: ElementRef) { }
 
@@ -25,30 +26,19 @@ export class SubmenuComponent implements OnChanges {
   }
 
   /**
-   * Check if this is an action
-   * TODO: Wth is this type checking?
-   * @param item
+   * Check if this is an option
+   * @param option
    * @returns
    */
-  public isAction(item: ContextMenuEntry): boolean {
-    return !!(item as Option).action;
+  public isOption(option: MenuItem): boolean {
+    return (option as Option).action != null;
   }
 
   /**
-   * TODO: Make this prettier
-   * @param item 
-   * @returns 
+   * Is this context menu entry a submenu?
+   * @param submenu
    */
-  public asAction(item: ContextMenuEntry): Option {
-    return item as Option;
-  }
-
-  /**
-   * TODO: Make this prettier
-   * @param item 
-   * @returns 
-   */
-  public asSubmenu(item: ContextMenuEntry): Submenu {
-    return item as Submenu;
+  public isSubmenu(submenu: MenuItem): boolean {
+    return (submenu as Submenu).items != null;
   }
 }

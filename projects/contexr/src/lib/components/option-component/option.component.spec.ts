@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { ContextMenuItemComponent } from './context-menu-item.component';
+import { OptionComponent } from './option.component';
 import { ContexrService } from '../../providers/contexr.service';
 import {HotkeysService} from 'angular2-hotkeys';
 import {ContextMenuItem} from 'contexr';
@@ -16,14 +16,14 @@ const testItem = {
 } as ContextMenuItem;
 
 describe('ContextMenuItemComponent', () => {
-  let component: ContextMenuItemComponent;
-  let fixture: ComponentFixture<ContextMenuItemComponent>;
+  let component: OptionComponent;
+  let fixture: ComponentFixture<OptionComponent>;
   let contexr: ContexrService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        ContextMenuItemComponent
+        OptionComponent
       ],
       providers: [
         ContexrService,
@@ -34,7 +34,7 @@ describe('ContextMenuItemComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ContextMenuItemComponent);
+    fixture = TestBed.createComponent(OptionComponent);
     component = fixture.componentInstance;
     component.item = testItem;
     contexr = fixture.componentRef.injector.get(ContexrService);

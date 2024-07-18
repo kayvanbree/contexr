@@ -3,7 +3,7 @@ import {ContextMenuComponent} from './context-menu.component';
 import {HotkeysService} from 'angular2-hotkeys';
 import {ContexrService} from '../../providers/contexr.service';
 import {SubmenuComponent} from '../submenu/submenu.component';
-import {ContextMenuItemComponent} from '../context-menu-item/context-menu-item.component';
+import {OptionComponent} from '../option-component/option.component';
 
 class HotkeysMockService {}
 
@@ -23,7 +23,7 @@ describe('ContextMenuComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         ContextMenuComponent,
-        ContextMenuItemComponent,
+        OptionComponent,
         SubmenuComponent
       ],
       providers: [

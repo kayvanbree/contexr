@@ -22,3 +22,8 @@ mat-toolbar {
 .filler {
   flex: 1 1 auto;
 }
+
+::ng-deep .example {
+  background-color: lightblue;
+  padding: 20px;
+}

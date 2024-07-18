@@ -1,13 +1,13 @@
 <li class="context-list-item">
   <div class="flex-container">
-    <span class="context">{{item.text}}</span>
+    <span class="context">{{submenu.label}}</span>
     <span style="flex: 1 1 auto;"></span>
     <span class="shortcut">>>></span>
   </div>
   <ul class="context-list submenu menu" [ngStyle]="subMenuStyle">
-    <ng-container *ngFor="let subItem of item.entries">
-      <ctx-context-menu-item *ngIf="isAction(subItem)" [item]="asAction(subItem)"></ctx-context-menu-item>
-      <ctx-submenu *ngIf="!isAction(subItem)" [item]="asSubmenu(subItem)"></ctx-submenu>
+    <ng-container *ngFor="let subItem of submenu.items">
+      <ctx-option *ngIf="isOption(subItem)" [item]="subItem"></ctx-option>
+      <ctx-submenu *ngIf="isSubmenu(subItem)" [item]="subItem"></ctx-submenu>
     </ng-container>
   </ul>
 </li>

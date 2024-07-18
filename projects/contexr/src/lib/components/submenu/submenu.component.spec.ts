@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SubmenuComponent } from './submenu.component';
-import {ContextMenuItemComponent} from '../context-menu-item/context-menu-item.component';
+import {OptionComponent} from '../option-component/option.component';
 import {HotkeysService} from 'angular2-hotkeys';
 
 describe('SubmenuComponent', () => {
@@ -12,7 +12,7 @@ describe('SubmenuComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         SubmenuComponent,
-        ContextMenuItemComponent
+        OptionComponent
       ],
       providers: [
         { provide: HotkeysService, useClass: HotkeysMockService }

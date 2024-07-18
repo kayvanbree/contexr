@@ -2,8 +2,7 @@ import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
 import {ContextState} from '../../types/context-state';
 import {ContexrService} from '../../providers/contexr.service';
 import {Subscription} from 'rxjs';
-import {Option} from '../../types/option';
-import { Submenu } from '../../types/submenu';
+import {Option, Submenu, MenuItem} from '../../types/menu-item';
 
 @Component({
   selector: 'ctx-context-menu',
@@ -83,39 +82,19 @@ export class ContextMenuComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Check if this is an action
-   * TODO: Wth is this ugly way of checking the type?
+   * Check if this is an option
    * @param option
    * @returns
    */
-  public isAction(option: Option | Submenu): boolean {
+  public isOption(option: MenuItem): boolean {
     return (option as Option).action != null;
   }
 
   /**
-   * TODO: Make this prettier
-   * @param option
-   * @returns 
-   */
-  public asAction(option: Option | Submenu): Option {
-    return option as Option;
-  }
-
-  /**
    * Is this context menu entry a submenu?
-   * TODO: Wth is this ugly way of checking the type?
    * @param submenu
    */
-  public isSubmenu(submenu: Option | Submenu): boolean {
-    return !!(submenu as Submenu).entries;
-  }
-
-  /**
-   * TODO: Make this prettier
-   * @param submenu
-   * @returns 
-   */
-  public asSubmenu(submenu: Option | Submenu): Submenu {
-    return submenu as Submenu;
+  public isSubmenu(submenu: MenuItem): boolean {
+    return (submenu as Submenu).items != null;
   }
 }

@@ -1,10 +1,12 @@
 import {ModuleWithProviders, NgModule, Optional, SkipSelf} from '@angular/core';
-import {ContextMenuComponent} from './components/context-menu/context-menu.component';
 import {CommonModule} from '@angular/common';
 import {ContexrService} from './providers/contexr.service';
 import {HotkeyModule} from 'angular2-hotkeys';
+
+import {ContextMenuComponent} from './components/context-menu/context-menu.component';
 import {SubmenuComponent} from './components/submenu/submenu.component';
-import {ContextMenuItemComponent} from './components/context-menu-item/context-menu-item.component';
+import {OptionComponent} from './components/option-component/option.component';
+
 import { ContextDirective } from './directives/context.directive';
 
 @NgModule({
@@ -15,7 +17,7 @@ import { ContextDirective } from './directives/context.directive';
   declarations: [
     ContextMenuComponent,
     SubmenuComponent,
-    ContextMenuItemComponent,
+    OptionComponent,
     ContextDirective
   ],
   exports: [

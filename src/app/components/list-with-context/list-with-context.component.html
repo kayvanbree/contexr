@@ -2,8 +2,6 @@
   mat-table
   [dataSource]="dataSource"
   class="mat-elevation-z8"
-  [ctx]="'element-list'"
-  [ctxArgs]="{list: this}"
 >
   <!-- Position Column -->
   <ng-container matColumnDef="position">
@@ -34,8 +32,8 @@
       #row
       *matRowDef="let element;
       columns: displayedColumns;"
-      [ctx]="'element'"
-      [ctxArgs]="{list: this, element: element}"
+      [ctx]="menu"
+      [ctxArgs]="element"
       (click)="onSelectRow($event, element)"
       (contextmenu)="onSelectRow($event, element)"
       [style.background]="selected && selected.indexOf(element) != -1 ? 'lightblue' : ''"

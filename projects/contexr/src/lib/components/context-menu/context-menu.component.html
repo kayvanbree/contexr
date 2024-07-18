@@ -6,9 +6,9 @@
   [ngStyle]="{'top.px': contextState.top, 'left.px': contextState.left}"
 >
   <ul class="context-list">
-    <ng-container *ngFor="let entry of contextState.menu">
-      <ctx-context-menu-item *ngIf="isAction(entry)" [item]="asAction(entry)"></ctx-context-menu-item>
-      <ctx-submenu *ngIf="isSubmenu(entry)" [item]="asSubmenu(entry)"></ctx-submenu>
+    <ng-container *ngFor="let entry of contextState.items">
+      <ctx-option *ngIf="isOption(entry)" [item]="entry"></ctx-option>
+      <ctx-submenu *ngIf="isSubmenu(entry)" [item]="entry"></ctx-submenu>
     </ng-container>
   </ul>
 </div>

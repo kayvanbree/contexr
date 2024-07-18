@@ -1,9 +1,8 @@
-import {Submenu} from './submenu';
-import {Option} from './option';
+import { MenuItem } from './menu-item';
 
-export class ContextState {
-  public open: boolean = false;
-  public menu?: Array<Option | Submenu> = [];
-  public top?: number = 0;
-  public left?: number = 0;
+export interface ContextState {
+  open: boolean;
+  items?: MenuItem[];
+  top?: number;
+  left?: number;
 }

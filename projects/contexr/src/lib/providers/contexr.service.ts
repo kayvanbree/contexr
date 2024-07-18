@@ -1,32 +1,19 @@
 import {Injectable} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
 import {ContextState} from '../types/context-state';
-import {Option} from '../types/option';
 import {Hotkey, HotkeysService} from 'angular2-hotkeys';
-import {Submenu} from '../types/submenu';
-import { ContextMenu } from '../types/context-menu';
+import { MenuItem, Option, Submenu } from '../types/menu-item';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContexrService {
-  private menu: ContextMenu;
-  private static currentContext: Array<Option | Submenu>;
-
   private contextStateSubject: Subject<ContextState> = new Subject<ContextState>();
   private contextStateObservable: Observable<ContextState> = this.contextStateSubject.asObservable();
 
-  constructor(private hotkeysService: HotkeysService) { 
-    this.menu = new ContextMenu([]);
-    ContexrService.currentContext = [];
-  }
-
-  /**
-   * Reset the current context
-   */
-  public reset() {
-    ContexrService.currentContext = [];
-  }
+  private static registeredContext: {[id: string] : MenuItem[]} = {};
+  
+  constructor(private hotkeysService: HotkeysService) {}
 
   /**
    * Returns the state of the context menu
@@ -37,13 +24,27 @@ export class ContexrService {
   }
 
   /**
-   * Open the context menu
+   * Register a context menu
+   * @param uuid 
+   * @param menu 
+   * @param args 
    */
-  public open(event: MouseEvent): void {
-    this.addCurrentContext('all', null);
+  public registerMenu(uuid: string, menu: MenuItem[], args: any) {
+    ContexrService.registeredContext[uuid] = menu;
+  }
+
+  /**
+   * Unregister a context menu
+   * @param uuid 
+   */
+  public unregisterMenu(uuid: string) {
+    delete ContexrService.registeredContext[uuid];
+  }
+
+  public open(event: MouseEvent) {
     this.contextStateSubject.next({
       open: true,
-      menu: ContexrService.currentContext,
+      items: this.getMergedMenus(),
       top: event.clientY + window.scrollY,
       left: event.clientX
     });
@@ -59,101 +60,54 @@ export class ContexrService {
   }
 
   /**
-   * Register an array of context menu items
-   * @param newMenu
+   * Reset the current context
    */
-  public registerContextMenu(newMenu: ContextMenu): void {
-    this.menu.addMenu(newMenu);
+  public reset() {
+    ContexrService.registeredContext = {};
   }
 
   /**
-   * Recursively register hotkeys
-   * @param entries 
+   * Iterate over the registered menus and merge them into a new one
+   * @returns 
    */
-  private registerHotkeys(entries: Array<Option | Submenu>) {
-    entries.forEach(entry => {
-      if (entry instanceof Option) {
-        this.registerHotkey(entry as Option);
-      } else if (entry instanceof Submenu) {
-        this.registerHotkeys(entry.entries);
-      }
-    })
-  }
+  private getMergedMenus(): MenuItem[] {
+    let mergedMenus: MenuItem[] = [];
 
-  /**
-   * Register the hotkey if it doesn't exist yet
-   * @param option 
-   */
-  private registerHotkey(option: Option) {
-    if (option.hotkey !== null && !this.hotkeysService.get(option.hotkey)) {
-      const hotkey = option.hotkey as string | string[];
-
-      // this.hotkeysService.add(new Hotkey(hotkey, (event: KeyboardEvent): boolean => {
-      //   const key = hotkey;
-
-      //   for (let i = 0; i < this.currentContext.length; i++) {
-      //     const item = this.currentContext[i] as any;
-      //     if (item.hotkey === key) {
-      //       item.action(item.args);
-      //     }
-      //   }
-      //   return false;
-      // }));
+    for (let uuid in ContexrService.registeredContext) {
+      mergedMenus = this.mergeMenus(mergedMenus, ContexrService.registeredContext[uuid]);
     }
+
+    return mergedMenus;
   }
 
   /**
-   * Add a context
-   * @param context
-   * @param arguments
+   * Recursively merge options and submenus
+   * @param menu1 
+   * @param menu2 
+   * @returns 
    */
-  public addCurrentContext(context: string, args: any) {
-    ContexrService.currentContext = this.filterCurrentContext(this.menu.entries, ContexrService.currentContext, context, args);
-  }
+  private mergeMenus(menu1: MenuItem[], menu2: MenuItem[]): MenuItem[] {
+    let mergedItems: MenuItem[] = menu1.slice();
+    for (let item of menu2) {
+      if ((item as Option).action) {
+        // If this is an option, just push it into the merged menu
+        mergedItems.push(item);
 
-  /**
-   * Filter all context items with our context string
-   * @param menu
-   * @param context
-   * @returns
-   */
-  private filterCurrentContext(menu: Array<Option | Submenu>, existingContext: Array<Option | Submenu>, context: string, args: any): Array<Option | Submenu> {
-    for (let i = 0; i < menu.length; i++) {
-      if ((menu[i] as Option).action) {
-        const option = Object.assign({}, menu[i]) as Option;
-        if (option.context.includes(context)) {
-          // Add context arguments
-          if (args !== null) {
-            option.args = args;
-          }
+      } else if ((item as Submenu).items) {
+        let existingSubmenu = mergedItems.find(x => (x as Submenu).items && x.label === item.label) as Submenu;
 
-          let existingOption = existingContext.find(x => JSON.stringify(x) == JSON.stringify(option));
-          if (existingOption == null) {
-            existingContext.push(option);
-          } else {
-            // If the option already exists, update it with the new args
-            existingContext[existingContext.indexOf(existingOption)] = option;
-          }
-          // TODO: Register hotkey here, instead of at registerContextMenu
-        }
-      } else if ((menu[i] as Submenu).entries) {
-        const submenu = Object.assign({}, menu[i]) as Submenu;
-        let index = existingContext.findIndex(x => x instanceof Submenu && x.text === submenu.text);
-
-        // If the submenu does not exist yet, we can ignore current context to filter submenu entries
-        if (index === -1) {
-          submenu.entries = this.filterCurrentContext(submenu.entries, [], context, args);
-          if (submenu.entries.length > 0) {
-            existingContext.push(submenu);
-          }
+        if (existingSubmenu && (item as Submenu).items) {
+          // If this is a submenu, merge the items and put them in the existing submenu
+          existingSubmenu.items = this.mergeMenus((existingSubmenu as Submenu).items, (item as Submenu).items);
         } else {
-          submenu.entries = this.filterCurrentContext(submenu.entries, (existingContext[index] as Submenu).entries, context, args);
-          if (submenu.entries.length > 0) {
-            existingContext[index] = submenu;
-          }
+          // If a submenu with the same label is not found, just push a copy into the merged menu
+          mergedItems.push({
+            label: item.label,
+            items: (item as Submenu).items.slice()
+          });
         }
       }
     }
-    return existingContext;
+    return mergedItems;
   }
 }
