@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import {HomeComponent} from './pages/home/home.component';
-import { SimpleMenuExampleComponent as OptionsExampleComponent } from './pages/simple-menu-example/options-example.component';
+import { SimpleMenuExampleComponent as OptionsExampleComponent } from './pages/simple-menu-example/options-example-page.component';
 import { NestedComponentsExampleComponent } from './pages/nested-components-example/nested-components-example.component';
 
 export const routes: Routes = [

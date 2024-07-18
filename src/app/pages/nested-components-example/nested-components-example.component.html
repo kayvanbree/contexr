@@ -9,11 +9,19 @@
 <mat-card>
     <mat-card-header>Code</mat-card-header>
     <mat-card-content>
-        <mat-tab-group>
-            <mat-tab label="Parent component"><pre><code [highlightAuto]="parentCode"></code></pre></mat-tab>
-            <mat-tab label="Child component"><pre><code [highlightAuto]="childCode"></code></pre></mat-tab>
-        </mat-tab-group>        
+        <div style="column-count: 2;">
+            <div>
+                <mat-tab-group>
+                    <mat-tab label="Parent component"><pre><code [highlightAuto]="parentCode"></code></pre></mat-tab>
+                    <mat-tab label="Child component"><pre><code [highlightAuto]="childCode"></code></pre></mat-tab>
+                </mat-tab-group>
+            </div>
+            <div>
+                <app-parent></app-parent>
+            </div>
+        </div>
+               
     </mat-card-content>
 </mat-card>
 
-<app-parent></app-parent>
+

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ContexrModule } from '../../../../projects/contexr/src/public-api';
 import { CommonModule } from '@angular/common';
-import { SimpleMenuExampleComponent } from '../simple-menu-example/options-example.component';
+import { SimpleMenuExampleComponent } from '../simple-menu-example/options-example-page.component';
 
 @Component({
   standalone: true,

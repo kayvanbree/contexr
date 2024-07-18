@@ -22,6 +22,12 @@ import { HttpClient } from '@angular/common/http';
   ],
 })
 export class NestedComponentsExampleComponent {
+  parentUrl = "https://raw.githubusercontent.com/kayvanbree/contexr/master/src/app/pages/nested-components-example/parent/parent.component.ts";
+  parentCode = "";
+
+  childUrl = "https://raw.githubusercontent.com/kayvanbree/contexr/master/src/app/pages/nested-components-example/child/child.component.ts";
+  childCode = "";
+
   constructor(private http: HttpClient) {
         this.http.get(this.parentUrl, {responseType: "text"}).subscribe(data => {
           this.parentCode = data;
@@ -30,10 +36,6 @@ export class NestedComponentsExampleComponent {
           this.childCode = data;
         });
   }
-  parentUrl = "https://raw.githubusercontent.com/kayvanbree/contexr/master/src/app/pages/nested-components-example/parent/parent.component.ts";
-  parentCode = "";
-  childUrl = "https://raw.githubusercontent.com/kayvanbree/contexr/master/src/app/pages/nested-components-example/child/child.component.ts";
-  childCode = "";
 }
 
 

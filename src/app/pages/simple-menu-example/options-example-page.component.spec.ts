@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SimpleMenuExampleComponent } from './options-example.component';
+import { SimpleMenuExampleComponent } from './options-example-page.component';
 
 describe('SimpleMenuExampleComponent', () => {
   let component: SimpleMenuExampleComponent;
