@@ -1,28 +1,39 @@
 import { Component } from '@angular/core';
-import { ContexrModule, MenuItem } from '../../../../projects/contexr/src/public-api';
-import { NestedComponentComponent } from '../../components/nested-component/nested-component.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MarkdownComponent } from 'ngx-markdown';
+import { ParentComponent } from './parent/parent.component';
+import { HighlightModule } from 'ngx-highlightjs';
+import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-nested-components-example',
   standalone: true,
   templateUrl: './nested-components-example.component.html',
   styleUrl: './nested-components-example.component.css',
-  imports: [ContexrModule, NestedComponentComponent],
+  imports: [
+    MatCardModule,
+    MatTabsModule,
+    MarkdownComponent,
+    ParentComponent,
+    HighlightModule,
+    CommonModule
+  ],
 })
 export class NestedComponentsExampleComponent {
-  menu: MenuItem[] = [
-    {
-      label: "Alert parent",
-      action: () => { alert("Clicked on context menu item 'Alert parent'!"); }
-    },
-    {
-      label: "Submenu",
-      items: [
-        {
-          label: "Console message parent",
-          action: () => { console.log("Clicked on context menu item 'Console message parent'!"); }
-        }
-      ]
-    }
-  ]
+  constructor(private http: HttpClient) {
+        this.http.get(this.parentUrl, {responseType: "text"}).subscribe(data => {
+          this.parentCode = data;
+        });
+        this.http.get(this.childUrl, {responseType: "text"}).subscribe(data => {
+          this.childCode = data;
+        });
+  }
+  parentUrl = "https://raw.githubusercontent.com/kayvanbree/contexr/master/src/app/pages/nested-components-example/parent/parent.component.ts";
+  parentCode = "";
+  childUrl = "https://raw.githubusercontent.com/kayvanbree/contexr/master/src/app/pages/nested-components-example/child/child.component.ts";
+  childCode = "";
 }
+
+

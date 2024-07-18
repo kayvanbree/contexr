@@ -1,14 +1,17 @@
 import { Component } from '@angular/core';
-import { ContexrModule, MenuItem } from '../../../../projects/contexr/src/public-api';
+import { ContexrModule, MenuItem } from '../../../../../projects/contexr/src/public-api';
 
 @Component({
-  selector: 'app-nested-component',
+  selector: 'app-child',
   standalone: true,
-  templateUrl: './nested-component.component.html',
-  styleUrl: './nested-component.component.css',
+  template: `
+    <div class="example nested-example" [ctx]="menu">
+      But right-clicking on the nested component will give you more options!
+    </div>
+  `,
   imports: [ContexrModule]
 })
-export class NestedComponentComponent {
+export class ChildComponent {
   menu: MenuItem[] = [
     {
       label: "Alert nested",

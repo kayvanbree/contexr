@@ -27,3 +27,7 @@ mat-toolbar {
   background-color: lightblue;
   padding: 20px;
 }
+
+::ng-deep mat-card {
+  margin: 20px 0;
+}
