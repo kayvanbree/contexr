@@ -22,7 +22,7 @@ import { MarkdownComponent } from 'ngx-markdown';
   ]
 })
 export class SimpleMenuExampleComponent {
-  exampleUrl = "https://raw.githubusercontent.com/kayvanbree/contexr/master/src/app/pages/nested-components-example/child/child.component.ts";
+  exampleUrl = "https://raw.githubusercontent.com/kayvanbree/contexr/master/src/app/pages/simple-menu-example/options-example/options-example.component.ts";
   exampleCode = "";
 
   constructor(private http: HttpClient) {
