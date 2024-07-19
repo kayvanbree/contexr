@@ -5,21 +5,27 @@ import { ContexrModule, MenuItem } from '../../../../../projects/contexr/src/pub
   selector: 'app-options-example',
   standalone: true,
   template: `
-  <div class="example" [ctx]="menu">
-    Right-click this div to open a context menu!
+  <div [ctx]="menu">
+    Use the context menu to increase the count.
+    <br />
+    Count: {{count}}
   </div>
   `,
   imports: [ContexrModule]
 })
 export class OptionsExampleComponent {
+  count: number = 0;
+
   menu: MenuItem[] = [
     {
-      label: "Alert",
-      action: () => { alert("Clicked on context menu item 'Alert'!"); }
+      label: "Increase",
+      action: () => { this.count++; },
+      hotkey: 'plus'
     },
     {
       label: "Console message",
-      action: () => { console.log("Clicked on context menu item 'Console message'!"); }
+      action: () => { this.count-- },
+      hotkey: '-'
     }
   ]
 }

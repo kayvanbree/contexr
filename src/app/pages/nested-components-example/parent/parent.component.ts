@@ -22,7 +22,7 @@ export class ParentComponent {
     },
     { 
       label: 'separator',
-      priority: 100
+      priority: 999
     },
     {
       label: "Submenu",

@@ -1,7 +1,12 @@
 import { Component } from '@angular/core';
 import { ContexrModule } from '../../../../projects/contexr/src/public-api';
 import { CommonModule } from '@angular/common';
-import { SimpleMenuExampleComponent } from '../simple-menu-example/options-example-page.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatTabsModule } from '@angular/material/tabs';
+import { HighlightAuto } from 'ngx-highlightjs';
+import { HttpClient } from '@angular/common/http';
+import { OptionsExampleComponent } from '../simple-menu-example/options-example/options-example.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   standalone: true,
@@ -11,10 +16,20 @@ import { SimpleMenuExampleComponent } from '../simple-menu-example/options-examp
   imports: [
     CommonModule,
     ContexrModule,
-    SimpleMenuExampleComponent
+    OptionsExampleComponent,
+    MatCardModule,
+    MatTabsModule,
+    HighlightAuto,
+    RouterLink
 ]
 })
 export class HomeComponent {
-  constructor() {
+  exampleUrl = "https://raw.githubusercontent.com/kayvanbree/contexr/master/src/app/pages/simple-menu-example/options-example/options-example.component.ts";
+  exampleCode = "";
+
+  constructor(private http: HttpClient) {
+    this.http.get(this.exampleUrl, {responseType: "text"}).subscribe(data => {
+      this.exampleCode = data;
+    });
   }
 }

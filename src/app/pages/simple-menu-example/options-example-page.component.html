@@ -1,11 +1,10 @@
-<h1>Options</h1>
+<h2>Creating menus</h2>
 
 <div>
-    <code class="hljs">Option</code> are context menu items with an action.
-    <br /><br />
-    The simplest context menu you can make consists only of <code class="hljs">Options</code>. For this, just add a field of type 
-    <code class="hljs">MenuItem[]</code> to your component, and add <code class="hljs">ContexrModule</code> to your imports and add 
-    that menu to any element using <code class="hljs">[ctx]="menu"</code> in your template:
+    After installing Contexr, you can start adding context menus to your components.
+    For example, if you need to increase and decrease a number displayed in your component,
+    start by creating the field <code class="hljs">menu: MenuItem[]</code> and add the options that increase and decrease
+    the <code class="hljs">count</code> field. In this example hotkeys are also defined for these options:
 </div>
 
 <mat-card>
@@ -18,4 +17,6 @@
     </mat-card-content>
 </mat-card>
 
-
+<div>
+    Hotkeys are provided by <a href="https://www.npmjs.com/package/angular2-hotkeys">angular2-hotkeys</a>. For more documentation, check out their npm page.
+</div>
