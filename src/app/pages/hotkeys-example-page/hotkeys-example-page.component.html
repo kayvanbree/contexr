@@ -1,0 +1,18 @@
+<h1>Hotkeys</h1>
+
+The real power of Contexr is the ability to define <code class="hljs">hotkeys</code> for context menu options. Hotkeys, just like the menu options, 
+are registered when a component loads
+<br /><br />
+Here, we take the options example and add some hotkeys to the options:
+
+<mat-card>
+    <mat-card-header>Code</mat-card-header>
+    <mat-card-content>
+        <div style="column-count: 2">
+            <div><pre><code [highlightAuto]="exampleCode"></code></pre></div>
+            <div><app-hotkeys-example></app-hotkeys-example></div>
+        </div>
+    </mat-card-content>
+</mat-card>
+
+Hotkeys are provided by <a href="https://www.npmjs.com/package/angular2-hotkeys">angular2-hotkeys</a>. For more documentation, check out their npm page.

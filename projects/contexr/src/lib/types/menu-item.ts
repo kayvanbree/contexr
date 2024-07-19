@@ -1,3 +1,5 @@
+import { Hotkey } from "angular2-hotkeys";
+
 export interface BaseMenuItem {
     /**
      * The label for this menu item
@@ -14,7 +16,7 @@ export interface Option<T = any> extends BaseMenuItem {
     /**
      * A callback method called when clicking on the menu item
      */
-    action: (args: T) => any;
+    action: (args?: T) => any;
 
     /**
      * The hotkey that does the same as this context menu option
@@ -24,7 +26,7 @@ export interface Option<T = any> extends BaseMenuItem {
     /**
      * Arguments passed along to the callback (action)
      */
-    args?: T;
+    args?: () => T;
 }
 
 export interface Submenu extends BaseMenuItem {

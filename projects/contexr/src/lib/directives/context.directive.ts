@@ -19,7 +19,7 @@ export class ContextDirective {
    * The arguments for the action
    */
   @Input('ctxArgs') 
-  arguments: any;
+  args: any;
 
   private uuid!: string;
 
@@ -27,9 +27,13 @@ export class ContextDirective {
     this.uuid = uuidv4();
   }
 
+  ngOnInit() {
+    this.contexr.registerMenu(this.uuid, this.menu, this.args);
+  }
+
   @HostListener('click', ['$event'])
   public onClick(event: MouseEvent) {
-    this.contexr.registerMenu(this.uuid, this.menu, this.arguments);
+    this.contexr.registerMenu(this.uuid, this.menu, this.args);
   }
 
   /**
@@ -38,7 +42,7 @@ export class ContextDirective {
    */
   @HostListener('contextmenu', ['$event'])
   public onContextMenu(event: any) {
-    this.contexr.registerMenu(this.uuid, this.menu, this.arguments);
+    this.contexr.registerMenu(this.uuid, this.menu, this.args);
   }
 
   ngOnDestroy() {

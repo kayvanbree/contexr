@@ -3,7 +3,7 @@ import {ContextMenuComponent} from './context-menu.component';
 import {HotkeysService} from 'angular2-hotkeys';
 import {ContexrService} from '../../providers/contexr.service';
 import {SubmenuComponent} from '../submenu/submenu.component';
-import {OptionComponent} from '../option-component/option.component';
+import {OptionComponent} from '../option/option.component';
 
 class HotkeysMockService {}
 

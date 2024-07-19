@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SubmenuComponent } from './submenu.component';
-import {OptionComponent} from '../option-component/option.component';
+import {OptionComponent} from '../option/option.component';
 import {HotkeysService} from 'angular2-hotkeys';
 
 describe('SubmenuComponent', () => {

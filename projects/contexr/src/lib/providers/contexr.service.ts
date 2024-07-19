@@ -12,6 +12,7 @@ export class ContexrService {
   private contextStateObservable: Observable<ContextState> = this.contextStateSubject.asObservable();
 
   private static registeredContext: {[id: string] : MenuItem[]} = {};
+  private static registeredHotkeys: {[id: string] : Hotkey[]} = {};
   
   constructor(private hotkeysService: HotkeysService) {}
 
@@ -30,7 +31,10 @@ export class ContexrService {
    * @param args 
    */
   public registerMenu(uuid: string, menu: MenuItem[], args: any) {
+    this.unregisterHotkeys(uuid);
     ContexrService.registeredContext[uuid] = menu;
+    ContexrService.registeredHotkeys[uuid] = [];
+    this.registerHotkeys(uuid, menu, args);
   }
 
   /**
@@ -38,6 +42,8 @@ export class ContexrService {
    * @param uuid 
    */
   public unregisterMenu(uuid: string) {
+    this.unregisterHotkeys(uuid);
+    delete ContexrService.registeredHotkeys[uuid];
     delete ContexrService.registeredContext[uuid];
   }
 
@@ -63,7 +69,52 @@ export class ContexrService {
    * Reset the current context
    */
   public reset() {
-    ContexrService.registeredContext = {};
+    // for (let uuid in ContexrService.registeredContext) {
+    //   this.unregisterHotkeys(ContexrService.registeredContext[uuid]);
+    // }
+    // ContexrService.registeredContext = {};
+  }
+
+  /**
+   * Registers hotkeys with the service
+   * @param menu 
+   */
+  private registerHotkeys(uuid: string, menu: MenuItem[], args: any) {
+    for (let item of menu) {
+      if ((item as Option).hotkey) {
+        let option = item as Option;
+        let hotkey = new Hotkey(
+          option.hotkey as string,
+          (event: KeyboardEvent): boolean => {
+            // If this option has an arguments callback, use it, otherwise call without arguments
+            option.args ? option.action(option.args()) : option.action();
+            return false;
+          }, 
+          undefined, 
+          option.label,
+          undefined,
+          false
+        );
+        this.hotkeysService.add(hotkey);
+        ContexrService.registeredHotkeys[uuid].push(hotkey);
+      }
+      if ((item as Submenu).items) {
+        this.registerHotkeys(uuid, (item as Submenu).items, args);
+      }
+    }
+  }
+
+  /**
+   * Unregisters hotkeys with the service
+   * @param menu 
+   */
+  private unregisterHotkeys(uuid: string) {
+    let hotkeys: Hotkey[] = ContexrService.registeredHotkeys[uuid];
+    if (hotkeys) {
+      for (let hotkey of hotkeys) {
+        this.hotkeysService.remove(hotkey);
+      }
+    }
   }
 
   /**

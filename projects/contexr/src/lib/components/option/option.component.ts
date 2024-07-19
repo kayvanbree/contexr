@@ -24,7 +24,7 @@ export class OptionComponent {
    * @param context
    */
   public act(): void {
-    this.option.action(this.option.args);
+    this.option.args ? this.option.action(this.option.args()): this.option.action();
     this.contexr.close();
   }
 }

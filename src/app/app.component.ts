@@ -4,6 +4,7 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { ContexrModule } from '../../projects/contexr/src/public-api';
+import { HotkeyModule } from 'angular2-hotkeys';
 
 @Component({
   standalone: true,
@@ -17,7 +18,8 @@ import { ContexrModule } from '../../projects/contexr/src/public-api';
     RouterLinkActive,
     MatToolbarModule,
     MatButtonModule,
-    ContexrModule
+    ContexrModule,
+    HotkeyModule
   ]
 })
 export class AppComponent {

@@ -5,7 +5,7 @@ import {HotkeyModule} from 'angular2-hotkeys';
 
 import {ContextMenuComponent} from './components/context-menu/context-menu.component';
 import {SubmenuComponent} from './components/submenu/submenu.component';
-import {OptionComponent} from './components/option-component/option.component';
+import {OptionComponent} from './components/option/option.component';
 
 import { ContextDirective } from './directives/context.directive';
 import { SeparatorComponent } from './components/separator/separator.component';

@@ -1,24 +1,24 @@
 import { Component } from '@angular/core';
-import { ContexrModule } from '../../../../projects/contexr/src/public-api';
-import { OptionsExampleComponent } from "./options-example/options-example.component";
+import { HotkeysExampleComponent } from './hotkeys-example/hotkeys-example.component';
 import { HttpClient } from '@angular/common/http';
 import { HighlightAuto } from 'ngx-highlightjs';
 import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
 
 @Component({
+  selector: 'app-hotkeys-example-page',
   standalone: true,
-  templateUrl: './options-example-page.component.html',
-  styleUrl: './options-example-page.component.css',
+  templateUrl: './hotkeys-example-page.component.html',
+  styleUrl: './hotkeys-example-page.component.css',
   imports: [
-    OptionsExampleComponent,
+    HotkeysExampleComponent,
     HighlightAuto,
     MatCardModule,
     MatTabsModule
   ]
 })
-export class SimpleMenuExampleComponent {
-  exampleUrl = "https://raw.githubusercontent.com/kayvanbree/contexr/master/src/app/pages/simple-menu-example/options-example/options-example.component.ts";
+export class HotkeysExamplePageComponent {
+  exampleUrl = "https://raw.githubusercontent.com/kayvanbree/contexr/master/src/app/pages/hotkeys-example-page/hotkeys-example/hotkeys-example.component.ts";
   exampleCode = "";
 
   constructor(private http: HttpClient) {

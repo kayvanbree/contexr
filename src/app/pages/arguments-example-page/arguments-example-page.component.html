@@ -1,0 +1,19 @@
+<h1>Arguments</h1>
+
+<div>
+    With context menus and shortcuts, it's never long before you encounter a use case in which you need to pass arguments
+    to the callback function. In Contexr, you can pass along arguments with another callback function, called <code class="hljs">args</code>.
+    <br /><br />
+    In the following example, we use this callback to get the value of the field <code class="hljs">name</code>, which gets passed along
+    to the <code class="hljs">action</code> function.
+</div>
+
+<mat-card>
+    <mat-card-header>Code</mat-card-header>
+    <mat-card-content>
+        <div style="column-count: 2">
+            <div><pre><code [highlightAuto]="exampleCode"></code></pre></div>
+            <div><app-arguments-example></app-arguments-example></div>
+        </div>
+    </mat-card-content>
+</mat-card>
