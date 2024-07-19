@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
-import { MenuItem } from '../../../../projects/contexr/src/lib/types/menu-item';
 import { ContexrModule } from '../../../../projects/contexr/src/public-api';
 import { OptionsExampleComponent } from "./options-example/options-example.component";
 import { HttpClient } from '@angular/common/http';
 import { HighlightAuto } from 'ngx-highlightjs';
 import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
-import { MarkdownComponent } from 'ngx-markdown';
 
 @Component({
   standalone: true,
@@ -17,8 +15,7 @@ import { MarkdownComponent } from 'ngx-markdown';
     OptionsExampleComponent,
     HighlightAuto,
     MatCardModule,
-    MatTabsModule,
-    MarkdownComponent,
+    MatTabsModule
   ]
 })
 export class SimpleMenuExampleComponent {

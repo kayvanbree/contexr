@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
-import { MarkdownComponent } from 'ngx-markdown';
 import { ParentComponent } from './parent/parent.component';
 import { HighlightModule } from 'ngx-highlightjs';
 import { CommonModule } from '@angular/common';
@@ -15,7 +14,6 @@ import { HttpClient } from '@angular/common/http';
   imports: [
     MatCardModule,
     MatTabsModule,
-    MarkdownComponent,
     ParentComponent,
     HighlightModule,
     CommonModule

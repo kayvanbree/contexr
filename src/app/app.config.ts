@@ -1,7 +1,6 @@
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { HIGHLIGHT_OPTIONS, provideHighlightOptions } from 'ngx-highlightjs';
-import { provideMarkdown } from 'ngx-markdown';
+import { provideHighlightOptions } from 'ngx-highlightjs';
 import { provideHttpClient } from '@angular/common/http';
 
 import { routes } from './app.routes';
@@ -14,7 +13,6 @@ export const appConfig: ApplicationConfig = {
       fullLibraryLoader: () => import('highlight.js')
     }),
     [provideRouter(routes)],
-    provideMarkdown(),
     provideHttpClient()
   ]
 };
