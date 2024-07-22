@@ -1,9 +1,7 @@
 import { Component, HostListener, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatMenuModule } from "@angular/material/menu";
 import { CONTEXT_STATE, ContextState } from '../../types/context-state';
 import { MenuComponent } from '../menu/menu.component';
-import { CdkMenuTrigger } from '@angular/cdk/menu';
 
 @Component({
   selector: 'app-context-menu-dialog',
@@ -12,9 +10,7 @@ import { CdkMenuTrigger } from '@angular/cdk/menu';
   styleUrl: './context-menu-dialog.component.css',
   imports: [
     CommonModule,
-    MatMenuModule,
-    MenuComponent,
-    CdkMenuTrigger
+    MenuComponent
   ]
 })
 export class ContextMenuDialogComponent {

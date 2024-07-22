@@ -41,6 +41,6 @@ export interface Submenu extends BaseMenuItem {
     items: MenuItem[];
 }
 
-export interface Separator extends BaseMenuItem {}
+export interface Divider extends BaseMenuItem {}
 
-export type MenuItem<T = any> = Submenu | Option | Separator;
+export type MenuItem<T = any> = Submenu | Option | Divider;

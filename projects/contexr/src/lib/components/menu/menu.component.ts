@@ -1,6 +1,6 @@
 import { Component, Input, TemplateRef, ViewChild } from '@angular/core';
 import { MenuItem, Submenu, Option } from '../../types/menu-item';
-import { MatMenuModule, MatMenuPanel } from '@angular/material/menu';
+import { MatMenuModule } from '@angular/material/menu';
 import { CdkMenuModule } from '@angular/cdk/menu';
 import { CommonModule } from '@angular/common';
 import { MatDividerModule } from '@angular/material/divider';
@@ -36,12 +36,18 @@ export class MenuComponent {
    */
   public act(event: MouseEvent, item: MenuItem): void {
     event.stopPropagation();
+    this.service.close();
 
     let option = item as Option;
-
     option.args ? option.action(option.args()): option.action();
+  }
 
-    this.service.close();
+  public anyItemHasIcon() {
+    return this.items.find(x => x.icon != null) != null;
+  }
+
+  public getHotkey(option: MenuItem) {
+    return (option as Option).hotkey;
   }
 
   public preventPropagation(event: MouseEvent) {
@@ -52,7 +58,7 @@ export class MenuComponent {
     return (option as Option).action != null;
   }
 
-  public isSeparator(separator: MenuItem): boolean {
+  public isDivider(separator: MenuItem): boolean {
     return separator.label == "separator";
   }
 

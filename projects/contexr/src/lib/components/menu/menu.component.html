@@ -12,13 +12,17 @@
                     *ngIf="menuComponent.menu as subMenu"
                     cdkMenuItem
                 >
-                    <mat-icon class="ctx-icon" *ngIf="item.icon">
-                        {{item.icon}}
-                    </mat-icon>
+                    <span class="ctx-icon" *ngIf="anyItemHasIcon()">
+                        <mat-icon>
+                            {{item.icon!}}
+                        </mat-icon>
+                    </span> 
                     <span class="ctx-label">
                         {{ item.label }}
                     </span>
-                    <div><mat-icon class="mat-icon">chevron_right</mat-icon></div>
+                    <span class="ctx-icon">
+                        <mat-icon>chevron_right</mat-icon>
+                    </span>
                 </button>
 
                 <ctx-menu
@@ -34,16 +38,21 @@
                     (click)="act($event, item)"
                     cdkMenuItem
                 >
-                <mat-icon class="ctx-icon" *ngIf="item.icon">
-                    {{item.icon}}
-                </mat-icon>
-                <span class="ctx-label">
-                    {{ item.label }}
-                </span>
+                    <span class="ctx-icon" *ngIf="anyItemHasIcon()">
+                        <mat-icon>
+                            {{item.icon!}}
+                        </mat-icon>
+                    </span>
+                    <span class="ctx-label">
+                        {{ item.label }}
+                    </span>
+                    <span class="ctx-hotkey">
+                        {{getHotkey(item)}}
+                    </span>
                 </button>
             </ng-container>
 
-            <ng-container *ngIf="isSeparator(item)">
+            <ng-container *ngIf="isDivider(item)">
                 <mat-divider class="ctx-divider"></mat-divider>
             </ng-container>
         </ng-container>
