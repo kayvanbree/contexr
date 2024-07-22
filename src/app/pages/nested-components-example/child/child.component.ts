@@ -29,6 +29,16 @@ export class ChildComponent {
           action: () => { console.log("Clicked on context menu item 'Console message nested'!"); }
         }
       ]
+    },
+    {
+      label: "Second submenu",
+      priority: 2000,
+      items: [
+        {
+          label: "Some action",
+          action: () => { console.log("Clicked on some action in second submenu"); }
+        }
+      ]
     }
   ]
 }

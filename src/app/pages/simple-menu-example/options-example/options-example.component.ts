@@ -24,7 +24,7 @@ export class OptionsExampleComponent {
       icon: "add"
     },
     {
-      label: "Console message",
+      label: "Decrease",
       action: () => { this.count-- },
       hotkey: '-',
       icon: "remove"

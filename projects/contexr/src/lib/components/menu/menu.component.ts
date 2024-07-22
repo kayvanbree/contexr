@@ -1,6 +1,5 @@
 import { Component, Input, TemplateRef, ViewChild } from '@angular/core';
 import { MenuItem, Submenu, Option } from '../../types/menu-item';
-import { MatMenuModule } from '@angular/material/menu';
 import { CdkMenuModule } from '@angular/cdk/menu';
 import { CommonModule } from '@angular/common';
 import { MatDividerModule } from '@angular/material/divider';
@@ -13,7 +12,6 @@ import { ContexrService } from '../../providers/contexr.service';
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.css',
   imports: [
-    MatMenuModule,
     CdkMenuModule,
     CommonModule,
     MatDividerModule,

@@ -1,4 +1,4 @@
-import { HostListener, Injectable, Injector } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import {Observable, Subject} from 'rxjs';
 import {CONTEXT_STATE, ContextState} from '../types/context-state';
 import {Hotkey, HotkeysService} from 'angular2-hotkeys';
@@ -6,7 +6,6 @@ import { MenuItem, Option, Submenu } from '../types/menu-item';
 import { ContextMenuDialogComponent } from '../components/context-menu-dialog/context-menu-dialog.component';
 import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { ContextMenuDialogRef } from '../types/context-menu-dialog-ref';
 import { MENU_STACK, MenuStack } from '@angular/cdk/menu';
 
 @Injectable({
@@ -22,9 +21,7 @@ export class ContexrService {
   private componentPortal!: ComponentPortal<ContextMenuDialogComponent>;
   private overlayRef!: OverlayRef;
   
-  constructor(private hotkeysService: HotkeysService, private overlay: Overlay) {
-    console.log("Creating contexr service");
-  }
+  constructor(private hotkeysService: HotkeysService, private overlay: Overlay) {}
 
   /**
    * Returns the state of the context menu
@@ -57,8 +54,10 @@ export class ContexrService {
     delete ContexrService.registeredContext[uuid];
   }
 
-  public open(event: MouseEvent) {
-    event.preventDefault();
+  public open(event?: MouseEvent) {
+    if (event) {
+      event.preventDefault();
+    }
 
     // Close any open context menus
     this.close();
@@ -80,7 +79,6 @@ export class ContexrService {
    * Close the context menu
    */
   public close(): void {
-    console.debug("Closing context menu");
     if (this.overlayRef) {
       this.overlayRef.dispose();
     }
@@ -100,14 +98,21 @@ export class ContexrService {
    * @param event 
    * @returns 
    */
-  private getOverlayConfig(event: MouseEvent): OverlayConfig {
-    const positionStrategy = this.overlay.position()
-      .global()
-      .top(event.clientY + window.scrollY + "px")
-      .left(event.clientX + "px");
+  private getOverlayConfig(event?: MouseEvent): OverlayConfig {
+    let positionStrategy;
+    if (event) {
+      positionStrategy = this.overlay.position()
+        .global()
+        .top(event.clientY + window.scrollY + "px")
+        .left(event.clientX + "px");
+    } else {
+      positionStrategy = this.overlay.position()
+        .global();
+    }
+    
 
     const overlayConfig = new OverlayConfig({
-      scrollStrategy: this.overlay.scrollStrategies.reposition(),
+      scrollStrategy: this.overlay.scrollStrategies.close(),
       positionStrategy
     });
 

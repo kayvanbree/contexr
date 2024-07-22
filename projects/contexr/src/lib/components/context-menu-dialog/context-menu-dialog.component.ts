@@ -1,7 +1,8 @@
-import { Component, HostListener, Inject } from '@angular/core';
+import { Component, HostListener, Inject, TemplateRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CONTEXT_STATE, ContextState } from '../../types/context-state';
 import { MenuComponent } from '../menu/menu.component';
+import { CdkMenuModule, CdkMenuTrigger } from '@angular/cdk/menu';
 
 @Component({
   selector: 'app-context-menu-dialog',
@@ -10,12 +11,24 @@ import { MenuComponent } from '../menu/menu.component';
   styleUrl: './context-menu-dialog.component.css',
   imports: [
     CommonModule,
-    MenuComponent
+    MenuComponent,
+    CdkMenuModule,
+    CdkMenuTrigger
   ]
 })
 export class ContextMenuDialogComponent {
-  constructor(@Inject(CONTEXT_STATE) public contextState: ContextState) {
-    console.debug("Opened context menu");
+  @ViewChild('menuComponent', { static: true }) 
+  menu!: TemplateRef<MenuComponent>;
+
+  @ViewChild(CdkMenuTrigger) 
+  menuTrigger!: CdkMenuTrigger;
+  
+  constructor(@Inject(CONTEXT_STATE) public contextState: ContextState) {}
+
+  ngAfterContentChecked() {
+    if (this.menuTrigger) {
+      this.menuTrigger.open();
+    }
   }
 
   @HostListener('document:click', ['$event'])

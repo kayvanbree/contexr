@@ -1,4 +1,7 @@
-<ng-container *ngTemplateOutlet="menuComponent.menu"></ng-container>
+<div 
+  style="height: 0px;"
+  [cdkMenuTriggerFor]="menuComponent.menu"
+></div>
 
 <ctx-menu
   #menuComponent
