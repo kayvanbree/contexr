@@ -1,0 +1,7 @@
+<ng-container *ngTemplateOutlet="menuComponent.menu"></ng-container>
+
+<ctx-menu
+  #menuComponent
+  [service]="contextState.service" 
+  [items]="contextState.items"
+></ctx-menu>

@@ -10,6 +10,11 @@ export interface BaseMenuItem {
      * The priority of this menu item in the menu
      */
     priority?: number;
+
+    /**
+     * Angular Materials Icon (for example "home" for the home icon)
+     */
+    icon?: string;
 }
 
 export interface Option<T = any> extends BaseMenuItem {

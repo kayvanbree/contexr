@@ -1,8 +1,13 @@
-import {Injectable} from '@angular/core';
+import { HostListener, Injectable, Injector } from '@angular/core';
 import {Observable, Subject} from 'rxjs';
-import {ContextState} from '../types/context-state';
+import {CONTEXT_STATE, ContextState} from '../types/context-state';
 import {Hotkey, HotkeysService} from 'angular2-hotkeys';
 import { MenuItem, Option, Submenu } from '../types/menu-item';
+import { ContextMenuDialogComponent } from '../components/context-menu-dialog/context-menu-dialog.component';
+import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
+import { ComponentPortal } from '@angular/cdk/portal';
+import { ContextMenuDialogRef } from '../types/context-menu-dialog-ref';
+import { MENU_STACK, MenuStack } from '@angular/cdk/menu';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +18,13 @@ export class ContexrService {
 
   private static registeredContext: {[id: string] : MenuItem[]} = {};
   private static registeredHotkeys: {[id: string] : Hotkey[]} = {};
+
+  private componentPortal!: ComponentPortal<ContextMenuDialogComponent>;
+  private overlayRef!: OverlayRef;
   
-  constructor(private hotkeysService: HotkeysService) {}
+  constructor(private hotkeysService: HotkeysService, private overlay: Overlay) {
+    console.log("Creating contexr service");
+  }
 
   /**
    * Returns the state of the context menu
@@ -48,21 +58,60 @@ export class ContexrService {
   }
 
   public open(event: MouseEvent) {
-    this.contextStateSubject.next({
-      open: true,
+    event.preventDefault();
+
+    // Close any open context menus
+    this.close();
+
+    // Create overlay ref and save it
+    this.overlayRef = this.overlay.create(this.getOverlayConfig(event));
+
+    const injector = this.createInjector({
       items: this.getMergedMenus(),
-      top: event.clientY + window.scrollY,
-      left: event.clientX
+      service: this
     });
+
+    // Attach ref to overlay
+    this.componentPortal = new ComponentPortal(ContextMenuDialogComponent, null, injector);
+    this.overlayRef.attach(this.componentPortal);
   }
 
   /**
    * Close the context menu
    */
   public close(): void {
-    this.contextStateSubject.next({
-      open: false
+    console.debug("Closing context menu");
+    if (this.overlayRef) {
+      this.overlayRef.dispose();
+    }
+  }
+
+  private createInjector(contextState: ContextState): Injector {
+    return Injector.create({
+      providers: [
+        { provide: CONTEXT_STATE, useValue: contextState },
+        { provide: MENU_STACK, useFactory: (parentMenuStack?: MenuStack) => parentMenuStack || MenuStack.inline("horizontal")}
+      ]
     });
+  }
+
+  /**
+   * Create the config for the overlay
+   * @param event 
+   * @returns 
+   */
+  private getOverlayConfig(event: MouseEvent): OverlayConfig {
+    const positionStrategy = this.overlay.position()
+      .global()
+      .top(event.clientY + window.scrollY + "px")
+      .left(event.clientX + "px");
+
+    const overlayConfig = new OverlayConfig({
+      scrollStrategy: this.overlay.scrollStrategies.reposition(),
+      positionStrategy
+    });
+
+    return overlayConfig;
   }
 
   /**

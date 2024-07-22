@@ -3,7 +3,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
-import { ContexrModule } from '../../projects/contexr/src/public-api';
 import { HotkeyModule } from 'angular2-hotkeys';
 
 @Component({
@@ -18,7 +17,6 @@ import { HotkeyModule } from 'angular2-hotkeys';
     RouterLinkActive,
     MatToolbarModule,
     MatButtonModule,
-    ContexrModule,
     HotkeyModule
   ]
 })

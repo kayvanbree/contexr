@@ -1,8 +1,10 @@
+import { InjectionToken } from '@angular/core';
 import { MenuItem } from './menu-item';
+import { ContexrService } from '../providers/contexr.service';
 
 export interface ContextState {
-  open: boolean;
-  items?: MenuItem[];
-  top?: number;
-  left?: number;
+  items: MenuItem[];
+  service: ContexrService;
 }
+
+export const CONTEXT_STATE = new InjectionToken<ContextState>('CONTEXT_STATE');

@@ -27,7 +27,7 @@ mat-toolbar {
   background-color: rgb(51, 59, 61);
   padding: 20px;
 
-  div {
+  > div {
     background-color: rgb(64, 74, 77);
   }
 }

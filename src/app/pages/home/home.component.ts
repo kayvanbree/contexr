@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ContexrModule } from '../../../../projects/contexr/src/public-api';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -15,7 +14,6 @@ import { RouterLink } from '@angular/router';
   styleUrls: ['./home.component.scss'],
   imports: [
     CommonModule,
-    ContexrModule,
     OptionsExampleComponent,
     MatCardModule,
     MatTabsModule,

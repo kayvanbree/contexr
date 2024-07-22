@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ContexrModule, MenuItem } from '../../../../../projects/contexr/src/public-api';
+import { MenuItem, ContextDirective } from '../../../../../projects/contexr/src/public-api';
 import { ChildComponent } from '../child/child.component';
 
 @Component({
@@ -11,14 +11,18 @@ import { ChildComponent } from '../child/child.component';
       <app-child></app-child>
     </div>
     `,
-  imports: [ContexrModule, ChildComponent],
+  imports: [
+    ContextDirective,
+    ChildComponent
+  ],
 })
 export class ParentComponent {
   menu: MenuItem[] = [
     {
       label: "Alert parent",
       priority: -100,
-      action: () => { alert("Clicked on context menu item 'Alert parent'!"); }
+      action: () => { alert("Clicked on context menu item 'Alert parent'!"); },
+      icon: "notifications_active"
     },
     { 
       label: 'separator',

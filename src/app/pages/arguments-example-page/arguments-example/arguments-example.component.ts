@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ContexrModule, MenuItem } from '../../../../../projects/contexr/src/public-api';
+import { ContextDirective, MenuItem } from '../../../../../projects/contexr/src/public-api';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -12,7 +12,10 @@ import { FormsModule } from '@angular/forms';
       Name: <input [(ngModel)]="name" />
     </div>
   `,
-  imports: [ContexrModule, FormsModule]
+  imports: [
+    ContextDirective,
+    FormsModule
+  ]
 })
 export class ArgumentsExampleComponent {
   name?: string;

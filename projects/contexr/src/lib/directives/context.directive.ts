@@ -4,7 +4,8 @@ import { MenuItem } from '../types/menu-item';
 import { v4 as uuidv4 } from 'uuid';
 
 @Directive({
-  selector: '[ctx]'
+  selector: '[ctx]',
+  standalone: true
 })
 export class ContextDirective {
 
@@ -31,18 +32,13 @@ export class ContextDirective {
     this.contexr.registerMenu(this.uuid, this.menu, this.args);
   }
 
-  @HostListener('click', ['$event'])
-  public onClick(event: MouseEvent) {
-    this.contexr.registerMenu(this.uuid, this.menu, this.args);
-  }
-
   /**
    * TODO: Typesafe
    * @param event
    */
   @HostListener('contextmenu', ['$event'])
   public onContextMenu(event: any) {
-    this.contexr.registerMenu(this.uuid, this.menu, this.args);
+    this.contexr.open(event);
   }
 
   ngOnDestroy() {

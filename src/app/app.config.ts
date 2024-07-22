@@ -5,6 +5,7 @@ import { provideHttpClient } from '@angular/common/http';
 
 import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { provideContexr } from '../../projects/contexr/src/public-api';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -13,6 +14,7 @@ export const appConfig: ApplicationConfig = {
       fullLibraryLoader: () => import('highlight.js')
     }),
     [provideRouter(routes)],
-    provideHttpClient()
+    provideHttpClient(),
+    provideContexr({ cheatSheetCloseEsc: true })
   ]
 };

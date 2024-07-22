@@ -1,0 +1,36 @@
+.ctx-menu {
+    background: white;
+    border: 1px #a7a7a7 solid;
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+}
+
+.ctx-menu-item {
+    min-width: 200px;
+    cursor: pointer;
+    border: none;
+    display: flex;
+    flex-wrap: nowrap;
+    background: none;
+    padding: 2px 5px;
+}
+
+.ctx-label {
+    text-align: left;
+    flex: 100%;
+    padding: 5px 0 5px 7px;
+}
+
+.ctx-icon {
+    font-size: 1.5em;
+    padding-top: 2px;
+}
+
+.ctx-menu-item:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.ctx-divider {
+    margin: 4px 0;
+}

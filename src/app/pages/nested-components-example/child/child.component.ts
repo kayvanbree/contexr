@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ContexrModule, MenuItem } from '../../../../../projects/contexr/src/public-api';
+import { MenuItem, ContextDirective } from '../../../../../projects/contexr/src/public-api';
 
 @Component({
   selector: 'app-child',
@@ -9,14 +9,15 @@ import { ContexrModule, MenuItem } from '../../../../../projects/contexr/src/pub
       But right-clicking on the nested component will give you more options!
     </div>
   `,
-  imports: [ContexrModule]
+  imports: [ContextDirective]
 })
 export class ChildComponent {
   menu: MenuItem[] = [
     {
       label: "Alert nested",
       priority: 100,
-      action: () => { alert("Clicked on context menu item 'Alert nested'!"); }
+      action: () => { alert("Clicked on context menu item 'Alert nested'!"); },
+      icon: "notifications_active"
     },
     {
       label: "Submenu",

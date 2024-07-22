@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ContexrModule } from '../../../../projects/contexr/src/public-api';
 import { OptionsExampleComponent } from "./options-example/options-example.component";
 import { HttpClient } from '@angular/common/http';
 import { HighlightAuto } from 'ngx-highlightjs';

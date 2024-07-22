@@ -1,0 +1,51 @@
+<ng-template #menu>
+    <div 
+        class="ctx-menu" 
+        cdkMenu
+    >
+        <ng-container *ngFor="let item of items">
+            <ng-container *ngIf="hasChildren(item)">
+                <button 
+                    class="ctx-menu-item"
+                    (click)="preventPropagation($event)"
+                    [cdkMenuTriggerFor]="subMenu" 
+                    *ngIf="menuComponent.menu as subMenu"
+                    cdkMenuItem
+                >
+                    <mat-icon class="ctx-icon" *ngIf="item.icon">
+                        {{item.icon}}
+                    </mat-icon>
+                    <span class="ctx-label">
+                        {{ item.label }}
+                    </span>
+                    <div><mat-icon class="mat-icon">chevron_right</mat-icon></div>
+                </button>
+
+                <ctx-menu
+                    #menuComponent
+                    [items]="getChildren(item)" 
+                    [service]="service"
+                ></ctx-menu>
+            </ng-container>
+
+            <ng-container *ngIf="isOption(item)">
+                <button 
+                    class="ctx-menu-item" 
+                    (click)="act($event, item)"
+                    cdkMenuItem
+                >
+                <mat-icon class="ctx-icon" *ngIf="item.icon">
+                    {{item.icon}}
+                </mat-icon>
+                <span class="ctx-label">
+                    {{ item.label }}
+                </span>
+                </button>
+            </ng-container>
+
+            <ng-container *ngIf="isSeparator(item)">
+                <mat-divider class="ctx-divider"></mat-divider>
+            </ng-container>
+        </ng-container>
+    </div>
+</ng-template>

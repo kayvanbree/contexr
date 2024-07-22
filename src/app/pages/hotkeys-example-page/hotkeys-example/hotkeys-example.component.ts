@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ContexrModule, MenuItem } from '../../../../../projects/contexr/src/public-api';
+import { MenuItem, ContextDirective } from '../../../../../projects/contexr/src/public-api';
 
 @Component({
   selector: 'app-hotkeys-example',
@@ -11,7 +11,7 @@ import { ContexrModule, MenuItem } from '../../../../../projects/contexr/src/pub
       Then try to use those hotkeys!
   </div>
   `,
-  imports: [ContexrModule],
+  imports: [ContextDirective],
 })
 export class HotkeysExampleComponent {
   menu: MenuItem[] = [

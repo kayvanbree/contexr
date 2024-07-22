@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ContexrModule, MenuItem } from '../../../../../projects/contexr/src/public-api';
+import { ContextDirective, MenuItem } from '../../../../../projects/contexr/src/public-api';
 
 @Component({
   selector: 'app-options-example',
@@ -11,7 +11,7 @@ import { ContexrModule, MenuItem } from '../../../../../projects/contexr/src/pub
     Count: {{count}}
   </div>
   `,
-  imports: [ContexrModule]
+  imports: [ContextDirective]
 })
 export class OptionsExampleComponent {
   count: number = 0;
@@ -20,12 +20,14 @@ export class OptionsExampleComponent {
     {
       label: "Increase",
       action: () => { this.count++; },
-      hotkey: 'plus'
+      hotkey: 'plus',
+      icon: "add"
     },
     {
       label: "Console message",
       action: () => { this.count-- },
-      hotkey: '-'
+      hotkey: '-',
+      icon: "remove"
     }
   ]
 }
