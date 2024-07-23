@@ -1,5 +1,4 @@
 import { Injectable, Injector } from '@angular/core';
-import {Observable, Subject} from 'rxjs';
 import {CONTEXT_STATE, ContextState} from '../types/context-state';
 import {Hotkey, HotkeysService} from 'angular2-hotkeys';
 import { MenuItem, Option, Submenu } from '../types/menu-item';
@@ -12,9 +11,6 @@ import { MENU_STACK, MenuStack } from '@angular/cdk/menu';
   providedIn: 'root'
 })
 export class ContexrService {
-  private contextStateSubject: Subject<ContextState> = new Subject<ContextState>();
-  private contextStateObservable: Observable<ContextState> = this.contextStateSubject.asObservable();
-
   private static registeredContext: {[id: string] : MenuItem[]} = {};
   private static registeredHotkeys: {[id: string] : Hotkey[]} = {};
 
@@ -22,14 +18,6 @@ export class ContexrService {
   private overlayRef!: OverlayRef;
   
   constructor(private hotkeysService: HotkeysService, private overlay: Overlay) {}
-
-  /**
-   * Returns the state of the context menu
-   * @returns
-   */
-  public getContextState(): Observable<ContextState> {
-    return this.contextStateObservable;
-  }
 
   /**
    * Register a context menu
