@@ -21,7 +21,7 @@ import { HotkeyModule } from 'angular2-hotkeys';
   ]
 })
 export class AppComponent {
-  title = 'app';
+  title = 'contexr-demo';
 
   constructor() {}
 }
