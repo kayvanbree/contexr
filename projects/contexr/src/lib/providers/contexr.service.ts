@@ -11,8 +11,8 @@ import { MENU_STACK, MenuStack } from '@angular/cdk/menu';
   providedIn: 'root'
 })
 export class ContexrService {
-  private static registeredContext: {[id: string] : MenuItem[]} = {};
-  private static registeredHotkeys: {[id: string] : Hotkey[]} = {};
+  private registeredContext: {[id: string] : MenuItem[]} = {};
+  private registeredHotkeys: {[id: string] : Hotkey[]} = {};
 
   private componentPortal!: ComponentPortal<ContextMenuDialogComponent>;
   private overlayRef!: OverlayRef;
@@ -27,8 +27,8 @@ export class ContexrService {
    */
   public registerMenu(uuid: string, menu: MenuItem[], args: any) {
     this.unregisterHotkeys(uuid);
-    ContexrService.registeredContext[uuid] = menu;
-    ContexrService.registeredHotkeys[uuid] = [];
+    this.registeredContext[uuid] = menu;
+    this.registeredHotkeys[uuid] = [];
     this.registerHotkeys(uuid, menu, args);
   }
 
@@ -38,8 +38,8 @@ export class ContexrService {
    */
   public unregisterMenu(uuid: string) {
     this.unregisterHotkeys(uuid);
-    delete ContexrService.registeredHotkeys[uuid];
-    delete ContexrService.registeredContext[uuid];
+    delete this.registeredHotkeys[uuid];
+    delete this.registeredContext[uuid];
   }
 
   public open(event?: MouseEvent) {
@@ -138,7 +138,7 @@ export class ContexrService {
           false
         );
         this.hotkeysService.add(hotkey);
-        ContexrService.registeredHotkeys[uuid].push(hotkey);
+        this.registeredHotkeys[uuid].push(hotkey);
       }
       if ((item as Submenu).items) {
         this.registerHotkeys(uuid, (item as Submenu).items, args);
@@ -151,7 +151,7 @@ export class ContexrService {
    * @param menu 
    */
   private unregisterHotkeys(uuid: string) {
-    let hotkeys: Hotkey[] = ContexrService.registeredHotkeys[uuid];
+    let hotkeys: Hotkey[] = this.registeredHotkeys[uuid];
     if (hotkeys) {
       for (let hotkey of hotkeys) {
         this.hotkeysService.remove(hotkey);
@@ -166,8 +166,8 @@ export class ContexrService {
   private getMergedMenus(): MenuItem[] {
     let mergedMenus: MenuItem[] = [];
 
-    for (let uuid in ContexrService.registeredContext) {
-      mergedMenus = this.mergeMenus(mergedMenus, ContexrService.registeredContext[uuid]);
+    for (let uuid in this.registeredContext) {
+      mergedMenus = this.mergeMenus(mergedMenus, this.registeredContext[uuid]);
     }
 
     return mergedMenus;
