@@ -20,21 +20,21 @@ export class ParentComponent {
   menu: MenuItem[] = [
     {
       label: "Alert parent",
-      priority: -100,
+      order: -100,
       action: () => { alert("Clicked on context menu item 'Alert parent'!"); },
       icon: "notifications_active"
     },
     {
       divider: true,
-      priority: 999
+      order: 999
     },
     {
       label: "Submenu",
-      priority: 1000,
+      order: 1000,
       items: [
         {
           label: "Console message parent",
-          priority: -100,
+          order: -100,
           action: () => { console.log("Clicked on context menu item 'Console message parent'!"); }
         }
       ]

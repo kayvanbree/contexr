@@ -28,7 +28,7 @@ export class MenuMerger {
           // If a submenu with the same label is not found, just push a copy into the merged menu
           mergedItems.push({
             label: (item as Submenu).label,
-            priority: item.priority,
+            order: item.order,
             items: (item as Submenu).items.slice()
           });
         }
@@ -37,7 +37,7 @@ export class MenuMerger {
       }
     }
     return mergedItems.sort((a, b) => {
-      return (a.priority ? a.priority : 0) - (b.priority ? b.priority : 0)
+      return (a.order ? a.order : 0) - (b.order ? b.order : 0)
     });
   }
 }

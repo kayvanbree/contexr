@@ -5,9 +5,9 @@ export interface BaseMenuItem {
     label?: string;
 
     /**
-     * The priority of this menu item in the menu
+     * The order of this menu item in the menu. Can be negative.
      */
-    priority?: number;
+    order?: number;
 
     /**
      * Angular Materials Icon (for example "home" for the home icon)

@@ -90,7 +90,7 @@ describe('MenuMerger', () => {
             {
                 label: "Menu 1 subitem",
                 action: () => {},
-                priority: 100
+                order: 100
             }
         ];
 
@@ -98,7 +98,7 @@ describe('MenuMerger', () => {
             {
                 label: "Menu 2 subitem",
                 action: () => {},
-                priority: -100
+                order: -100
             }
         ];
 
@@ -106,12 +106,12 @@ describe('MenuMerger', () => {
             {
                 label: "Menu 2 subitem",
                 action: () => {},
-                priority: -100
+                order: -100
             },
             {
                 label: "Menu 1 subitem",
                 action: () => {},
-                priority: 100
+                order: 100
             }
         ];
 
@@ -127,7 +127,7 @@ describe('MenuMerger', () => {
                 {
                   label: "Menu 1 subitem",
                   action: () => {},
-                  priority: 100
+                  order: 100
                 }
               ]
             }
@@ -140,7 +140,7 @@ describe('MenuMerger', () => {
                 {
                   label: "Menu 2 subitem",
                   action: () => {},
-                  priority: -100
+                  order: -100
                 }
               ]
             }
@@ -153,12 +153,12 @@ describe('MenuMerger', () => {
                 {
                     label: "Menu 2 subitem",
                     action: () => {},
-                    priority: -100
+                    order: -100
                 },
                 {
                   label: "Menu 1 subitem",
                   action: () => {},
-                  priority: 100
+                  order: 100
                 }
               ]
             }
@@ -234,11 +234,11 @@ describe('MenuMerger', () => {
             {
                 label: "Menu 1 subitem",
                 action: () => {},
-                priority: -100
+                order: -100
             },
             {
                 divider: true,
-                priority: 0
+                order: 0
             }
         ];
 
@@ -246,7 +246,7 @@ describe('MenuMerger', () => {
             {
                 label: "Menu 2 subitem",
                 action: () => {},
-                priority: 100
+                order: 100
             }
         ];
 
@@ -254,16 +254,16 @@ describe('MenuMerger', () => {
             {
                 label: "Menu 1 subitem",
                 action: () => {},
-                priority: -100
+                order: -100
             },
             {
                 divider: true,
-                priority: 0
+                order: 0
             },
             {
                 label: "Menu 2 subitem",
                 action: () => {},
-                priority: 100
+                order: 100
             }
         ];
 
