@@ -5,19 +5,17 @@
     "ng": "ng",
     "prestart": "rimraf node_modules/contexr && linklocal",
     "start": "ng serve",
+    "lint": "ng lint",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:ci": "jest --runInBand",
+    "test:coverage": "jext --runInBand --coverage",
     "build": "ng build contexr-demo --prod",
     "build:lib": "ng build contexr --prod",
-    "postbuild:lib": "cpx README.md dist/contexr && cpx LICENSE.md dist/contexr",
-    "test:coverage": "ng test contexr --watch=false --code-coverage",
-    "lint": "ng lint",
-    "e2e": "ng e2e",
     "prepublish": "npm run build:lib",
     "publish": "cd dist/contexr && npm publish",
     "prepublish:pages": "ng build --prod --base-href \"https://kayvanbree.github.io/contexr/\"",
-    "publish:pages": "ngh --repo=https://GH_TOKEN@github.com/contexr.git --dir=dist/contexr-demo"
+    "publish:pages": "ng deploy contexr-demo --base-href /contexr/ --repo=https://github.com/kayvanbree/contexr.git --dir=dist/contexr-demo"
   },
   "private": true,
   "dependencies": {
@@ -46,6 +44,7 @@
     "@angular/compiler-cli": "^18.1.0",
     "@types/jest": "^29.5.12",
     "@types/uuid": "^10.0.0",
+    "angular-cli-ghpages": "^2.0.1",
     "jest": "^29.7.0",
     "jest-preset-angular": "^14.2.0",
     "linklocal": "^2.8.2",
@@ -54,6 +53,8 @@
   },
   "jest": {
     "preset": "jest-preset-angular",
-    "setupFilesAfterEnv": ["<rootDir>/setup-jest.ts"]
+    "setupFilesAfterEnv": [
+      "<rootDir>/setup-jest.ts"
+    ]
   }
 }
