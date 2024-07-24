@@ -59,14 +59,14 @@ export class MenuComponent {
   }
 
   public isDivider(item: MenuItem): boolean {
-    return (item as Divider).divider;
+    return (item as Divider).divider != null;
   }
 
-  public hasChildren(item: MenuItem) {
+  public isSubmenu(item: MenuItem) {
     return (item as Submenu).items != null && (item as Submenu).items.length > 0;
   }
 
   public getChildren(item: MenuItem) {
-    return (item as Submenu).items;
+    return (item as Submenu).items != null;
   }
 }
