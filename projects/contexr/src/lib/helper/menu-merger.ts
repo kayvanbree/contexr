@@ -1,4 +1,7 @@
-import { MenuItem, Option, Submenu } from "../types/menu-item";
+import { Divider } from "../types/divider";
+import { MenuItem } from "../types/menu-item";
+import { Option } from "../types/option";
+import { Submenu } from "../types/submenu";
 
 export class MenuMerger {
 
@@ -16,7 +19,7 @@ export class MenuMerger {
         mergedItems.push(item);
 
       } else if ((item as Submenu).items) {
-        let existingSubmenu = mergedItems.find(x => (x as Submenu).items && x.label === item.label) as Submenu;
+        let existingSubmenu = mergedItems.find(x => (x as Submenu).items && (x as Submenu).label === (item as Submenu).label) as Submenu;
 
         if (existingSubmenu && (item as Submenu).items) {
           // If this is a submenu, merge the items and put them in the existing submenu
@@ -24,12 +27,12 @@ export class MenuMerger {
         } else {
           // If a submenu with the same label is not found, just push a copy into the merged menu
           mergedItems.push({
-            label: item.label,
+            label: (item as Submenu).label,
             priority: item.priority,
             items: (item as Submenu).items.slice()
           });
         }
-      } else if (item.label = "separator") {
+      } else if ((item as Divider).divider) {
         mergedItems.push(item);
       }
     }

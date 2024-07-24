@@ -1,11 +1,13 @@
 import { Injectable, Injector } from '@angular/core';
 import {CONTEXT_STATE, ContextState} from '../types/context-state';
 import {Hotkey, HotkeysService} from 'angular2-hotkeys';
-import { MenuItem, Option, Submenu } from '../types/menu-item';
 import { ContextMenuDialogComponent } from '../components/context-menu-dialog/context-menu-dialog.component';
 import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { MENU_STACK, MenuStack } from '@angular/cdk/menu';
+import { MenuItem } from '../types/menu-item';
+import { Option } from '../types/option';
+import { Submenu } from '../types/submenu';
 import { MenuMerger } from '../helper/menu-merger';
 
 @Injectable({

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MenuItem, ContextDirective } from 'contexr';
+import { MenuItem, ContextDirective, Divider } from 'contexr';
 import { ChildComponent } from '../child/child.component';
 
 @Component({
@@ -24,8 +24,8 @@ export class ParentComponent {
       action: () => { alert("Clicked on context menu item 'Alert parent'!"); },
       icon: "notifications_active"
     },
-    { 
-      label: 'separator',
+    {
+      divider: true,
       priority: 999
     },
     {

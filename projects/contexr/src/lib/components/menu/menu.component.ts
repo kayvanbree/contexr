@@ -1,10 +1,13 @@
 import { Component, Input, TemplateRef, ViewChild } from '@angular/core';
-import { MenuItem, Submenu, Option } from '../../types/menu-item';
+import { MenuItem } from '../../types/menu-item';
+import { Option } from '../../types/option'
 import { CdkMenuModule } from '@angular/cdk/menu';
 import { CommonModule } from '@angular/common';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { ContexrService } from '../../providers/contexr.service';
+import { Divider } from '../../types/divider';
+import { Submenu } from '../../types/submenu';
 
 @Component({
   selector: 'ctx-menu',
@@ -56,8 +59,8 @@ export class MenuComponent {
     return (option as Option).action != null;
   }
 
-  public isDivider(separator: MenuItem): boolean {
-    return separator.label == "separator";
+  public isDivider(item: MenuItem): boolean {
+    return (item as Divider).divider;
   }
 
   public hasChildren(item: MenuItem) {
