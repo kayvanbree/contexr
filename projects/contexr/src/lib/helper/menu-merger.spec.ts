@@ -229,5 +229,45 @@ describe('MenuMerger', () => {
         expect(JSON.stringify(expectedMenu)).toBe(JSON.stringify(mergedMenus));
     });
 
-    
+    it('should merge dividers', () => {
+        let menu1: MenuItem[] = [
+            {
+                label: "Menu 1 subitem",
+                action: () => {},
+                priority: -100
+            },
+            {
+                divider: true,
+                priority: 0
+            }
+        ];
+
+        let menu2: MenuItem[] = [
+            {
+                label: "Menu 2 subitem",
+                action: () => {},
+                priority: 100
+            }
+        ];
+
+        let expectedMenu: MenuItem[] = [
+            {
+                label: "Menu 1 subitem",
+                action: () => {},
+                priority: -100
+            },
+            {
+                divider: true,
+                priority: 0
+            },
+            {
+                label: "Menu 2 subitem",
+                action: () => {},
+                priority: 100
+            }
+        ];
+
+        const mergedMenus = MenuMerger.mergeMenus(menu1, menu2);
+        expect(JSON.stringify(expectedMenu)).toBe(JSON.stringify(mergedMenus));
+    });
 });
