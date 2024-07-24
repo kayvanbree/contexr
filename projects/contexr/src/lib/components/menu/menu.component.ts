@@ -67,6 +67,6 @@ export class MenuComponent {
   }
 
   public getChildren(item: MenuItem) {
-    return (item as Submenu).items != null;
+    return (item as Submenu).items;
   }
 }

@@ -4,7 +4,7 @@
         cdkMenu
     >
         <ng-container *ngFor="let item of items">
-            <ng-container *ngIf="hasChildren(item)">
+            <ng-container *ngIf="isSubmenu(item)">
                 <button 
                     class="ctx-menu-item"
                     (click)="preventPropagation($event)"
