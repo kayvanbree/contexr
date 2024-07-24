@@ -36,8 +36,33 @@ export class MenuMerger {
         mergedItems.push(item);
       }
     }
-    return mergedItems.sort((a, b) => {
+
+    let sortedItems = mergedItems.sort((a, b) => {
       return (a.order ? a.order : 0) - (b.order ? b.order : 0)
     });
+
+    sortedItems = MenuMerger.trimHeadingDividers(sortedItems);
+    sortedItems = MenuMerger.trimTrailingDividers(sortedItems);
+
+    if (mergedItems.length != sortedItems.length) {
+      console.log("One or more heading or trailing dividers have been trimmed")
+    }
+    
+    return sortedItems;
+  }
+
+  private static trimHeadingDividers(items: MenuItem[]): MenuItem[] {
+    while ((items[0] as Divider).divider) {
+      items.shift();
+    }
+    return items;
+  }
+
+  private static trimTrailingDividers(items: MenuItem[]): MenuItem[] {
+    items = items.reverse();
+    while ((items[0] as Divider).divider) {
+      items.shift();
+    }
+    return items.reverse();
   }
 }

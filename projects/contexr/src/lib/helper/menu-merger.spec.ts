@@ -33,7 +33,7 @@ describe('MenuMerger', () => {
         ];
 
         const mergedMenus = MenuMerger.mergeMenus(menu1, menu2);
-        expect(JSON.stringify(expectedMenu)).toBe(JSON.stringify(mergedMenus));
+        expect(JSON.stringify(mergedMenus)).toBe(JSON.stringify(expectedMenu));
     });
 
     it('should merge submenus', () => {
@@ -82,7 +82,7 @@ describe('MenuMerger', () => {
         ];
 
         const mergedMenus = MenuMerger.mergeMenus(menu1, menu2);
-        expect(JSON.stringify(expectedMenu)).toBe(JSON.stringify(mergedMenus));
+        expect(JSON.stringify(mergedMenus)).toBe(JSON.stringify(expectedMenu));
     });
 
     it('should merge with order', () => {
@@ -116,7 +116,7 @@ describe('MenuMerger', () => {
         ];
 
         const mergedMenus = MenuMerger.mergeMenus(menu1, menu2);
-        expect(JSON.stringify(expectedMenu)).toBe(JSON.stringify(mergedMenus));
+        expect(JSON.stringify(mergedMenus)).toBe(JSON.stringify(expectedMenu));
     });
 
     it('should merge submenus with order', () => {
@@ -165,7 +165,7 @@ describe('MenuMerger', () => {
         ];
 
         const mergedMenus = MenuMerger.mergeMenus(menu1, menu2);
-        expect(JSON.stringify(expectedMenu)).toBe(JSON.stringify(mergedMenus));
+        expect(JSON.stringify(mergedMenus)).toBe(JSON.stringify(expectedMenu));
     });
 
     it('should merge deep submenus', () => {
@@ -226,7 +226,7 @@ describe('MenuMerger', () => {
         ];
 
         const mergedMenus = MenuMerger.mergeMenus(menu1, menu2);
-        expect(JSON.stringify(expectedMenu)).toBe(JSON.stringify(mergedMenus));
+        expect(JSON.stringify(mergedMenus)).toBe(JSON.stringify(expectedMenu));
     });
 
     it('should merge dividers', () => {
@@ -268,7 +268,7 @@ describe('MenuMerger', () => {
         ];
 
         const mergedMenus = MenuMerger.mergeMenus(menu1, menu2);
-        expect(JSON.stringify(expectedMenu)).toBe(JSON.stringify(mergedMenus));
+        expect(JSON.stringify(mergedMenus)).toBe(JSON.stringify(expectedMenu));
     });
 
     it('should treat undefined order as 0', () => {
@@ -310,6 +310,98 @@ describe('MenuMerger', () => {
         ];
 
         const mergedMenus = MenuMerger.mergeMenus(menu1, menu2);
-        expect(JSON.stringify(expectedMenu)).toBe(JSON.stringify(mergedMenus));
+        expect(JSON.stringify(mergedMenus)).toBe(JSON.stringify(expectedMenu));
+    });
+
+    it('should remove heading dividers', () => {
+        let menu1: MenuItem[] = [
+            {
+                divider: true
+            },
+            {
+                divider: true
+            },
+            {
+                label: "Menu 1 item",
+                action: () => {},
+                order: 100
+            }
+        ];
+
+        let menu2: MenuItem[] = [
+            {
+                divider: true
+            },
+            {
+                divider: true
+            },
+            {
+                label: "Menu 2 item",
+                action: () => {},
+                order: 101
+            }
+        ];
+
+        let expectedMenu: MenuItem[] = [
+            {
+                label: "Menu 1 item",
+                action: () => {},
+                order: 100
+            },
+            {
+                label: "Menu 2 item",
+                action: () => {},
+                order: 101
+            }
+        ];
+
+        const mergedMenus = MenuMerger.mergeMenus(menu1, menu2);
+        expect(JSON.stringify(mergedMenus)).toBe(JSON.stringify(expectedMenu));
+    });
+
+    it('should remove trailing dividers', () => {
+        let menu1: MenuItem[] = [
+            {
+                label: "Menu 1 item",
+                action: () => {},
+                order: -100
+            },
+            {
+                divider: true
+            },
+            {
+                divider: true
+            }
+        ];
+
+        let menu2: MenuItem[] = [
+            {
+                label: "Menu 2 item",
+                action: () => {},
+                order: -99
+            },
+            {
+                divider: true
+            },
+            {
+                divider: true
+            }
+        ];
+
+        let expectedMenu: MenuItem[] = [
+            {
+                label: "Menu 1 item",
+                action: () => {},
+                order: -100
+            },
+            {
+                label: "Menu 2 item",
+                action: () => {},
+                order: -99
+            }
+        ];
+
+        const mergedMenus = MenuMerger.mergeMenus(menu1, menu2);
+        expect(JSON.stringify(mergedMenus)).toBe(JSON.stringify(expectedMenu));
     });
 });
