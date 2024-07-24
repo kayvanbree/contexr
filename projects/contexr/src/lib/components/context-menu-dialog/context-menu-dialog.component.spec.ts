@@ -1,25 +1,23 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ContextMenuDialogComponent } from './context-menu-dialog.component';
-import { CONTEXT_STATE, ContextState } from '../../types/context-state';
-import { ContexrService } from '../../providers/contexr.service';
+import { CONTEXT_STATE } from '../../types/context-state';
+import { MenuItem } from '../../types/menu-item';
+import { HotkeysServiceMock } from '../../mocks/hotkeys-service.mock';
+import { HotkeysService } from 'angular2-hotkeys';
 
 describe('ContextMenuDialogComponent', () => {
   let component: ContextMenuDialogComponent;
   let fixture: ComponentFixture<ContextMenuDialogComponent>;
 
-  let contextState: ContextState;
-
   beforeEach(async () => {
-    contextState = {
-      items: [],
-      service: {} as ContexrService
-    };
+    let items: MenuItem[] = [];
 
     await TestBed.configureTestingModule({
       imports: [ContextMenuDialogComponent],
       providers: [
-        { provide: CONTEXT_STATE, useValue: contextState }
+        { provide: HotkeysService, useClass: HotkeysServiceMock },
+        { provide: CONTEXT_STATE, useValue: items }
       ]
     })
     .compileComponents();

@@ -16,7 +16,7 @@
                         <mat-icon>
                             {{item.icon!}}
                         </mat-icon>
-                    </span> 
+                    </span>
                     <span class="ctx-label">
                         {{ item.label }}
                     </span>
@@ -25,11 +25,7 @@
                     </span>
                 </button>
 
-                <ctx-menu
-                    #menuComponent
-                    [items]="getChildren(item)" 
-                    [service]="service"
-                ></ctx-menu>
+                <ctx-menu #menuComponent [items]="getChildren(item)"></ctx-menu>
             </ng-container>
 
             <ng-container *ngIf="isOption(item)">

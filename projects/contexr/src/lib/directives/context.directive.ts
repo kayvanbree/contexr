@@ -16,12 +16,6 @@ export class ContextDirective {
   @Input('ctx') 
   menu!: MenuItem[];
 
-  /**
-   * The arguments for the action
-   */
-  @Input('ctxArgs') 
-  args: any;
-
   private uuid!: string;
 
   constructor(private contexr: ContexrService) {
@@ -29,7 +23,7 @@ export class ContextDirective {
   }
 
   ngOnInit() {
-    this.contexr.registerMenu(this.uuid, this.menu, this.args);
+    this.contexr.registerMenu(this.uuid, this.menu);
   }
 
   /**

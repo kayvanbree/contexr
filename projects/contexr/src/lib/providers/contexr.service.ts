@@ -1,5 +1,5 @@
 import { Injectable, Injector } from '@angular/core';
-import {CONTEXT_STATE, ContextState} from '../types/context-state';
+import {CONTEXT_STATE} from '../types/context-state';
 import {Hotkey, HotkeysService} from 'angular2-hotkeys';
 import { ContextMenuDialogComponent } from '../components/context-menu-dialog/context-menu-dialog.component';
 import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
@@ -28,11 +28,11 @@ export class ContexrService {
    * @param menu 
    * @param args 
    */
-  public registerMenu(uuid: string, menu: MenuItem[], args: any) {
+  public registerMenu(uuid: string, menu: MenuItem[]) {
     this.unregisterHotkeys(uuid);
     this.registeredContext[uuid] = menu;
     this.registeredHotkeys[uuid] = [];
-    this.registerHotkeys(uuid, menu, args);
+    this.registerHotkeys(uuid, menu);
   }
 
   /**
@@ -58,10 +58,7 @@ export class ContexrService {
     // Create overlay ref and save it
     this.overlayRef = this.overlay.create(this.getOverlayConfig(event));
 
-    const injector = this.createInjector({
-      items: this.getMergedMenus(),
-      service: this
-    });
+    const injector = this.createInjector(this.getMergedMenus());
 
     // Attach ref to overlay
     this.componentPortal = new ComponentPortal(ContextMenuDialogComponent, null, injector);
@@ -77,10 +74,10 @@ export class ContexrService {
     }
   }
 
-  private createInjector(contextState: ContextState): Injector {
+  private createInjector(items: MenuItem[]): Injector {
     return Injector.create({
       providers: [
-        { provide: CONTEXT_STATE, useValue: contextState },
+        { provide: CONTEXT_STATE, useValue: items },
         { provide: MENU_STACK, useFactory: (parentMenuStack?: MenuStack) => parentMenuStack || MenuStack.inline("horizontal")}
       ]
     });
@@ -116,7 +113,7 @@ export class ContexrService {
    * Registers hotkeys with the service
    * @param menu 
    */
-  private registerHotkeys(uuid: string, menu: MenuItem[], args: any) {
+  private registerHotkeys(uuid: string, menu: MenuItem[]) {
     for (let item of menu) {
       if ((item as Option).hotkey) {
         let option = item as Option;
@@ -136,7 +133,7 @@ export class ContexrService {
         this.registeredHotkeys[uuid].push(hotkey);
       }
       if ((item as Submenu).items) {
-        this.registerHotkeys(uuid, (item as Submenu).items, args);
+        this.registerHotkeys(uuid, (item as Submenu).items);
       }
     }
   }

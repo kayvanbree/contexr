@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MenuComponent } from './menu.component';
+import { HotkeysService } from 'angular2-hotkeys';
+import { HotkeysServiceMock } from '../../mocks/hotkeys-service.mock';
 
 describe('MenuComponent', () => {
   let component: MenuComponent;
@@ -8,7 +10,10 @@ describe('MenuComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MenuComponent]
+      imports: [MenuComponent],
+      providers: [
+        { provide: HotkeysService, useClass: HotkeysServiceMock },
+      ]
     })
     .compileComponents();
 

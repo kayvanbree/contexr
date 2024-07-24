@@ -1,8 +1,10 @@
 import { Component, HostListener, Inject, TemplateRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CONTEXT_STATE, ContextState } from '../../types/context-state';
+import { CONTEXT_STATE } from '../../types/context-state';
 import { MenuComponent } from '../menu/menu.component';
 import { CdkMenuModule, CdkMenuTrigger } from '@angular/cdk/menu';
+import { ContexrService } from '../../providers/contexr.service';
+import { MenuItem } from '../../types/menu-item';
 
 @Component({
   selector: 'app-context-menu-dialog',
@@ -23,7 +25,7 @@ export class ContextMenuDialogComponent {
   @ViewChild(CdkMenuTrigger) 
   menuTrigger!: CdkMenuTrigger;
   
-  constructor(@Inject(CONTEXT_STATE) public contextState: ContextState) {}
+  constructor(@Inject(CONTEXT_STATE) public items: MenuItem[], private contexr: ContexrService) {}
 
   ngAfterContentChecked() {
     if (this.menuTrigger) {
@@ -33,6 +35,6 @@ export class ContextMenuDialogComponent {
 
   @HostListener('document:click', ['$event'])
   public closeOnClick(event: MouseEvent) {
-    this.contextState.service.close();
+    this.contexr.close();
   }
 }

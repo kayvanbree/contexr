@@ -5,16 +5,7 @@ import { CONTEXT_STATE } from '../types/context-state';
 import { Overlay } from '@angular/cdk/overlay';
 import { v4 as uuidv4 } from 'uuid';
 import { MenuItem } from '../types/menu-item';
-
-class HotkeysServiceMock {
-  public add(hotkey: Hotkey | Hotkey[], specificEvent?: string): Hotkey | Hotkey[] {
-      return hotkey;
-  }
-  
-  public remove(hotkey?: Hotkey | Hotkey[], specificEvent?: string): Hotkey | Hotkey[] {
-    return {} as Hotkey;
-  }
-}
+import { HotkeysServiceMock } from '../mocks/hotkeys-service.mock';
 
 describe('ContexrService', () => {
   beforeEach(() => {
@@ -57,7 +48,7 @@ describe('ContexrService', () => {
       }
     ];
 
-    service.registerMenu(uuid, menu, null);
+    service.registerMenu(uuid, menu);
     expect(spyOnHotkeysServiceAdd).toHaveBeenCalledTimes(2);
   }));
 
@@ -80,7 +71,7 @@ describe('ContexrService', () => {
       }
     ];
 
-    service.registerMenu(uuid, menu, null);
+    service.registerMenu(uuid, menu);
     service.unregisterMenu(uuid);
     expect(spyOnHotkeysServiceRemove).toHaveBeenCalledTimes(2)
   }));
@@ -105,8 +96,8 @@ describe('ContexrService', () => {
       }
     ];
 
-    service.registerMenu(uuid, menu, null);
-    service.registerMenu(uuid, menu, null);
+    service.registerMenu(uuid, menu);
+    service.registerMenu(uuid, menu);
     expect(spyOnHotkeysServiceRemove).toHaveBeenCalledTimes(2);
   }));
 });

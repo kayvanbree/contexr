@@ -28,8 +28,7 @@ export class MenuComponent {
   @ViewChild('menu', { static: true }) 
   menu!: TemplateRef<any>;
 
-  @Input()
-  public service!: ContexrService;
+  constructor(private contexr: ContexrService) {}
 
   /**
    * Call an action and close the context menu
@@ -37,7 +36,7 @@ export class MenuComponent {
    */
   public act(event: MouseEvent, item: MenuItem): void {
     event.stopPropagation();
-    this.service.close();
+    this.contexr.close();
 
     let option = item as Option;
     option.args ? option.action(option.args()): option.action();
