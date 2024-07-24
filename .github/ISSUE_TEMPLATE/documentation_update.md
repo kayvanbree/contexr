@@ -1,6 +1,7 @@
 ---
 name: Documentation update
 about: A request to add or update documentation
+labels: "documentation"
 
 ---
 
