@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ContextDirective, MenuItem } from '../../../../../projects/contexr/src/public-api';
+import { ContextDirective, MenuItem } from 'contexr';
 import { FormsModule } from '@angular/forms';
 
 @Component({

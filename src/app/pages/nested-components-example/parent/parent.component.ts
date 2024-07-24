@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MenuItem, ContextDirective } from '../../../../../projects/contexr/src/public-api';
+import { MenuItem, ContextDirective } from 'contexr';
 import { ChildComponent } from '../child/child.component';
 
 @Component({

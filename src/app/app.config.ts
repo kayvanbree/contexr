@@ -5,7 +5,7 @@ import { provideHttpClient } from '@angular/common/http';
 
 import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { provideContexr } from '../../projects/contexr/src/public-api';
+import { provideContexr } from 'contexr';
 
 export const appConfig: ApplicationConfig = {
   providers: [

@@ -5,7 +5,7 @@
   "compilerOptions": {
     "paths": {
       "contexr": [
-        "./dist/contexr"
+        "./projects/contexr/src/public-api"
       ]
     },
     "outDir": "./dist/out-tsc",
