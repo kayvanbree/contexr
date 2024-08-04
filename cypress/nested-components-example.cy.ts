@@ -8,7 +8,7 @@ const config: MountConfig<ParentComponent> = {
     ]
 }
   
-describe('options-example.component.ts', () => {
+describe('nested-components-example.component.ts', () => {
     beforeEach(() => {
       cy.mount(ParentComponent, config);
     });
