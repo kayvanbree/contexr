@@ -5,10 +5,10 @@ import { ContextDirective, MenuItem } from 'contexr';
   selector: 'app-options-example',
   standalone: true,
   template: `
-  <div [ctx]="menu">
+  <div data-cy="context" [ctx]="menu">
     Use the context menu to increase the count.
     <br />
-    Count: {{count}}
+    Count: <span data-cy="counter">{{count}}</span>
   </div>
   `,
   imports: [ContextDirective]
