@@ -6,7 +6,7 @@ import { ChildComponent } from '../child/child.component';
   selector: 'app-parent',
   standalone: true,
   template: `
-    <div class="example" [ctx]="menu">
+    <div data-cy="context" class="example" [ctx]="menu">
       This component has another component within it. Right-clicking on this div will give you only the options of the parent component.
       <app-child></app-child>
     </div>
